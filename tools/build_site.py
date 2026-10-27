@@ -220,6 +220,14 @@ CHAPTERS=[
    tags=['Viterbi', 'trellis', 'convoluzionale', 'FEC']),
   ]),
 ]
+SECTIONS=[
+ dict(id="sez-basi",ids=["db"],kicker="Per tutti",title="Le basi comuni",intro="Il linguaggio che useremo in tutto il corso, in elettronica come in radiofrequenza: i decibel."),
+ dict(id="sez-elettronica",ids=["mm","osc"],kicker="Sezione 1",title="Elettronica",intro="Gli strumenti di tutti i giorni sul banco: misurare tensioni, correnti e forme d'onda in sicurezza, e capire cosa ci stanno dicendo davvero."),
+ dict(id="sez-rf",ids=["vna","sa","gen","wm","mod","ft8","acc","tel","rum","cm","vit"],kicker="Sezione 2",title="Radiofrequenza",intro="Gli strumenti RF, i segnali e i sistemi radio, il rumore e i disturbi: dalla misura sull'antenna fino a come funzionano FT8 e la telefonia cellulare."),
+]
+_byid={c["id"]:c for c in CHAPTERS}
+assert sorted(i for x in SECTIONS for i in x["ids"])==sorted(_byid), "capitoli non assegnati a una sezione"
+CHAPTERS=[_byid[i] for x in SECTIONS for i in x["ids"]]
 CSS=open(os.path.join(ROOT,"tools/site.css")).read()
 nmod=sum(len(c["mods"]) for c in CHAPTERS); nsl=sum(m["slides"] for c in CHAPTERS for m in c["mods"])
 def mod_html(c,i,m):
@@ -232,7 +240,11 @@ def mod_html(c,i,m):
         <div class="btns"><a class="btn primary" href="{href}" download>⬇ Scarica PDF</a><a class="btn ghost" href="{href}" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article>'''
 chap=""
+def sec_of(c): return next(x for x in SECTIONS if c["id"] in x["ids"])
 for c in CHAPTERS:
+    x=sec_of(c)
+    if c["id"]==x["ids"][0]:
+        chap+=f'''<section class="secband" id="{x["id"]}"><div class="wrap"><span class="kicker">{x["kicker"]}</span><h2>{x["title"]}</h2><p class="sub">{x["intro"]}</p></div></section>'''
     n=len(c["mods"])
     steps="".join(f'<a class="step" href="#{c["id"]}{i+1}"><small>Modulo {i+1}</small><div>{m["short"]}</div></a>' for i,m in enumerate(c["mods"]))
     chap+=f'''<section class="chapter" id="{c["id"]}"><div class="wrap">
@@ -241,22 +253,27 @@ for c in CHAPTERS:
   <div class="path p{n}">{steps}</div>
   {"".join(mod_html(c,i+1,m) for i,m in enumerate(c["mods"]))}
 </div></section>'''
-toc="".join(f'<a href="#{c["id"]}"><small>{c["num"]}</small><h3>{c["title"]}</h3><p>{c["intro"]}</p></a>' for c in CHAPTERS)
+toc="".join(f'<h3 class="tochead"><a href="#{x["id"]}">{x["kicker"]} · {x["title"]}</a></h3><div class="toc">'+"".join(f'<a href="#{c["id"]}"><small>{c["num"]}</small><h3>{c["title"]}</h3><p>{c["intro"]}</p></a>' for c in (_byid[i] for i in x["ids"]))+'</div>' for x in SECTIONS)
 page=f'''<!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ham Radio Pills · Corso su multimetro, oscilloscopio, VNA, analizzatore di spettro, wattmetro RF · IV3HGA</title>
-<meta name="description" content="Corso gratuito per radioamatori: multimetro, oscilloscopio, VNA, carta di Smith, analizzatore di spettro, wattmetro RF e misure. {len(CHAPTERS)} capitoli, {nmod} moduli in PDF. A cura di IV3HGA.">
+<meta name="description" content="Corso gratuito per radioamatori, diviso in elettronica e radiofrequenza: multimetro, oscilloscopio, VNA, carta di Smith, analizzatore di spettro, wattmetro RF, modulazioni, rumore, modo comune. {len(CHAPTERS)} capitoli, {nmod} moduli in PDF. A cura di IV3HGA.">
 <link rel="icon" href="assets/logo.png"><style>{CSS}</style></head><body>
 <header class="hero"><div class="wrap"><div>
-  <span class="kicker">Corso · RF e strumentazione per radioamatori</span>
+  <span class="kicker">Corso · elettronica e radiofrequenza per radioamatori</span>
   <h1>Ham Radio <span>Pills</span></h1>
-  <p class="lead">Un corso in pillole per capire davvero gli strumenti da banco e usarli sull'antenna e sul trasmettitore: il multimetro, l'oscilloscopio, il VNA e la carta di Smith, l'analizzatore di spettro, il generatore RF e il wattmetro RF, dalle basi ai trucchi del mestiere, e poi la teoria: decibel, modulazioni, FT8, accesso multiplo, telefonia.</p>
+  <p class="lead">Un corso in pillole di elettronica e radiofrequenza per il laboratorio e la stazione: il multimetro e l'oscilloscopio, il VNA e la carta di Smith, l'analizzatore di spettro, il generatore e il wattmetro RF, e poi decibel, modulazioni, FT8, accesso multiplo, telefonia, rumore e correnti di modo comune.</p>
   <div class="btns"><a class="btn primary" href="#capitoli">Inizia il corso ↓</a><a class="btn ghost" href="https://github.com/metallarox/hamradio-pills">Sorgenti su GitHub</a></div>
   <div class="stats"><div><b>{len(CHAPTERS)}</b>capitoli</div><div><b>{nmod}</b>moduli</div><div><b>{nsl}</b>slide</div><div><b>PDF</b>gratuiti</div></div>
 </div><img src="assets/logo.png" alt="Logo IV3HGA"></div></header>
+<section class="mission"><div class="wrap"><div class="mgrid"><div>
+<h2>Lo scopo</h2>
+<p>Questo sito vuole spiegare qualche concetto che ci può tornare utile nelle nostre attività di laboratorio e in stazione. La trattazione è <b>pratica e non troppo accademica</b>: si parte da quello che vediamo sul banco, con qualche pillola di teoria qua e là, quando serve a capire davvero cosa succede.</p></div>
+<blockquote>La matematica, per quanto indigesta, è il linguaggio che ci permette di collegare tutte le materie del mondo e di rappresentare qualsiasi cosa in un unico linguaggio che non conosce confini.</blockquote>
+</div></div></section>
 <section id="capitoli" style="padding-bottom:20px"><div class="wrap"><h2>I capitoli</h2>
-<p class="sub">Ogni capitolo parte da come funziona lo strumento, passa all'uso corretto e arriva alle misure avanzate. I moduli si possono leggere anche da soli.</p>
-<div class="toc">{toc}</div></div></section>
+<p class="sub">Il corso è diviso in due sezioni, elettronica e radiofrequenza, precedute dai decibel che servono a entrambe. I moduli si possono leggere anche da soli.</p>
+{toc}</div></section>
 {chap}
 <section class="info"><div class="wrap"><h2>Come seguire il corso</h2>
 <p class="sub">Non serve un laboratorio: bastano strumenti economici e la voglia di provare sul banco quello che leggi.</p>
@@ -271,6 +288,8 @@ open(os.path.join(ROOT,"index.html"),"w").write(page)
 # README
 rows=""
 for c in CHAPTERS:
+    x=sec_of(c)
+    if c["id"]==x["ids"][0]: rows+=f"\n## {x['kicker']} · {x['title']}\n\n{x['intro']}\n"
     rows+=f"\n### {c['num']} · {c['title']}\n\n| Modulo | Presentazione | Slide |\n|---|---|---|\n"
     for i,m in enumerate(c["mods"]):
         rows+=f"| {i+1} | [{m['title']}]({m['dir']}/{m['pdf']}) | {m['slides']} |\n"
@@ -280,7 +299,11 @@ readme=f'''<p align="center"><img src="assets/logo.png" width="180" alt="IV3HGA"
 
 🌐 **Sito del corso: https://metallarox.github.io/hamradio-pills/**
 
-Un corso in pillole su strumentazione RF, misure e teoria delle radiocomunicazioni per radioamatori, a cura di **Elia, IV3HGA**: {len(CHAPTERS)} capitoli, {nmod} moduli, {nsl} slide.
+Un corso in pillole di elettronica e radiofrequenza per radioamatori, a cura di **Elia, IV3HGA**: {len(CHAPTERS)} capitoli, {nmod} moduli, {nsl} slide.
+
+Lo scopo è spiegare qualche concetto che ci può tornare utile nelle nostre attività di laboratorio, con una trattazione pratica e non troppo accademica e qualche pillola di teoria qua e là.
+
+> La matematica, per quanto indigesta, è il linguaggio che ci permette di collegare tutte le materie del mondo e di rappresentare qualsiasi cosa in un unico linguaggio che non conosce confini.
 Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti Python che lo generano (simulazioni, grafici e slide).
 {rows}
 ## Rigenerare un PDF

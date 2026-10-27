@@ -4,8 +4,16 @@
 
 🌐 **Sito del corso: https://metallarox.github.io/hamradio-pills/**
 
-Un corso in pillole su strumentazione RF, misure e teoria delle radiocomunicazioni per radioamatori, a cura di **Elia, IV3HGA**: 14 capitoli, 55 moduli, 577 slide.
+Un corso in pillole di elettronica e radiofrequenza per radioamatori, a cura di **Elia, IV3HGA**: 14 capitoli, 55 moduli, 577 slide.
+
+Lo scopo è spiegare qualche concetto che ci può tornare utile nelle nostre attività di laboratorio, con una trattazione pratica e non troppo accademica e qualche pillola di teoria qua e là.
+
+> La matematica, per quanto indigesta, è il linguaggio che ci permette di collegare tutte le materie del mondo e di rappresentare qualsiasi cosa in un unico linguaggio che non conosce confini.
 Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti Python che lo generano (simulazioni, grafici e slide).
+
+## Per tutti · Le basi comuni
+
+Il linguaggio che useremo in tutto il corso, in elettronica come in radiofrequenza: i decibel.
 
 ### Milestone · I decibel
 
@@ -15,6 +23,10 @@ Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti 
 | 2 | [dBm, dBW, dBu, dBµV e tutti gli altri](decibel/02-dbm-dbu-dbuv/DB_Unita_dBm_dBu_IV3HGA.pdf) | 8 |
 | 3 | [La catena di trasmissione in decibel](decibel/03-catena-di-trasmissione/DB_Catena_Trasmissione_IV3HGA.pdf) | 8 |
 | 4 | [EIRP e antenne: la candela di IW3SMV](decibel/04-eirp-antenne-candela/DB_EIRP_Antenne_Candela_IV3HGA.pdf) | 13 |
+
+## Sezione 1 · Elettronica
+
+Gli strumenti di tutti i giorni sul banco: misurare tensioni, correnti e forme d'onda in sicurezza, e capire cosa ci stanno dicendo davvero.
 
 ### Capitolo 1 · Il multimetro
 
@@ -39,6 +51,10 @@ Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti 
 | 4 | [Le misure con l'oscilloscopio](oscilloscopio/04-misure-classiche/OSC_Misure_Classiche_IV3HGA.pdf) | 10 |
 | 5 | [Come NON usare l'oscilloscopio](oscilloscopio/05-come-non-usarlo/OSC_Come_Non_Usarlo_IV3HGA.pdf) | 10 |
 | 6 | [Misure inconsuete e trucchi](oscilloscopio/06-misure-inconsuete-e-trucchi/OSC_Misure_Inconsuete_Trucchi_IV3HGA.pdf) | 11 |
+
+## Sezione 2 · Radiofrequenza
+
+Gli strumenti RF, i segnali e i sistemi radio, il rumore e i disturbi: dalla misura sull'antenna fino a come funzionano FT8 e la telefonia cellulare.
 
 ### Capitolo 3 · Il VNA (analizzatore di reti vettoriale)
 
