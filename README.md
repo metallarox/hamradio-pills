@@ -4,7 +4,7 @@
 
 🌐 **Sito del corso: https://metallarox.github.io/hamradio-pills/**
 
-Un corso in pillole di elettronica e radiofrequenza per radioamatori, a cura di **Elia, IV3HGA**: 14 capitoli, 55 moduli, 577 slide.
+Un corso in pillole di elettronica e radiofrequenza per radioamatori, a cura di **Elia, IV3HGA**: 15 capitoli, 57 moduli, 600 slide.
 
 Lo scopo è spiegare qualche concetto che ci può tornare utile nelle nostre attività di laboratorio, con una trattazione pratica e non troppo accademica e qualche pillola di teoria qua e là.
 
@@ -26,7 +26,7 @@ Il linguaggio che useremo in tutto il corso, in elettronica come in radiofrequen
 
 ## Sezione 1 · Elettronica
 
-Gli strumenti di tutti i giorni sul banco: misurare tensioni, correnti e forme d'onda in sicurezza, e capire cosa ci stanno dicendo davvero.
+Gli strumenti di tutti i giorni sul banco: misurare tensioni, correnti, forme d'onda e componenti in sicurezza, e capire cosa ci stanno dicendo davvero.
 
 ### Capitolo 1 · Il multimetro
 
@@ -52,11 +52,18 @@ Gli strumenti di tutti i giorni sul banco: misurare tensioni, correnti e forme d
 | 5 | [Come NON usare l'oscilloscopio](oscilloscopio/05-come-non-usarlo/OSC_Come_Non_Usarlo_IV3HGA.pdf) | 10 |
 | 6 | [Misure inconsuete e trucchi](oscilloscopio/06-misure-inconsuete-e-trucchi/OSC_Misure_Inconsuete_Trucchi_IV3HGA.pdf) | 11 |
 
+### Capitolo 3 · Misurare i componenti
+
+| Modulo | Presentazione | Slide |
+|---|---|---|
+| 1 | [L'LCR meter: come funziona e cosa fa](misura-componenti/01-lcr-meter/LCR_1_Come_funziona_IV3HGA.pdf) | 11 |
+| 2 | [Il prova componenti: FNIRSI LCR-P1 e un LCR meter HP](misura-componenti/02-prova-componenti-vs-hp/LCR_2_Prova_componenti_vs_HP_IV3HGA.pdf) | 12 |
+
 ## Sezione 2 · Radiofrequenza
 
 Gli strumenti RF, i segnali e i sistemi radio, il rumore e i disturbi: dalla misura sull'antenna fino a come funzionano FT8 e la telefonia cellulare.
 
-### Capitolo 3 · Il VNA (analizzatore di reti vettoriale)
+### Capitolo 4 · Il VNA (analizzatore di reti vettoriale)
 
 | Modulo | Presentazione | Slide |
 |---|---|---|
@@ -66,7 +73,7 @@ Gli strumenti RF, i segnali e i sistemi radio, il rumore e i disturbi: dalla mis
 | 4 | [Misurare un quarzo con il VNA](vna/04-quarzo-vna/Quarzo_VNA_IV3HGA.pdf) | 10 |
 | 5 | [Misure inconsuete con il VNA](vna/05-vna-misure-inconsuete/VNA_Misure_Inconsuete_IV3HGA.pdf) | 15 |
 
-### Capitolo 4 · L'analizzatore di spettro
+### Capitolo 5 · L'analizzatore di spettro
 
 | Modulo | Presentazione | Slide |
 |---|---|---|
@@ -76,7 +83,7 @@ Gli strumenti RF, i segnali e i sistemi radio, il rumore e i disturbi: dalla mis
 | 4 | [Carico con prelievo, accoppiatore e ponte](analizzatore-di-spettro/04-prelievi-accoppiatori-ponti/SA_Prelievi_Accoppiatori_Ponti_IV3HGA.pdf) | 14 |
 | 5 | [Misure inconsuete e trucchi](analizzatore-di-spettro/05-misure-inconsuete-e-trucchi/SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf) | 13 |
 
-### Capitolo 5 · Il generatore di segnali RF
+### Capitolo 6 · Il generatore di segnali RF
 
 | Modulo | Presentazione | Slide |
 |---|---|---|
@@ -88,7 +95,7 @@ Gli strumenti RF, i segnali e i sistemi radio, il rumore e i disturbi: dalla mis
 | 6 | [Selettività e dinamica del ricevitore](generatore-rf/06-selettivita-e-dinamica/GEN_Selettivita_Dinamica_IV3HGA.pdf) | 9 |
 | 7 | [Usi pratici e trucchi](generatore-rf/07-usi-pratici-e-trucchi/GEN_Usi_Pratici_Trucchi_IV3HGA.pdf) | 9 |
 
-### Capitolo 6 · Il wattmetro RF
+### Capitolo 7 · Il wattmetro RF
 
 | Modulo | Presentazione | Slide |
 |---|---|---|
@@ -99,7 +106,7 @@ Gli strumenti RF, i segnali e i sistemi radio, il rumore e i disturbi: dalla mis
 | 5 | [Misure inconsuete e problemi di misura](wattmetro-rf/05-misure-inconsuete-e-problemi/WM_Misure_Inconsuete_Problemi_IV3HGA.pdf) | 11 |
 | 6 | [Potenza del segnale e potenza dello spettro](wattmetro-rf/06-potenza-segnale-spettro-bessel/Potenza_Segnale_Spettro_Bessel_IV3HGA.pdf) | 14 |
 
-### Capitolo 7 · Le modulazioni
+### Capitolo 8 · Le modulazioni
 
 | Modulo | Presentazione | Slide |
 |---|---|---|
@@ -109,33 +116,33 @@ Gli strumenti RF, i segnali e i sistemi radio, il rumore e i disturbi: dalla mis
 | 4 | [Le modulazioni numeriche](modulazioni/04-numeriche-costellazione-occhio/MOD_Numeriche_Costellazione_Occhio_IV3HGA.pdf) | 11 |
 | 5 | [Sistemi numerici: DMR, TETRA e gli altri](modulazioni/05-dmr-tetra-sistemi/MOD_DMR_TETRA_Sistemi_IV3HGA.pdf) | 10 |
 
-### Capitolo 8 · FT8
+### Capitolo 9 · FT8
 
 | Modulo | Presentazione | Slide |
 |---|---|---|
 | 1 | [FT8: come funziona](ft8/01-come-funziona/FT8_Come_Funziona_IV3HGA.pdf) | 11 |
 
-### Capitolo 9 · L'accesso multiplo
+### Capitolo 10 · L'accesso multiplo
 
 | Modulo | Presentazione | Slide |
 |---|---|---|
 | 1 | [Accesso multiplo: FDMA, TDMA, CDMA](accesso-multiplo/01-fdma-tdma-cdma/ACC_FDMA_TDMA_CDMA_IV3HGA.pdf) | 10 |
 
-### Capitolo 10 · La telefonia cellulare
+### Capitolo 11 · La telefonia cellulare
 
 | Modulo | Presentazione | Slide |
 |---|---|---|
 | 1 | [La telefonia cellulare: il GSM](telefonia/01-gsm/TEL_GSM_IV3HGA.pdf) | 9 |
 | 2 | [La telefonia cellulare: WCDMA (UMTS)](telefonia/02-wcdma/TEL_WCDMA_IV3HGA.pdf) | 8 |
 
-### Capitolo 11 · Il rumore
+### Capitolo 12 · Il rumore
 
 | Modulo | Presentazione | Slide |
 |---|---|---|
 | 1 | [Il rumore: cos'è e da dove viene](rumore/01-cos-e-e-tipi/Rumore_1_Cos_e_IV3HGA.pdf) | 11 |
 | 2 | [Il rumore: quando fa male e quando ci serve](rumore/02-cifra-di-rumore-danno-e-uso/Rumore_2_Cifra_di_rumore_IV3HGA.pdf) | 12 |
 
-### Capitolo 12 · Le correnti di modo comune
+### Capitolo 13 · Le correnti di modo comune
 
 | Modulo | Presentazione | Slide |
 |---|---|---|

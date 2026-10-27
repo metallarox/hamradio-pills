@@ -5,7 +5,7 @@ def ar(x1,y1,x2,y2,c=N,w=3):
     m={N:"ar",C:"ac",O:"ao"}[c]; return f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{c}" stroke-width="{w}" marker-end="url(#{m})"/>'
 def tx(x,y,t,c=N,fs=16,a="middle",b=""): return f'<text x="{x}" y="{y}" font-size="{fs}" fill="{c}" text-anchor="{a}" {"font-weight=\"bold\"" if b else ""}>{t}</text>'
 def wire(x1,y1,x2,y2,c=N,w=3,d=""): return f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{c}" stroke-width="{w}" {d}/>'
-D=Deck("Le correnti di modo comune · queste sconosciute","Che cosa sono, perché scorrono sulla parte esterna della calza, da dove nascono, quali problemi causano in trasmissione e in ricezione, come si misurano","Capitolo 12 · modo comune · 1")
+D=Deck("Le correnti di modo comune · queste sconosciute","Che cosa sono, perché scorrono sulla parte esterna della calza, da dove nascono, quali problemi causano in trasmissione e in ricezione, come si misurano","Modo comune · 1")
 dm=f'''<svg viewBox="0 0 560 300" width="100%">{MK}
 {tx(280,24,"Modo differenziale",C,18,b=1)}
 <rect x="20" y="50" width="80" height="90" rx="8" fill="{L}" stroke="{N}" stroke-width="2"/>{tx(60,100,"TX")}

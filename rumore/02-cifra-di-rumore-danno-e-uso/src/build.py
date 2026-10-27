@@ -1,5 +1,5 @@
 from deck import *
-D=Deck("Il rumore · quando fa male e quando ci serve","Cifra di rumore e temperatura, la formula di Friis, il preamplificatore sul palo, perché in HF il ricevitore non conta quasi mai, e il rumore come strumento di misura","Capitolo 11 · il rumore · 2")
+D=Deck("Il rumore · quando fa male e quando ci serve","Cifra di rumore e temperatura, la formula di Friis, il preamplificatore sul palo, perché in HF il ricevitore non conta quasi mai, e il rumore come strumento di misura","Il rumore · 2")
 rows="".join(f"<tr><td style='white-space:nowrap'>{it(a,1)} dB</td><td style='white-space:nowrap'>{b} K</td><td class='l'>{c}</td></tr>" for a,b,c in [(0.5,35,"preamplificatore VHF/UHF di buona qualità"),(1,75,"preamplificatore da palo"),(3,289,"ricevitore VHF/UHF moderno"),(6,865,"ricevitore senza preamplificatore"),(10,"2610","ricevitore HF tipico"),(15,"8880","ricevitore HF con attenuatore inserito")])
 D.add("La cifra di rumore",f'''<div class="two"><div><ul>
 <li>Ogni stadio aggiunge il suo rumore e quindi <b>peggiora il rapporto S/N</b>. Il fattore di rumore F dice di quanto:</li></ul>

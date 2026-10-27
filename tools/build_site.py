@@ -67,7 +67,17 @@ CHAPTERS=[
   dict(dir="oscilloscopio/06-misure-inconsuete-e-trucchi",pdf="OSC_Misure_Inconsuete_Trucchi_IV3HGA.pdf",img="osc-6.jpg",short="Inconsuete e trucchi",title="Misure inconsuete e trucchi",slides=11,meta="tips and tricks da banco",
    learn=["Il <b>ripple</b> dei condensatori di filtro in accoppiamento AC, ESR e invecchiamento","Misure differenziali <b>A − B</b> e corrente di spunto con trigger single","<b>Prova componenti</b> in modalità XY","<b>TDR</b> con generatore, T e oscilloscopio","PTT, burst TDMA, inviluppo CW e altri trucchi (line trigger, sonda-spira)"],
    tags=["ripple","ESR","A − B","XY tester","TDR","key click"])]),
- dict(id="vna",num="Capitolo 3",title="Il VNA (analizzatore di reti vettoriale)",
+ dict(id="lcr",num="Capitolo 3",title="Misurare i componenti",
+  intro="L'LCR meter: come misura impedenza, L, C, D, Q ed ESR, perché frequenza e livello contano; e il prova componenti FNIRSI LCR-P1 confrontato con un LCR meter HP.",
+  mods=[
+  dict(dir="misura-componenti/01-lcr-meter",pdf="LCR_1_Come_funziona_IV3HGA.pdf",img="lcr-1.jpg",short="LCR meter",title="L'LCR meter: come funziona e cosa fa",slides=11,meta="impedenza, serie/parallelo, D, Q, ESR",
+   learn=['Misura <b>vettoriale</b> V/I e ponte auto-bilanciato', 'Modello <b>serie o parallelo</b>, D, Q ed ESR', 'Frequenza, autorisonanza, livello e <b>DC bias</b>', 'Collegamenti a <b>4 terminali</b>, compensazioni e accuratezza'],
+   tags=['LCR', 'ESR', 'D/Q', 'Kelvin', 'DC bias']),
+  dict(dir="misura-componenti/02-prova-componenti-vs-hp",pdf="LCR_2_Prova_componenti_vs_HP_IV3HGA.pdf",img="lcr-2.jpg",short="Prova componenti vs HP",title="Il prova componenti: FNIRSI LCR-P1 e un LCR meter HP",slides=12,meta="tre pin contro il laboratorio",
+   learn=['Dentro il tester: <b>tre pin</b>, 680 Ω, 470 kΩ e un ADC', 'Come <b>riconosce</b> i componenti e ne trova i pin', 'Condensatori e induttori misurati coi <b>tempi</b>', 'Confronto con l\'<b>HP 4263B</b>: quale usare e quando'],
+   tags=['LCR-P1', 'transistor tester', 'HP 4263B', 'ESR', 'hFE']),
+  ]),
+ dict(id="vna",num="Capitolo 4",title="Il VNA (analizzatore di reti vettoriale)",
   intro="Dallo strumento alle applicazioni: come funziona, come si usa e si calibra, la carta di Smith e le misure più particolari.",
   mods=[
   dict(dir="vna/01-vna-come-funziona",pdf="VNA_Come_Funziona_IV3HGA.pdf",img="vna-1.jpg",short="Come funziona un VNA",title="Come funziona un VNA",slides=15,meta="le basi · consigliato come punto di partenza",
@@ -85,7 +95,7 @@ CHAPTERS=[
   dict(dir="vna/05-vna-misure-inconsuete",pdf="VNA_Misure_Inconsuete_IV3HGA.pdf",img="vna-5.jpg",short="Misure inconsuete",title="Misure inconsuete con il VNA",slides=15,meta="12 misure oltre SWR e filtri",
    learn=["<b>Ferriti</b> sconosciute, SRF/ESR dei componenti, choke in modo comune","<b>Shunt-through</b> per i milliohm e group delay di risonatori e cavità","<b>TDR</b> per trovare guasti nei cavi, εr e tan δ di un PCB, umidità dei materiali","Grid-dip moderno e NFC, accoppiamento k, isolamento tra antenne, schermatura, time-gating"],
    tags=["ferriti","TDR","choke","PCB εr","grid-dip","time-gating"])]),
- dict(id="sa",num="Capitolo 4",title="L'analizzatore di spettro",
+ dict(id="sa",num="Capitolo 5",title="L'analizzatore di spettro",
   intro="Come funziona, come usarlo senza romperlo, le misure classiche fatte bene, carichi con prelievo, accoppiatori e ponti, e i trucchi che non trovi nei manuali.",
   mods=[
   dict(dir="analizzatore-di-spettro/01-come-funziona",pdf="SA_Come_Funziona_IV3HGA.pdf",img="sa-1.jpg",short="Come funziona",title="Come funziona l'analizzatore di spettro",slides=13,meta="le basi · supereterodina, RBW, rivelatori",
@@ -103,7 +113,7 @@ CHAPTERS=[
   dict(dir="analizzatore-di-spettro/05-misure-inconsuete-e-trucchi",pdf="SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf",img="sa-5.jpg",short="Inconsuete e trucchi",title="Misure inconsuete e trucchi",slides=13,meta="tips and tricks da banco",
    learn=["Capire se una riga è <b>vera</b>: test dell'attenuazione e altri tre controlli","Misurare vicino al rumore e la <b>cifra di rumore</b> con il metodo Y-factor","<b>Sonde near-field</b> per la caccia al QRM e misure di campo in dBµV/m","Ascoltare i segnali, <b>slope detection</b> della FM e il trucco della RBW","Più dinamica con notch e filtri, riferimento a 10 MHz e altri trucchi"],
    tags=["righe false","Y-factor","near-field","QRM","slope detection","dBµV/m"])]),
- dict(id="gen",num="Capitolo 5",title="Il generatore di segnali RF",
+ dict(id="gen",num="Capitolo 6",title="Il generatore di segnali RF",
   intro="Il compagno dell'analizzatore: come funziona, livelli e attenuatori, modulazioni, purezza spettrale e i test di sensibilità, selettività e dinamica dei ricevitori.",
   mods=[
   dict(dir="generatore-rf/01-come-funziona",pdf="GEN_Come_Funziona_IV3HGA.pdf",img="gen-1.jpg",short="Come funziona",title="Il generatore RF: come funziona",slides=9,meta="le basi · architettura e specifiche",
@@ -128,7 +138,7 @@ CHAPTERS=[
    learn=["Tarare l'<b>S-meter</b> con la convenzione IARU", 'Allineare filtri e IF; <b>iniezione di segnale</b> per la ricerca guasti', '<b>Proteggere il generatore</b> nelle prove sui ricetrasmettitori', 'Generatore e analizzatore insieme, altri trucchi ed errori da evitare'],
    tags=['S-meter', 'allineamento', 'iniezione', 'protezione']),
   ]),
- dict(id="wm",num="Capitolo 6",title="Il wattmetro RF",
+ dict(id="wm",num="Capitolo 7",title="Il wattmetro RF",
   intro="Come funziona e quali tipi esistono, il Bird 43 con le sue testine, bolometri e termistori, come preservarlo, i problemi di misura e la matematica della potenza.",
   mods=[
   dict(dir="wattmetro-rf/01-come-funziona",pdf="WM_Come_Funziona_IV3HGA.pdf",img="wm-1.jpg",short="Come funziona",title="Il wattmetro RF: come funziona",slides=10,meta="le basi · tipi di wattmetri e di sensori",
@@ -149,7 +159,7 @@ CHAPTERS=[
   dict(dir="wattmetro-rf/06-potenza-segnale-spettro-bessel",pdf="Potenza_Segnale_Spettro_Bessel_IV3HGA.pdf",img="wm-6.jpg",short="Potenza e Bessel",title="Potenza del segnale e potenza dello spettro",slides=14,meta="approfondimento matematico con esempi concreti",
    learn=["Il teorema di <b>Parseval</b>: il ponte tra wattmetro e analizzatore","<b>AM</b>: portante, bande laterali, media e PEP con i numeri","<b>SSB</b> a due toni: PEP = 2 × media","<b>FM</b> e funzioni di <b>Bessel</b>: la potenza si ridistribuisce, non cambia","Regola di Carson, densità spettrale e RBW, somme in dB, fattore di cresta"],
    tags=["Parseval","AM","SSB","FM","Bessel","Carson","PAPR"])]),
- dict(id="mod",num="Capitolo 7",title="Le modulazioni",
+ dict(id="mod",num="Capitolo 8",title="Le modulazioni",
   intro="Dalle basi ai sistemi: CW, AM, SSB (USB e LSB), FM e PM; la FM in profondità e l'intermodulazione; modulazioni numeriche, costellazioni e diagramma ad occhio; DMR, TETRA e gli altri.",
   mods=[
   dict(dir="modulazioni/01-analogiche",pdf="MOD_Analogiche_IV3HGA.pdf",img="mod-1.jpg",short="Analogiche",title="Le modulazioni analogiche",slides=10,meta="CW, AM, SSB, FM, PM",
@@ -168,21 +178,21 @@ CHAPTERS=[
    learn=['<b>DMR</b>: 4FSK e TDMA a 2 slot, dentro un burst', '<b>TETRA</b>: π/4-DQPSK, 4 slot e servizi', 'D-STAR, C4FM e gli altri', 'Vantaggi e limiti del digitale nella pratica'],
    tags=['DMR', 'TETRA', '4FSK', 'π/4-DQPSK', 'D-STAR']),
   ]),
- dict(id="ft8",num="Capitolo 8",title="FT8",
+ dict(id="ft8",num="Capitolo 9",title="FT8",
   intro="Il modo digitale per segnali deboli: cicli di 15 secondi, 8-GFSK, sincronismo Costas, correzione d'errore LDPC e perché si decodifica sotto il rumore.",
   mods=[
   dict(dir="ft8/01-come-funziona",pdf="FT8_Come_Funziona_IV3HGA.pdf",img="ft8-1.jpg",short="Come funziona",title="FT8: come funziona",slides=11,meta="modulazione, codifica, vantaggi",
    learn=["Cicli di 15 s e precisione dell'orologio", '<b>8-GFSK</b>: 8 toni da 6,25 Hz, 50 Hz di banda', 'Sincronismo <b>Costas</b>, CRC e <b>LDPC</b>', 'Il waterfall, perché funziona a −21 dB e un QSO tipico'],
    tags=['FT8', '8-GFSK', 'Costas', 'LDPC', 'waterfall']),
   ]),
- dict(id="acc",num="Capitolo 9",title="L'accesso multiplo",
+ dict(id="acc",num="Capitolo 10",title="L'accesso multiplo",
   intro="Come tanti utenti condividono lo spettro: FDMA, TDMA, CDMA, OFDMA, duplex FDD e TDD, accesso casuale.",
   mods=[
   dict(dir="accesso-multiplo/01-fdma-tdma-cdma",pdf="ACC_FDMA_TDMA_CDMA_IV3HGA.pdf",img="acc-1.jpg",short="FDMA, TDMA, CDMA",title="Accesso multiplo: FDMA, TDMA, CDMA",slides=10,meta="dividere frequenza, tempo, codice",
    learn=['Quattro modi di dividere lo spettro', '<b>FDMA</b> e <b>TDMA</b> con esempi reali', '<b>CDMA</b>: spreading, guadagno di processo, vicino-lontano', 'Duplex <b>FDD e TDD</b>, ALOHA e CSMA'],
    tags=['FDMA', 'TDMA', 'CDMA', 'OFDMA', 'FDD/TDD']),
   ]),
- dict(id="tel",num="Capitolo 10",title="La telefonia cellulare",
+ dict(id="tel",num="Capitolo 11",title="La telefonia cellulare",
   intro="Come funzionano davvero GSM e WCDMA: modulazioni, trame, codici, equalizzatori, RAKE e controllo di potenza.",
   mods=[
   dict(dir="telefonia/01-gsm",pdf="TEL_GSM_IV3HGA.pdf",img="tel-1.jpg",short="GSM",title="La telefonia cellulare: il GSM",slides=9,meta="FDMA+TDMA, GMSK, Viterbi",
@@ -192,7 +202,7 @@ CHAPTERS=[
    learn=['Chip rate, portanti da 5 MHz, trama da 10 ms', 'Codici <b>OVSF</b> e di scrambling', '<b>Guadagno di processo</b> e ricevitore <b>RAKE</b>', 'Controllo di potenza, soft handover e confronto con LTE'],
    tags=['WCDMA', 'UMTS', 'OVSF', 'RAKE', 'LTE']),
   ]),
- dict(id="rum",num="Capitolo 11",title="Il rumore",
+ dict(id="rum",num="Capitolo 12",title="Il rumore",
   intro="Che cos'è il rumore e quali sono i suoi tipi, da dove viene, quanto ne arriva dall'antenna, la cifra di rumore e la formula di Friis; quando è dannoso e quando lo usiamo come strumento.",
   mods=[
   dict(dir="rumore/01-cos-e-e-tipi",pdf="Rumore_1_Cos_e_IV3HGA.pdf",img="rum-1.jpg",short="Cos'è e i tipi",title="Il rumore: cos'è e da dove viene",slides=11,meta="kTB, tipi, rumore esterno",
@@ -202,7 +212,7 @@ CHAPTERS=[
    learn=['<b>Cifra di rumore</b>, temperatura e MDS', '<b>Friis</b> e il preamplificatore sul palo', 'Perché in HF il ricevitore non conta', 'Usi utili: <b>fattore Y</b>, spazzata con rumore, Sole, dither'],
    tags=['NF', 'Friis', 'preamp', 'fattore Y', 'dither']),
   ]),
- dict(id="cm",num="Capitolo 12",title="Le correnti di modo comune",
+ dict(id="cm",num="Capitolo 13",title="Le correnti di modo comune",
   intro="Queste sconosciute che sono spesso metà dei nostri problemi: cosa sono, da dove nascono, come si misurano e si bloccano, le masse, gli anelli a 50 Hz e il falso mito della calza collegata da un solo lato.",
   mods=[
   dict(dir="modo-comune/01-cosa-sono",pdf="Modo_comune_1_Cosa_sono_IV3HGA.pdf",img="cm-1.jpg",short="Cosa sono",title="Le correnti di modo comune: cosa sono",slides=9,meta="tre correnti, cause, sintomi",
@@ -222,7 +232,7 @@ CHAPTERS=[
 ]
 SECTIONS=[
  dict(id="sez-basi",ids=["db"],kicker="Per tutti",title="Le basi comuni",intro="Il linguaggio che useremo in tutto il corso, in elettronica come in radiofrequenza: i decibel."),
- dict(id="sez-elettronica",ids=["mm","osc"],kicker="Sezione 1",title="Elettronica",intro="Gli strumenti di tutti i giorni sul banco: misurare tensioni, correnti e forme d'onda in sicurezza, e capire cosa ci stanno dicendo davvero."),
+ dict(id="sez-elettronica",ids=["mm","osc","lcr"],kicker="Sezione 1",title="Elettronica",intro="Gli strumenti di tutti i giorni sul banco: misurare tensioni, correnti, forme d'onda e componenti in sicurezza, e capire cosa ci stanno dicendo davvero."),
  dict(id="sez-rf",ids=["vna","sa","gen","wm","mod","ft8","acc","tel","rum","cm","vit"],kicker="Sezione 2",title="Radiofrequenza",intro="Gli strumenti RF, i segnali e i sistemi radio, il rumore e i disturbi: dalla misura sull'antenna fino a come funzionano FT8 e la telefonia cellulare."),
 ]
 _byid={c["id"]:c for c in CHAPTERS}

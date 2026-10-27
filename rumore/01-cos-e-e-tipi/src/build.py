@@ -1,5 +1,5 @@
 from deck import *
-D=Deck("Il rumore · cos'è e da dove viene","Che cosa intendiamo per rumore, il rumore termico e il famoso −174 dBm/Hz, gli altri rumori dei componenti, bianco e rosa, gaussiano e impulsivo, il rumore che arriva dall'antenna","Capitolo 11 · il rumore · 1")
+D=Deck("Il rumore · cos'è e da dove viene","Che cosa intendiamo per rumore, il rumore termico e il famoso −174 dBm/Hz, gli altri rumori dei componenti, bianco e rosa, gaussiano e impulsivo, il rumore che arriva dall'antenna","Il rumore · 1")
 D.add("Che cosa intendiamo per rumore",'''<div class="two"><div><ul>
 <li>Il <b>rumore</b> è un segnale <b>casuale</b>: non porta informazione e non si può prevedere istante per istante.</li>
 <li>Non si descrive con un'ampiezza, ma con una <b>potenza media</b> in una certa banda, o con una <b>densità</b> (dBm/Hz).</li>

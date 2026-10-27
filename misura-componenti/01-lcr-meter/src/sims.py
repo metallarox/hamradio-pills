@@ -1,0 +1,30 @@
+import numpy as np
+from deck import mpl_setup
+plt=mpl_setup(); A="#0a1a2e"; B="#1593d1"; O="#e0563b"; G="#9aa5b4"; V="#2a9d5c"
+f=np.logspace(1,8.5,800); w=2*np.pi*f
+zc=lambda C,R,L: np.abs(R+1j*w*L+1/(1j*w*C))
+zl=lambda L,R,Cp: np.abs(1/(1/(R+1j*w*L)+1j*w*Cp))
+fig,ax=plt.subplots(figsize=(6.4,4.0))
+ax.axvspan(100,1e5,color=B,alpha=.08); ax.text(130,4e5,"LCR meter tipico",fontsize=9,color=B)
+ax.axvspan(1e5,10**8.5,color=O,alpha=.05); ax.text(3e5,4e5,"zona del VNA",fontsize=9,color=O)
+ax.plot(f,zc(100e-9,0.02,1e-9),color=B,lw=2.2,label="ceramico 100 nF (ESL 1 nH)")
+ax.plot(f,zc(1e-3,0.05,15e-9),color=O,lw=2.2,label="elettrolitico 1000 µF (ESL 15 nH)")
+ax.plot(f,zl(100e-6,0.5,5e-12),color=V,lw=2.2,label="induttore 100 µH (C parass. 5 pF)")
+ax.set_xscale("log"); ax.set_yscale("log"); ax.set_ylim(5e-3,3e6); ax.set_xlim(10,10**8.5)
+ax.set_xlabel("frequenza (Hz)"); ax.set_ylabel("|Z| (Ω)"); ax.grid(alpha=.25,which="both")
+ax.legend(frameon=False,fontsize=8.5,loc="upper center",bbox_to_anchor=(0.5,-0.18),ncol=2)
+fig.tight_layout(); fig.savefig("zf.svg",transparent=True)
+v=np.linspace(0,16,200)
+fig,ax=plt.subplots(figsize=(5.6,3.6))
+for vk,c,n in [(6,O,"X7R 10 µF, 16 V, 0805"),(14,B,"X7R 10 µF, 50 V, 1210"),(1e4,V,"C0G / film")]:
+    ax.plot(v,100/(1+(v/vk)**1.6),color=c,lw=2.2,label=n)
+ax.set_ylim(0,105); ax.set_xlabel("tensione continua applicata (V)"); ax.set_ylabel("capacità (% del nominale)"); ax.grid(alpha=.25); ax.legend(frameon=False,fontsize=9,loc="lower left")
+ax.text(9,92,"curve indicative",fontsize=9,color="#555")
+fig.tight_layout(); fig.savefig("bias.svg",transparent=True)
+z=np.logspace(-3,8,400)
+acc=0.1*(1+0.02/z+z/1e6)
+fig,ax=plt.subplots(figsize=(5.6,3.5))
+ax.plot(z,acc,color=A,lw=2.4); ax.axhspan(0.08,0.2,color=V,alpha=.1)
+ax.set_xscale("log"); ax.set_yscale("log"); ax.set_ylim(0.05,100); ax.set_xlabel("|Z| del componente alla frequenza di prova (Ω)"); ax.set_ylabel("errore (%)")
+ax.text(1,0.13,"zona migliore",fontsize=9,color=V); ax.text(2e-3,25,"piccole Z:\ncontano i residui\ndi cortocircuito",fontsize=9,color=O); ax.text(1.5e5,25,"grandi Z:\ncontano le\ncapacità parassite",fontsize=9,color=O)
+ax.grid(alpha=.25,which="both"); fig.tight_layout(); fig.savefig("acc.svg",transparent=True)

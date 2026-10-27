@@ -20,7 +20,7 @@ myth=f'''<svg viewBox="0 0 1080 320" width="100%">
 {panel(0,"Calza a terra da un solo lato",O,"one",[("50 Hz: nessun anello di massa ✓",V),("RF: la calza aperta è un'antenna ✗",O),("nessuna schermatura magnetica ✗",O)])}
 {panel(370,"Calza a terra dai due lati, a 360°",V,"both",[("schermatura elettrica e magnetica ✓",V),("la corrente a 50 Hz va sul conduttore",V),("di equipotenzialità, non sulla calza",V)])}
 {panel(740,"Soluzione ibrida",C,"cap",[("50 Hz: aperto (10 nF ≈ 318 kΩ) ✓",V),("RF: chiuso (a 10 MHz ≈ 1,6 Ω) ✓",V),("quando non si può fare di meglio",N)])}</svg>'''
-D=Deck("Le correnti di modo comune · rimedi e falsi miti","I choke e le ferriti, dove metterli e come misurarli, le masse e gli anelli a 50 Hz, il mito della calza collegata da un solo lato e le buone pratiche delle norme EMC","Capitolo 12 · modo comune · 2")
+D=Deck("Le correnti di modo comune · rimedi e falsi miti","I choke e le ferriti, dove metterli e come misurarli, le masse e gli anelli a 50 Hz, il mito della calza collegata da un solo lato e le buone pratiche delle norme EMC","Modo comune · 2")
 D.add("Il choke: un'impedenza solo per il modo comune",f'''<div class="two"><div class="fig">{svg("chokes.svg")}</div><div><ul class="small">
 <li>Avvolgendo il coassiale su una ferrite (o in spire), la corrente utile I1/I2 non vede nulla: i suoi campi si annullano dentro il cavo.</li>
 <li>La corrente sulla faccia esterna, invece, trova un'<b>impedenza in serie</b> alta: il modo comune viene bloccato.</li>
