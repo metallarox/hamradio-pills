@@ -2,6 +2,11 @@
 const V='4.10.38', CDN=`https://cdn.jsdelivr.net/npm/pdfjs-dist@${V}/build/`;
 const box=document.querySelector('.slider'); if(box){
 const url=box.dataset.pdf, cv=box.querySelector('canvas'), lab=box.querySelector('.cnt'), stage=box.querySelector('.stage');
+const KS='hrp-slides', dk=()=>{try{return localStorage.getItem(KS)!=='light'}catch(e){return true}};
+box.classList.toggle('darkslides',dk());
+box.querySelector('.tone').onclick=e=>{e.stopPropagation();const on=!box.classList.contains('darkslides');box.classList.toggle('darkslides',on);try{localStorage.setItem(KS,on?'dark':'light')}catch(_){}};
+const tb=box.querySelector('.tone'); const vis=()=>{tb.style.display=document.documentElement.getAttribute('data-theme')==='dark'?'':'none'}; vis();
+new MutationObserver(vis).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 const fallback=()=>{stage.innerHTML=`<iframe src="${url}#view=FitH" title="PDF"></iframe>`;box.querySelector('.sctl').style.display='none'};
 try{
   const pdfjs=await import(CDN+'pdf.min.mjs'); pdfjs.GlobalWorkerOptions.workerSrc=CDN+'pdf.worker.min.mjs';

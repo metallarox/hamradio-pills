@@ -127,3 +127,25 @@ a.plain{color:inherit;text-decoration:none}a.plain:hover{color:var(--blue)}
 .sctl button{background:rgba(255,255,255,.1);border:0;color:#fff;font-size:24px;width:46px;height:40px;border-radius:10px;cursor:pointer}.sctl button:hover{background:var(--blue)}
 .sctl .fs{font-size:18px;margin-left:auto}.sctl .cnt{min-width:90px;text-align:center}.sctl .prev{margin-left:auto}
 .slider:fullscreen{display:flex;flex-direction:column;justify-content:center;border-radius:0;padding:2vh 2vw}.slider:fullscreen .stage{max-height:88vh;aspect-ratio:auto}.slider:fullscreen canvas{max-height:88vh;width:auto;max-width:100%}
+/* ===== tema scuro ===== */
+.themebtn{position:fixed;right:20px;bottom:20px;z-index:50;width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:var(--navy);color:#ffd36a;font-size:22px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.themebtn:hover{background:var(--blue);color:#fff}
+.slidetone{font-size:15px!important;width:auto!important;padding:0 12px}
+html[data-theme=dark]{color-scheme:dark;--ice:#16263c;--line:#26344a;--ink:#dbe4ef;--mute:#93a3b8}
+html[data-theme=dark] body{background:#0b1220;color:var(--ink)}
+html[data-theme=dark] h2,html[data-theme=dark] .mod h3,html[data-theme=dark] .toc h3,html[data-theme=dark] .card h4,html[data-theme=dark] .siblings h4,html[data-theme=dark] .pg b,html[data-theme=dark] .step div{color:#eaf2fb}
+html[data-theme=dark] .mission h2,html[data-theme=dark] .secband h2{color:#fff}
+html[data-theme=dark] .toc a,html[data-theme=dark] .card,html[data-theme=dark] .pg{background:#131d2e;border-color:var(--line)}
+html[data-theme=dark] .toc a:hover,html[data-theme=dark] .pg:hover{box-shadow:0 10px 30px rgba(0,0,0,.5)}
+html[data-theme=dark] .step:hover,html[data-theme=dark] .siblings a:hover{background:#1d3352}
+html[data-theme=dark] .siblings a.on{background:#0b1220}
+html[data-theme=dark] .tags span{color:#bfe3f7}
+html[data-theme=dark] .shot{border-color:var(--line);box-shadow:0 18px 50px rgba(0,0,0,.5)}
+html[data-theme=dark] .mod .btn.ghost{color:#eaf2fb;border-color:#3a4c66}
+html[data-theme=dark] .chap-num{background:var(--blue)}
+html[data-theme=dark] .chapter+.chapter{border-top-color:#131d2e}
+html[data-theme=dark] footer,html[data-theme=dark] .topbar{background:#070d18}
+html[data-theme=dark] .slider{background:#070d18}
+html[data-theme=dark] .slider .stage{background:#111}
+html[data-theme=dark] .slider.darkslides canvas,html[data-theme=dark] .shot img.dk,html[data-theme=dark] .slider.darkslides iframe{filter:invert(.92) hue-rotate(180deg) brightness(.95) contrast(.95)}
+html[data-theme=dark] .shot img{filter:brightness(.68) contrast(1.05)}

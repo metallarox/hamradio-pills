@@ -248,7 +248,7 @@ def head(title,desc,up):
     return f'''<!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)}</title><meta name="description" content="{html.escape(desc)}">
-<link rel="icon" href="{up}assets/logo.png"><link rel="stylesheet" href="{up}assets/site.css"></head><body>'''
+<link rel="icon" href="{up}assets/logo.png"><link rel="stylesheet" href="{up}assets/site.css"><script src="{up}assets/theme.js"></script></head><body>'''
 def topbar(up,crumbs):
     cr=" <span>›</span> ".join(f'<a href="{h}">{t}</a>' if h else f'<b>{t}</b>' for t,h in crumbs)
     return f'''<nav class="topbar"><div class="wrap"><a class="brand" href="{up}index.html"><img src="{up}assets/logo.png" alt="">Ham Radio <span>Pills</span></a><div class="crumbs">{cr}</div></div></nav>'''
@@ -291,7 +291,7 @@ for k,(c,i,m) in enumerate(ALL):
 <p class="lead">{m["slides"]} slide · {m["meta"]}</p>
 <div class="btns"><a class="btn primary" href="{m["pdf"]}" download>⬇ Scarica PDF</a><a class="btn ghost" href="{m["pdf"]}" target="_blank" rel="noopener">Apri a schermo intero</a></div></div></header>
 <section class="modpage"><div class="wrap"><div class="slider" data-pdf="{m["pdf"]}"><div class="stage"><canvas></canvas></div>
-<div class="sctl"><button class="prev" aria-label="Slide precedente">‹</button><span class="cnt">caricamento…</span><button class="next" aria-label="Slide successiva">›</button><button class="fs" aria-label="Schermo intero">⛶</button></div></div>
+<div class="sctl"><button class="prev" aria-label="Slide precedente">‹</button><span class="cnt">caricamento…</span><button class="next" aria-label="Slide successiva">›</button><button class="tone slidetone" aria-label="Slide chiare o scure" title="Slide chiare o scure">◐ slide</button><button class="fs" aria-label="Schermo intero">⛶</button></div></div>
 <p class="vnote">Sfoglia con le frecce, la tastiera o con uno swipe. Per stampare o salvare usa <a href="{m["pdf"]}" target="_blank" rel="noopener">Apri a schermo intero</a> o Scarica PDF.</p>
 <script type="module" src="{up}assets/viewer.js"></script>
 <div style="height:44px"></div><div class="mgrid2"><div>
