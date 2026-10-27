@@ -4,7 +4,7 @@ def tx(x,y,t,c=N,fs=15,a="middle",b=""): return f'<text x="{x}" y="{y}" font-siz
 def wire(x1,y1,x2,y2,c=N,w=2.5): return f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{c}" stroke-width="{w}"/>'
 D=Deck("L'LCR meter · come funziona e cosa fa","Impedenza, misura vettoriale di tensione e corrente, ponte auto-bilanciato, modelli serie e parallelo, D, Q ed ESR, frequenza e livello di prova, collegamenti a 4 terminali e compensazioni","Misurare i componenti · LCR meter")
 D.add("Che cosa misura",f'''<div class="two"><div><ul>
-<li>Un multimetro misura la resistenza in <b>continua</b>. Un LCR meter applica una tensione <b>alternata sinusoidale</b> di frequenza e ampiezza note e misura l'<b>impedenza</b>:</li></ul>
+<li>L'LCR meter applica una tensione <b>alternata sinusoidale</b> di frequenza e ampiezza note e misura l'<b>impedenza</b> complessa del componente:</li></ul>
 {eq("Z = R + jX = |Z|·e<sup>jθ</sup>")}
 <ul><li>Dalle due componenti, resistiva e reattiva, ricava tutto il resto:</li></ul>
 <table><tr><th>Se X &gt; 0 (induttivo)</th><th>Se X &lt; 0 (capacitivo)</th></tr><tr><td class="l">L = X / ω</td><td class="l">C = −1 / (ω·X)</td></tr><tr><td class="l">Q = X / R</td><td class="l">D = R / |X| = ESR·ω·C</td></tr></table></div><div>
@@ -82,4 +82,95 @@ D.add("Esempi pratici",'''<div class="grid3"><div class="card"><h3>Elettrolitico
 <div class="card"><h3>Trasformatori</h3><p>Induttanza del primario a secondario aperto, induttanza di dispersione a secondario in corto: due misure, molte informazioni.</p></div></div>''')
 r=[("Misura","Z complessa con tensione AC nota: V/I vettoriale"),("Modelli","serie per piccole Z, parallelo per grandi Z"),("Perdite","ESR, D = ESR·ω·C, Q = X/R"),("Frequenza","il valore vale a quella frequenza; per l'RF serve il VNA"),("Livello","ceramici X7R e ferriti cambiano con tensione e corrente"),("Collegamenti","4 terminali e compensazione open/short"),("Precisione","massima a |Z| medie: scegli la frequenza giusta")]
 D.add("Riepilogo",'<table class="sum">'+"".join(f'<tr><td class="l" style="width:160px"><b>{a}</b></td><td class="l">{b}</td></tr>' for a,b in r)+'</table>')
+D.add("Dal multimetro all'LCR meter",f"""<div class="two"><div><ul>
+<li>Il multimetro misura la resistenza facendo passare una piccola corrente <b>continua</b>. Un condensatore in continua è un circuito aperto, un induttore è solo la resistenza del filo: il multimetro non vede né C né L.</li>
+<li>In alternata invece condensatori e induttori hanno una <b>reattanza</b>, che dipende dalla frequenza:</li></ul>
+{eq("X<sub>C</sub> = 1 / (2π·f·C)    X<sub>L</sub> = 2π·f·L")}
+<ul><li>L'LCR meter usa proprio questo: applica una sinusoide di frequenza nota, misura la reattanza e ne ricava C o L.</li></ul></div><div>
+<h3>Quanto valgono le reattanze</h3><table><tr><th>Frequenza</th><th>1 µF</th><th>100 µH</th></tr>
+<tr><td>100 Hz</td><td>1592 Ω</td><td>0,063 Ω</td></tr><tr><td>1 kHz</td><td>159 Ω</td><td>0,63 Ω</td></tr><tr><td>100 kHz</td><td>1,59 Ω</td><td>62,8 Ω</td></tr></table>
+<p class="note">Lo stesso induttore da 100 µH a 100 Hz ha una reattanza di 63 mΩ, più piccola della resistenza dei puntali: a quella frequenza non si misura. A 100 kHz diventa 63 Ω, facile. La scelta della frequenza è metà della misura.</p></div></div>""")
+D.add("Tensione e corrente fuori fase",f"""<div class="fig" style="width:94%">{svg("phasor.svg")}</div><div class="two" style="gap:30px"><div><ul class="small">
+<li>In una resistenza tensione e corrente salgono e scendono insieme. In un condensatore la corrente <b>anticipa</b> la tensione di un quarto di periodo (90°), in un induttore la <b>segue</b> con 90° di ritardo.</li></ul></div><div><ul class="small">
+<li>Un componente reale sta in mezzo: un condensatore con perdite ha un angolo di poco meno di 90°. L'LCR meter misura proprio questo <b>angolo</b> insieme al rapporto delle ampiezze: è da lì che separa la parte resistiva da quella reattiva.</li></ul></div></div>""")
+D.add("La demodulazione sincrona",f"""<div class="two"><div class="fig">{svg("demod.svg")}</div><div><ul class="small">
+<li>Per sapere quanto del segnale misurato è "in fase" e quanto "in quadratura" con l'oscillatore, lo si moltiplica per due copie del riferimento: una in fase (I) e una sfasata di 90° (Q).</li>
+<li>La <b>media</b> di ciascun prodotto è proporzionale alla componente corrispondente. Nell'esempio il segnale ha ampiezza 1 e fase −60°: le medie valgono 0,5·cos(−60°) = 0,25 e 0,5·sin(−60°) ≈ −0,43.</li>
+<li>Lo stesso si fa sulla tensione e sulla corrente; dividendo i due numeri complessi si ottiene Z.</li>
+<li>Il prodotto per il riferimento scarta quasi tutto ciò che non è alla frequenza di prova (rumore, ronzio): la misura resta stabile anche con segnali piccoli. Gli strumenti moderni fanno tutto in digitale dopo l'ADC.</li></ul></div></div>""")
+D.add("Un esempio passo per passo",f"""<div class="two"><div><h3>Ceramico X7R da 1 µF a 1 kHz</h3><ul>
+<li>Tensione applicata: <b>1 V</b>, presa come riferimento di fase (0°).</li>
+<li>Corrente misurata: <b>6,282 mA</b>, in anticipo di <b>88,99°</b>.</li></ul>
+{eq("Z = V / I = 1 / 0,006282 = 159,2 Ω  con θ = −88,99°")}
+<ul><li>Parte reattiva: X = 159,2·sin(−88,99°) ≈ −159,15 Ω → C = 1 / (2π·1000·159,15) = <b>1,000 µF</b>.</li>
+<li>Parte resistiva: R = 159,2·cos(−88,99°) ≈ <b>2,8 Ω</b> = ESR a 1 kHz.</li>
+<li>D = R / |X| = 2,8 / 159,15 ≈ <b>0,018</b>.</li></ul></div><div>
+<h3>Che cosa ci dice</h3><ul class="small"><li>Un grado di differenza dall'angolo ideale (−90°) basta a rivelare 2,8 Ω di perdite: per questo serve una misura di fase molto accurata.</li>
+<li>D = 0,018 è un valore normale per un X7R; un film avrebbe D ≈ 0,001, cioè un angolo di −89,94°.</li>
+<li>Lo strumento fa questi conti ad ogni lettura e mostra i parametri che scegli: Cs e D, oppure Cs e ESR, oppure |Z| e θ.</li></ul></div></div>""")
+D.add("Serie o parallelo: un esempio",f"""<div class="two"><div><h3>Un condensatore da 10 pF</h3><ul class="small">
+<li>A 1 kHz la sua reattanza vale 15,9 MΩ. Una resistenza di dispersione di 1 GΩ è in <b>parallelo</b> e pesa poco; una resistenza serie di qualche ohm è del tutto invisibile.</li>
+<li>Il modello giusto è il parallelo (Cp, Rp o D). Il modello serie darebbe un'ESR di pochi kilohm senza alcun significato fisico.</li></ul>
+<h3>Un elettrolitico da 1000 µF</h3><ul class="small"><li>A 120 Hz la reattanza vale 1,33 Ω, confrontabile con un'ESR di 0,05–0,1 Ω. Le perdite sono in <b>serie</b>: modello Cs ed ESR.</li></ul></div><div>
+<h3>Lo stesso componente, due numeri</h3><ul class="small"><li>Con D piccolo Cs ≈ Cp e la scelta non cambia quasi nulla.</li>
+<li>Con D = 0,3 (elettrolitico esaurito) Cs = Cp·1,09: il 9 % di differenza solo per aver scelto il modello sbagliato.</li>
+<li>Un induttore 100 µH con Q = 126 a 100 kHz ha Rs = 0,5 Ω oppure Rp ≈ 7,9 kΩ: sono la stessa cosa, viste in due modi.</li></ul>
+<p class="note">Regola: usa il modello in cui il "difetto" è fisicamente presente, e quando confronti con un datasheet usa lo stesso modello e la stessa frequenza.</p></div></div>""")
+D.add("ESR e invecchiamento degli elettrolitici",f"""<div class="two"><div><ul>
+<li>Negli elettrolitici l'elettrolita si asciuga col calore e col tempo: la <b>capacità cala</b> e soprattutto l'<b>ESR sale</b>.</li>
+<li>Un'ESR alta scalda il condensatore (P = I²·ESR con la corrente di ripple), che invecchia ancora più in fretta: negli alimentatori switching è la causa di guasto più comune.</li>
+<li>La capacità spesso è ancora "quasi giusta" quando l'ESR è già fuori: misurare solo C non basta.</li></ul></div><div>
+<h3>Esempio indicativo, 1000 µF 25 V</h3><table><tr><th></th><th>Nuovo</th><th>Invecchiato</th></tr><tr><td class="l">Cs a 120 Hz</td><td>1000 µF</td><td>820 µF</td></tr><tr><td class="l">ESR a 100 kHz</td><td>0,03 Ω</td><td>0,6 Ω</td></tr><tr><td class="l">Calore con 1 A di ripple</td><td>30 mW</td><td>600 mW</td></tr></table>
+<ul class="small"><li>Una regola pratica diffusa: sostituire quando l'ESR supera circa il doppio del valore di datasheet alla stessa frequenza.</li>
+<li>L'ESR si misura a 100 kHz per i condensatori degli switching, a 120 Hz per i livellamenti a 50 Hz.</li></ul></div></div>""")
+D.add("L'autorisonanza: calcolarla",f"""<div class="two"><div>{eq("f<sub>SRF</sub> = 1 / (2π·√(L·C))")}<ul>
+<li>Per un condensatore L è l'induttanza parassita (ESL): pochi nH per un SMD piccolo, 10–20 nH per un elettrolitico con terminali.</li>
+<li>Per un induttore C è la capacità tra le spire: da frazioni di pF a decine di pF.</li></ul>
+<table><tr><th>Componente</th><th>Parassita</th><th>SRF</th></tr><tr><td class="l">ceramico 100 nF</td><td>1 nH</td><td>15,9 MHz</td></tr><tr><td class="l">elettrolitico 1000 µF</td><td>15 nH</td><td>41 kHz</td></tr><tr><td class="l">induttore 100 µH</td><td>5 pF</td><td>7,1 MHz</td></tr></table></div><div>
+<h3>Conseguenze per chi fa radio</h3><ul class="small"><li>Un 100 nF di disaccoppiamento in 2 m (145 MHz) è già un induttore: per questo si mettono in parallelo valori diversi (100 nF + 1 nF + 100 pF), ognuno efficace nella sua banda.</li>
+<li>Un'impedenza RF da 100 µH sopra 7 MHz lascia passare l'RF attraverso la sua capacità parassita: in 20 m non blocca più nulla.</li>
+<li>Un elettrolitico in uscita a un alimentatore switching è un induttore sopra qualche decina di kHz: servono ceramici in parallelo.</li>
+<li>L'LCR meter non vede nulla di tutto questo sotto 100 kHz: si misura col VNA.</li></ul></div></div>""")
+D.add("Scegliere frequenza, livello e modello",'''<table><tr><th>Componente</th><th>Frequenza</th><th>Livello</th><th>Modello e parametri</th></tr>
+<tr><td class="l">Elettrolitico, livellamento rete</td><td class="l">120 Hz (100 Hz)</td><td class="l">0,5–1 V</td><td class="l">Cs, D o ESR</td></tr>
+<tr><td class="l">Elettrolitico per switching</td><td class="l">100 kHz</td><td class="l">0,5–1 V</td><td class="l">Cs, ESR</td></tr>
+<tr><td class="l">Ceramico fino a 10 µF</td><td class="l">1 kHz</td><td class="l">1 V (0,5 V se grande)</td><td class="l">Cp o Cs, D</td></tr>
+<tr><td class="l">Ceramico sotto 100 pF</td><td class="l">100 kHz (o 1 MHz se disponibile)</td><td class="l">1 V</td><td class="l">Cp, D</td></tr>
+<tr><td class="l">Film</td><td class="l">1 kHz</td><td class="l">1 V</td><td class="l">Cs, D</td></tr>
+<tr><td class="l">Induttore di potenza</td><td class="l">100 kHz</td><td class="l">basso; con DC bias se possibile</td><td class="l">Ls, Q, Rdc</td></tr>
+<tr><td class="l">Induttore RF piccolo</td><td class="l">la più alta disponibile</td><td class="l">basso</td><td class="l">Ls, Q (poi VNA)</td></tr>
+<tr><td class="l">Resistenza</td><td class="l">1 kHz o DC</td><td class="l">1 V</td><td class="l">R; con X si vede l'induttanza dei filo-avvolti</td></tr></table>
+<p class="note">Per i confronti vale sempre la condizione del datasheet: stessa frequenza, stesso livello, stesso modello.</p>''')
+D.add("Puntali e fixture",'''<div class="grid3"><div class="card"><h3>Pinze Kelvin</h3><p>Ogni ganascia ha due contatti isolati: uno porta la corrente, l'altro legge la tensione. Sono il modo pratico di fare la misura a 4 terminali su componenti con terminali.</p></div>
+<div class="card"><h3>Fixture per componenti</h3><p>Zoccoli a molla o a vite collegati direttamente ai 4 terminali dello strumento: minimi residui, misure ripetibili su componenti a terminali assiali e radiali.</p></div>
+<div class="card"><h3>Pinzette SMD</h3><p>Per componenti 0402–1206. Residui più alti: la compensazione open/short con le pinzette stesse è indispensabile.</p></div>
+<div class="card"><h3>Cavi 4 terminal pair</h3><p>Quattro coassiali con le calze unite in fondo: la corrente di andata e ritorno corre nello stesso cavo e il campo si annulla. Si dichiara la lunghezza allo strumento.</p></div>
+<div class="card"><h3>Coccodrilli comuni</h3><p>Vanno bene per resistenze e capacità medie. Per piccole impedenze (mΩ, nH) o grandi impedenze (pF) sono la prima fonte di errore.</p></div>
+<div class="card"><h3>Mani e tavolo</h3><p>Un dito vicino a un condensatore da pochi pF aggiunge capacità; un piano metallico sotto un induttore ne cambia L e Q. Misura lontano da masse e fermo.</p></div></div>''')
+D.add("La compensazione passo per passo",f"""<div class="two"><div><h3>Procedura</h3><ol>
+<li>Imposta frequenza e livello che userai per la misura.</li>
+<li>Collega puntali o fixture esattamente come per la misura.</li>
+<li><b>Open</b>: puntali aperti, alla distanza dei terminali del componente. Avvia la correzione.</li>
+<li><b>Short</b>: puntali chiusi con una barretta corta e spessa, o con le ganasce a contatto. Avvia la correzione.</li>
+<li>Se lo strumento la prevede, <b>load</b>: misura un componente di riferimento noto, simile a quelli da misurare.</li>
+<li>Misura. Se cambi frequenza, cavi o fixture, ripeti.</li></ol></div><div>
+<h3>Che cosa fa lo strumento</h3><ul class="small"><li>Con l'open misura l'ammettenza parassita Yo (capacità e dispersione dei puntali); con lo short l'impedenza residua Zs (resistenza e induttanza dei collegamenti).</li>
+<li>Poi corregge ogni misura con un modello semplice:</li></ul>
+{eq("Z<sub>vera</sub> ≈ (Z<sub>mis</sub> − Zs) / (1 − (Z<sub>mis</sub> − Zs)·Yo)")}
+<ul class="small"><li>È la stessa idea della calibrazione SOL del VNA, in forma più semplice.</li></ul></div></div>""")
+D.add("Tre misure con i numeri",'''<div class="grid3"><div class="card"><h3>Toroide sconosciuto</h3><p>10 spire di filo, misura a 100 kHz: L = 40 µH.</p><p>AL = L / N² = 40 µH / 100 = <b>400 nH/spira²</b>. Un valore così alto indica una ferrite, non un ferro carbonile (che sta sotto i 100 nH/spira²).</p><p>Per 25 µH servono N = √(25000 / 400) ≈ 8 spire.</p></div>
+<div class="card"><h3>Quanto è lungo questo cavo?</h3><p>Matassa di RG-58 aperta in fondo, a 1 kHz: Cp = 1,52 nF.</p><p>RG-58 ha circa 101 pF/m: 1520 / 101 ≈ <b>15 m</b>.</p><p>Con l'altro capo in corto si misura invece l'induttanza: circa 0,25 µH/m.</p></div>
+<div class="card"><h3>Elettrolitico sospetto</h3><p>1000 µF dichiarati, a 120 Hz: Cs = 940 µF, D = 0,09.</p><p>ESR = D / (ω·C) = 0,09 / (2π·120·940·10⁻⁶) ≈ <b>0,13 Ω</b>.</p><p>Si confronta con il datasheet alla stessa frequenza prima di decidere.</p></div></div>''')
+D.add("Errori comuni",'''<div class="two"><div><ul>
+<li><b>Frequenza sbagliata</b>: piccole induttanze a 1 kHz, grandi capacità a 100 kHz. La |Z| finisce fuori dalla zona buona.</li>
+<li><b>Niente compensazione</b>, o fatta a un'altra frequenza o con altri puntali.</li>
+<li><b>Modello sbagliato</b>: Cs al posto di Cp su piccoli condensatori, o confronti con un datasheet che usa l'altro modello.</li>
+<li><b>Componente in circuito</b>: tutto quello che è in parallelo entra nella misura.</li></ul></div><div><ul>
+<li><b>Condensatori carichi</b>: possono danneggiare l'ingresso. Scaricali sempre; gli strumenti seri hanno protezioni, ma hanno un limite di energia.</li>
+<li><b>Dimenticare il livello</b>: un X7R misurato a 0,1 V e a 1 V dà valori diversi, e senza DC bias non si vede la perdita in esercizio.</li>
+<li><b>Fidarsi di più cifre</b>: cinque cifre sul display non significano cinque cifre di precisione.</li>
+<li><b>Mani e metallo vicini</b> durante la misura di pF e nH.</li></ul></div></div>''')
+ORDER=["Dal multimetro all'LCR meter","Che cosa misura","Tensione e corrente fuori fase","Il principio: tensione e corrente come vettori","La demodulazione sincrona","Un esempio passo per passo","Serie o parallelo?","Serie o parallelo: un esempio","D, Q ed ESR","ESR e invecchiamento degli elettrolitici","Perché la frequenza conta","L'autorisonanza: calcolarla","Livello di prova e polarizzazione","Scegliere frequenza, livello e modello","I collegamenti: 2, 3 o 4 terminali","Puntali e fixture","La compensazione passo per passo","Dove è preciso e dove no","Esempi pratici","Tre misure con i numeri","Errori comuni","Riepilogo"]
+_d={t:b for t,b in D.S}; assert set(_d)==set(ORDER), set(_d)^set(ORDER)
+D.S=[(t,_d[t]) for t in ORDER]
 D.render(); pdf("LCR_1_Come_funziona_IV3HGA.pdf")

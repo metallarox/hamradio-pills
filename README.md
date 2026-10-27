@@ -4,7 +4,7 @@
 
 🌐 **Sito del corso: https://metallarox.github.io/hamradio-pills/**
 
-Un corso in pillole di elettronica e radiofrequenza per radioamatori, a cura di **Elia, IV3HGA**: 15 capitoli, 57 moduli, 600 slide.
+Un corso in pillole di elettronica e radiofrequenza per radioamatori, a cura di **Elia, IV3HGA**: 15 capitoli, 57 moduli, 624 slide.
 
 Lo scopo è spiegare qualche concetto che ci può tornare utile nelle nostre attività di laboratorio, con una trattazione pratica e non troppo accademica e qualche pillola di teoria qua e là.
 
@@ -56,8 +56,8 @@ Gli strumenti di tutti i giorni sul banco: misurare tensioni, correnti, forme d'
 
 | Modulo | Presentazione | Slide |
 |---|---|---|
-| 1 | [L'LCR meter: come funziona e cosa fa](misura-componenti/01-lcr-meter/LCR_1_Come_funziona_IV3HGA.pdf) | 11 |
-| 2 | [Il prova componenti: FNIRSI LCR-P1 e un LCR meter HP](misura-componenti/02-prova-componenti-vs-hp/LCR_2_Prova_componenti_vs_HP_IV3HGA.pdf) | 12 |
+| 1 | [L'LCR meter: come funziona e cosa fa](misura-componenti/01-lcr-meter/LCR_1_Come_funziona_IV3HGA.pdf) | 23 |
+| 2 | [Il prova componenti: FNIRSI LCR-P1 e un LCR meter HP](misura-componenti/02-prova-componenti-vs-hp/LCR_2_Prova_componenti_vs_HP_IV3HGA.pdf) | 24 |
 
 ## Sezione 2 · Radiofrequenza
 

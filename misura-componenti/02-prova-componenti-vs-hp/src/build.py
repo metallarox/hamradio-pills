@@ -74,4 +74,100 @@ D.add("Consigli d'uso del tester",'''<div class="grid3"><div class="card"><h3>Sc
 <div class="card"><h3>Leggi come una prova</h3><p>Il tester dice che cosa è e se funziona. Se il valore è critico, misuralo con l'LCR meter.</p></div></div>''')
 r=[("Tester","3 pin, microcontrollore, resistenze 680 Ω e 470 kΩ"),("Riconosce","R, C, L, diodi, zener, BJT, FET, IGBT, tiristori"),("Misura","in continua: tempi di carica, impulsi, salita di corrente"),("Limiti","nessuna frequenza di prova, livello fisso, qualche %"),("HP 4263B","100 Hz–100 kHz, 20 mV–1 V, 0,1 %, 4 terminali"),("Scelta","tester per identificare, LCR meter per misurare, VNA per l'RF")]
 D.add("Riepilogo",'<table class="sum">'+"".join(f'<tr><td class="l" style="width:160px"><b>{a}</b></td><td class="l">{b}</td></tr>' for a,b in r)+'</table>')
+D.add("Da dove viene",'''<div class="two"><div><ul>
+<li>Il progetto nasce come <b>AVR Transistortester</b> di Markus Frejek: un microcontrollore ATmega, qualche resistenza e un display, per capire che transistor si ha in mano e come sono i pin.</li>
+<li>Karl-Heinz Kübbeler lo ha poi sviluppato per anni, soprattutto nel software, aggiungendo misure di condensatori, ESR, induttori, zener, autotaratura e molto altro. Il suo manuale descrive in dettaglio ogni metodo di misura.</li>
+<li>Pieter-Tjerk de Boer, PA3FWM, ha aggiunto un metodo a campionamento per piccole capacità e induttanze.</li></ul></div><div>
+<h3>La famiglia</h3><ul><li>Dal progetto aperto sono nati moltissimi strumenti commerciali economici, con nomi come GM328 o LCR-T4, display diversi e qualche funzione in più.</li>
+<li>L'<b>LCR-P1</b> è una versione recente: display a colori, zoccolo rimovibile, batteria ricaricabile, contatti separati per gli zener e decodifica IR.</li></ul>
+<p class="note">Il costruttore non pubblica il firmware né il microcontrollore usati: qui si descrive il principio del progetto aperto, comune a tutta la famiglia.</p></div></div>''')
+blk=f'''<svg viewBox="0 0 600 300" width="100%">{ARW}
+{box(20,30,140,50,"batteria|e USB-C")}{box(20,120,140,50,"regolatore|5 V")}{box(230,90,150,110,"microcontrollore||con ADC")}
+{box(450,30,130,50,"display")}{box(450,120,130,50,"rete di|resistenze")}{box(450,210,130,50,"zoccolo|TP1 TP2 TP3",fill="#fde8e3")}
+{box(230,230,150,50,"DC-DC per|zener fino a 32 V")}{box(20,230,140,50,"ricevitore IR")}
+{ln(90,80,90,120)}{ln(160,145,230,145)}{ln(380,110,450,60)}{ln(380,145,450,145)}{ln(515,170,515,210)}{ln(160,255,230,170)}{ln(305,200,305,230)}</svg>'''
+D.add("Lo schema a blocchi",f"""<div class="two"><div>{blk}</div><div><ul class="small">
+<li>Il <b>microcontrollore</b> fa tutto: comanda le uscite verso la rete di resistenze, legge le tensioni con l'ADC, misura i tempi con i suoi timer, calcola e mostra il risultato.</li>
+<li>La <b>rete di resistenze</b> collega ogni pin di prova al microcontrollore in modo diretto, tramite 680 Ω o tramite 470 kΩ.</li>
+<li>Un <b>convertitore DC-DC</b> genera una tensione più alta per misurare gli zener sui contatti dedicati.</li>
+<li>Il riferimento di tensione dell'ADC e la precisione delle resistenze determinano l'accuratezza finale.</li></ul></div></div>""")
+D.add("Misurare una resistenza",f"""<div class="two"><div class="fig">{svg("rerr.svg")}</div><div><ul class="small">
+<li>Il resistore incognito e una resistenza nota formano un <b>partitore</b>: un pin a Vcc tramite la resistenza nota, l'altro a massa. Dalla tensione letta:</li></ul>
+{eq("R<sub>x</sub> = R<sub>rif</sub> · V / (V<sub>cc</sub> − V)")}
+<ul class="small"><li>Esempio: con 680 Ω e 5 V, l'ADC legge 2,5 V → R<sub>x</sub> = 680 Ω.</li>
+<li>Con un ADC a 10 bit un passo vale 5 V / 1024 ≈ 4,9 mV. L'errore è minimo quando R<sub>x</sub> è vicina alla resistenza di riferimento e cresce molto agli estremi.</li>
+<li>Per questo il tester usa 680 Ω per le resistenze piccole e 470 kΩ per quelle grandi, e fa la media di molte letture.</li>
+<li>Sotto pochi ohm entrano in gioco la resistenza interna dei pin del microcontrollore e quella dei contatti: servono autotaratura e un metodo dedicato.</li></ul></div></div>""")
+D.add("Il diodo",'''<div class="two"><div><ul>
+<li>Il tester trova un diodo quando una coppia di pin conduce in un verso e non nell'altro.</li>
+<li>Misura la tensione diretta con due correnti diverse:</li></ul>
+<table><tr><th>Percorso</th><th>Corrente circa</th><th>Che cosa vedi</th></tr><tr><td class="l">via 680 Ω</td><td>(5 − 0,65) / 680 ≈ 6,4 mA</td><td class="l">Vf "di lavoro"</td></tr><tr><td class="l">via 470 kΩ</td><td>(5 − 0,65) / 470 k ≈ 9 µA</td><td class="l">Vf a corrente minima, più bassa</td></tr></table>
+<ul class="small"><li>Nel verso inverso misura la <b>capacità di giunzione</b> e la corrente di fuga.</li></ul></div><div>
+<h3>Che cosa ci si fa</h3><ul><li>Distinguere un diodo al silicio (0,6–0,7 V), uno Schottky (0,2–0,4 V), un germanio (0,2–0,3 V) e un LED (oltre 1,5 V, e spesso si accende).</li>
+<li>Riconoscere un diodo varicap dalla capacità inversa, utile per gli oscillatori.</li>
+<li>Trovare i diodi interni dei MOSFET e i diodi di protezione dei transistor.</li></ul>
+<p class="note">Un diodo che conduce in entrambi i versi o in nessuno viene segnalato come guasto o come "nessun componente".</p></div></div>''')
+D.add("Il transistor bipolare passo per passo",f"""<div class="two"><div><h3>Riconoscimento</h3><ol class="small">
+<li>Trova due giunzioni che conducono con un pin in comune: quel pin è la <b>base</b>.</li>
+<li>Il verso di conduzione dice se è <b>NPN</b> (la base è l'anodo comune) o <b>PNP</b>.</li>
+<li>Prova i due pin rimasti come collettore ed emettitore: il collegamento con il guadagno più alto è quello giusto.</li></ol>
+<h3>Esempio di calcolo dell'hFE (NPN)</h3><ul class="small"><li>Base alimentata da 5 V tramite 470 kΩ: Ib ≈ (5 − 0,65) / 470 k ≈ <b>9,3 µA</b>.</li>
+<li>Collettore a 5 V tramite 680 Ω: l'ADC misura una caduta di 1,9 V → Ic = 1,9 / 680 ≈ <b>2,8 mA</b>.</li></ul>
+{eq("hFE = Ic / Ib ≈ 2,8 mA / 9,3 µA ≈ 300")}</div><div>
+<h3>Che cosa mostra</h3><ul class="small"><li>hFE, Ube (tensione base-emettitore), correnti di fuga Iceo e Ices, presenza di un diodo di protezione.</li>
+<li>L'hFE è misurato a pochi milliampere: in un finale di potenza a 1 A sarà diverso. Va bene per confrontare e abbinare transistor dello stesso tipo, non come dato di progetto.</li>
+<li>I Darlington si riconoscono dall'hFE molto alto e dalla Ube intorno a 1,2 V.</li></ul></div></div>""")
+D.add("MOSFET e JFET",'''<div class="grid3"><div class="card"><h3>MOSFET ad arricchimento</h3><p>Il gate non conduce. Il tester carica lentamente il gate tramite 470 kΩ finché tra drain e source inizia a passare corrente: la tensione a quel punto è la <b>soglia Vt</b>.</p></div>
+<div class="card"><h3>Capacità di gate</h3><p>Dal tempo di carica del gate ricava la capacità Cg, utile per confrontare MOSFET e capire quanto sarà facile pilotarli.</p></div>
+<div class="card"><h3>Diodo interno</h3><p>Tra source e drain c'è il diodo intrinseco: il tester ne misura la Vf e lo usa per capire la polarità (canale N o P).</p></div>
+<div class="card"><h3>Rds(on)</h3><p>Con il gate carico misura una resistenza drain-source, ma a correnti di milliampere e con Vgs di pochi volt: per i MOSFET a soglia alta non è il valore del datasheet.</p></div>
+<div class="card"><h3>JFET</h3><p>Conduce già senza tensione sul gate; il tester misura la corrente di drain e la capacità di gate, e riconosce canale N o P.</p></div>
+<div class="card"><h3>Attenzione</h3><p>I MOSFET sono sensibili alle cariche elettrostatiche: maneggiali per il corpo, e cortocircuita i pin prima di inserirli se il tester li legge in modo strano.</p></div></div>''')
+D.add("Zener e tensioni più alte",'''<div class="two"><div><ul>
+<li>Dallo zoccolo principale il microcontrollore arriva al massimo alla sua alimentazione: uno zener si vede solo fino a circa 4,5 V.</li>
+<li>Per gli zener più alti l'LCR-P1 ha <b>contatti dedicati</b> (K-A-A) alimentati da un convertitore DC-DC, che misurano fino a circa <b>32 V</b>.</li>
+<li>La corrente di prova è piccola: la tensione letta è quella "di ginocchio" a bassa corrente, che può essere un po' più bassa del valore nominale a 5 mA del datasheet.</li></ul></div><div>
+<h3>Altri usi dei contatti alti</h3><ul><li>Verificare LED bianchi e blu e piccole stringhe di LED.</li>
+<li>Controllare la tensione di scarica di un TVS o di un piccolo varistore a bassa tensione.</li></ul>
+<p class="note">Il tester non sostituisce un alimentatore regolabile con limitazione di corrente per caratterizzare uno zener: è un controllo rapido.</p></div></div>''')
+D.add("L'ESR: come lo stima",f"""<div class="two"><div class="fig">{svg("esrpulse.svg")}</div><div><ul class="small">
+<li>Si fa passare nel condensatore un breve impulso di corrente nota, tramite 680 Ω o direttamente dal pin.</li>
+<li>All'inizio dell'impulso la tensione salta subito di I·ESR, prima ancora che il condensatore abbia accumulato carica; poi sale lentamente con pendenza I/C. Alla fine dell'impulso ricade dello stesso salto.</li>
+<li>Misurando il salto, e conoscendo la corrente, si ricava l'ESR. Nell'esempio: 5 mA e 10 mV di salto → ESR = <b>2 Ω</b>.</li>
+<li>Il salto è di pochi millivolt: servono molte misure mediate e un ADC usato al limite. Per questo l'ESR del tester è indicativa e si misura solo su capacità non troppo piccole.</li></ul></div></div>""")
+D.add("Da dove vengono gli errori",'''<div class="grid3"><div class="card"><h3>Risoluzione dell'ADC</h3><p>Nel progetto originale l'ADC è a 10 bit: 4,9 mV per passo con riferimento a 5 V. Le misure ai limiti delle portate ne risentono.</p></div>
+<div class="card"><h3>Riferimento di tensione</h3><p>Tutte le misure dipendono dal riferimento dell'ADC: se varia dell'1 %, variano dell'1 % i risultati. L'autotaratura ne corregge una parte.</p></div>
+<div class="card"><h3>Resistenze di riferimento</h3><p>La tolleranza delle 680 Ω e 470 kΩ entra direttamente nelle misure di R e di C.</p></div>
+<div class="card"><h3>Pin del microcontrollore</h3><p>Le uscite hanno una resistenza interna di qualche decina di ohm che cambia con temperatura e corrente: pesa sulle piccole resistenze e sull'ESR.</p></div>
+<div class="card"><h3>Contatti e cavi</h3><p>Lo zoccolo e le pinzette aggiungono resistenza e capacità: pochi pF falsano i piccoli condensatori.</p></div>
+<div class="card"><h3>Componente stesso</h3><p>Un elettrolitico con dispersione alta, un induttore con nucleo che satura o un ceramico X7R danno letture che dipendono dal metodo di prova.</p></div></div>''')
+D.add("HP 4263B: come si usa",'''<div class="two"><div><h3>Impostazioni principali</h3><ul>
+<li><b>Frequenza</b>: 100 Hz, 120 Hz, 1 kHz, 10 kHz, 100 kHz.</li>
+<li><b>Livello</b>: tensione di prova da 20 mV a 1 Vrms; il monitor mostra tensione e corrente effettive sul componente.</li>
+<li><b>Parametro primario e secondario</b>: per esempio Cs e D, Ls e Q, |Z| e θ, R e X.</li>
+<li><b>Tempo di misura</b>: corto, medio o lungo, cioè velocità contro rumore.</li></ul></div><div><h3>Prima di misurare</h3><ul>
+<li>Dichiara la lunghezza dei cavi (0, 1, 2 o 4 m), che lo strumento corregge.</li>
+<li>Esegui le correzioni <b>open e short</b>, ed eventualmente <b>load</b> con un componente di riferimento.</li>
+<li>Usa una fixture o le pinze Kelvin: i terminali sono a 4 coppie (Hcur, Hpot, Lpot, Lcur).</li>
+<li>Per gli elettrolitici attiva la <b>polarizzazione DC</b> interna, rispettando la polarità.</li></ul>
+<p class="note">Con l'opzione per trasformatori misura anche rapporto spire, mutua induttanza e resistenza in continua.</p></div></div>''')
+D.add("Sei componenti, due strumenti",'''<table><tr><th>Componente</th><th>Prova componenti</th><th>LCR meter HP</th></tr>
+<tr><td class="l">Resistenza 100 Ω</td><td class="l">valore corretto entro pochi percento</td><td class="l">valore allo 0,1 %, e con X si vede se è a filo avvolto</td></tr>
+<tr><td class="l">Film 100 nF</td><td class="l">capacità corretta; ESR troppo piccola per essere letta</td><td class="l">Cs e D (circa 0,001), a frequenza scelta</td></tr>
+<tr><td class="l">Ceramico X7R 10 µF 0805</td><td class="l">un valore misurato col suo metodo e i suoi volt</td><td class="l">valore a 1 kHz e 1 V; con DC bias si vede la perdita di capacità in esercizio</td></tr>
+<tr><td class="l">Elettrolitico 470 µF</td><td class="l">capacità, ESR indicativa, Vloss: ottimo per scovare quelli esauriti</td><td class="l">Cs e ESR a 120 Hz e a 100 kHz, da confrontare col datasheet</td></tr>
+<tr><td class="l">Induttore 100 µH su ferrite</td><td class="l">induttanza e resistenza in continua</td><td class="l">Ls e Q a 100 kHz; con DC bias la saturazione</td></tr>
+<tr><td class="l">Transistor sconosciuto</td><td class="l">tipo, piedinatura, hFE, Ube</td><td class="l">non è il suo lavoro</td></tr></table>
+<p class="note">Descrizioni qualitative: la lettura esatta dipende dal componente e dall'esemplare di strumento.</p>''')
+D.add("Un flusso di lavoro in riparazione",'''<div class="two"><div><ol>
+<li><b>Ispezione</b>: componenti gonfi, bruciati, saldature rotte.</li>
+<li><b>In circuito</b>, a scheda spenta e scarica: un misuratore di ESR in circuito o l'LCR meter a 100 kHz per una prima idea sugli elettrolitici.</li>
+<li><b>Fuori dal circuito</b>: il prova componenti per identificare semiconduttori sospetti, controllare piedinature e trovare transistor in corto o aperti.</li>
+<li><b>Ricambio</b>: il prova componenti per scegliere tra i pezzi del cassetto, abbinare hFE, verificare la polarità di un MOSFET.</li>
+<li><b>Valori critici</b>: l'LCR meter per induttori di filtro, condensatori di temporizzazione, componenti di oscillatori e filtri.</li>
+<li><b>RF</b>: il VNA per tutto quello che lavora sopra il centinaio di kHz.</li></ol></div><div>
+<p class="note">I due strumenti non sono in competizione: il tester risponde a "che cos'è e funziona?", l'LCR meter a "quanto vale esattamente, a questa frequenza e a questo livello?".</p></div></div>''')
+ORDER=["Che cos'è un prova componenti","Da dove viene","Lo schema a blocchi","Dentro: tre pin e un microcontrollore","Come riconosce il componente","Misurare una resistenza","Il diodo","Il transistor bipolare passo per passo","MOSFET e JFET","Zener e tensioni più alte","Come misura i condensatori","L'ESR: come lo stima","Come misura gli induttori","Da dove vengono gli errori","L'altro mondo: un LCR meter HP","HP 4263B: come si usa","Il confronto","Lo stesso condensatore, due letture","Sei componenti, due strumenti","Quale usare, e quando","Un flusso di lavoro in riparazione","Consigli d'uso del tester","Riepilogo"]
+_d={t:b for t,b in D.S}; assert set(_d)==set(ORDER), set(_d)^set(ORDER)
+D.S=[(t,_d[t]) for t in ORDER]
 D.render(); pdf("LCR_2_Prova_componenti_vs_HP_IV3HGA.pdf")
