@@ -1,0 +1,17 @@
+@page{size:1280px 720px;margin:0}*{box-sizing:border-box}body{margin:0;font-family:"DejaVu Sans",Arial,sans-serif;color:#1b2430}
+.slide{width:1280px;height:720px;position:relative;overflow:hidden;page-break-after:always;padding:56px 70px 60px;background:#fff}
+.slide h2{margin:0 0 28px;padding-right:120px;font-size:36px;color:#0a1a2e;border-left:8px solid #22b8f0;padding-left:18px}
+.hdrlogo{position:absolute;top:22px;right:44px}.hdrlogo img{width:92px;height:92px}
+.foot{position:absolute;bottom:22px;left:70px;right:70px;font-size:13px;color:#8a94a3;display:flex;justify-content:space-between}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+ul,ol{font-size:19px;line-height:1.5;padding-left:24px;margin:6px 0}li{margin-bottom:8px}
+h3{color:#1593d1;font-size:22px;margin:0 0 10px}
+.eq{background:#e8f6fd;border-radius:8px;padding:10px 16px;margin:8px 0;font-size:20px;font-family:"DejaVu Sans Mono",monospace}
+.note{font-size:16px;color:#4a5566;line-height:1.45}.cap{font-size:17px;color:#4a5566;margin-top:6px;line-height:1.45}
+.fig svg{width:100%;height:auto}
+table{border-collapse:collapse;width:100%;font-size:18px}th{text-align:left;color:#1593d1;border-bottom:2px solid #1593d1;padding:8px}td{padding:8px;border-bottom:1px solid #e1e6ee}td:last-child{text-align:right;font-family:"DejaVu Sans Mono",monospace}
+.cover{height:100%;display:flex;flex-direction:column;justify-content:center}.cover h1{font-size:64px;color:#0a1a2e;margin:28px 0 18px;line-height:1.1}
+.cover .sub{font-size:24px;color:#4a5566;max-width:900px}.cover .by{font-size:20px;color:#1593d1;font-weight:700;margin-top:30px}
+.clogo img{width:260px;height:260px}.cover{padding-left:20px}.slide.c{background:linear-gradient(135deg,#fff 55%,#e8f6fd)}.cover{flex-direction:row!important;align-items:center;gap:60px;justify-content:flex-start!important}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:10px}.card{background:#e8f6fd;border-radius:12px;padding:22px 24px;border-left:5px solid #22b8f0}.card h3{font-size:22px;margin:0 0 8px}.card p{margin:0;font-size:17px;color:#33404f;line-height:1.4}
+.small li{font-size:17px}table.sum td,table.sum th{font-size:17px;padding:7px 10px}table.sum td:last-child{text-align:left;font-family:inherit}

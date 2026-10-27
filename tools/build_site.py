@@ -37,7 +37,28 @@ CHAPTERS=[
    tags=["carico fittizio","prelievo","accoppiatore","direttività","ponte RL","two-tone"]),
   dict(dir="analizzatore-di-spettro/05-misure-inconsuete-e-trucchi",pdf="SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf",img="sa-5.jpg",short="Inconsuete e trucchi",title="Misure inconsuete e trucchi",slides=13,meta="tips and tricks da banco",
    learn=["Capire se una riga è <b>vera</b>: test dell'attenuazione e altri tre controlli","Misurare vicino al rumore e la <b>cifra di rumore</b> con il metodo Y-factor","<b>Sonde near-field</b> per la caccia al QRM e misure di campo in dBµV/m","Ascoltare i segnali, <b>slope detection</b> della FM e il trucco della RBW","Più dinamica con notch e filtri, riferimento a 10 MHz e altri trucchi"],
-   tags=["righe false","Y-factor","near-field","QRM","slope detection","dBµV/m"])])]
+   tags=["righe false","Y-factor","near-field","QRM","slope detection","dBµV/m"])]),
+ dict(id="wm",num="Capitolo 3",title="Il wattmetro RF",
+  intro="Come funziona e quali tipi esistono, il Bird 43 con le sue testine, bolometri e termistori, come preservarlo, i problemi di misura e la matematica della potenza.",
+  mods=[
+  dict(dir="wattmetro-rf/01-come-funziona",pdf="WM_Come_Funziona_IV3HGA.pdf",img="wm-1.jpg",short="Come funziona",title="Il wattmetro RF: come funziona",slides=10,meta="le basi · tipi di wattmetri e di sensori",
+   learn=["Che cosa vuol dire misurare la <b>potenza</b> in RF: P = V²/R, dBm e tensioni","Wattmetri <b>passanti</b> (direzionali) e <b>terminali</b> (sensore + carico)","Sensori a <b>diodo</b>, termocoppia, <b>termistore</b>, <b>bolometro</b> e calorimetro a confronto","Potenza media, di picco e <b>PEP</b>, e le specifiche da leggere"],
+   tags=["passante","terminale","diodo","termocoppia","termistore","PEP"]),
+  dict(dir="wattmetro-rf/02-bird-43-e-testine",pdf="WM_Bird43_Testine_IV3HGA.pdf",img="wm-2.jpg",short="Il Bird 43",title="Il Bird 43 e le sue testine",slides=9,meta="esempio pratico · misure passo per passo",
+   learn=["Come funziona un wattmetro passante con <b>testina</b> rotante","Le testine: <b>lettera = banda</b>, numero = fondo scala","Misurare potenza <b>diretta</b>, <b>riflessa</b>, SWR e potenza netta","Perché la precisione è in % del <b>fondo scala</b>; esempio a 145 MHz","Modulazioni, lettura di picco ed errori tipici"],
+   tags=["Bird 43","testine","diretta/riflessa","SWR","fondo scala"]),
+  dict(dir="wattmetro-rf/03-bolometri-e-termistori",pdf="WM_Bolometri_Termistori_IV3HGA.pdf",img="wm-3.jpg",short="Bolometri e termistori",title="Bolometri e termistori",slides=11,meta="sostituzione DC e misure di precisione",
+   learn=["Il principio: la RF scalda, la <b>continua</b> la sostituisce","Il <b>ponte autobilanciato</b> e la formula con un esempio numerico","Compensazione, azzeramento e un classico: l'HP 432A","<b>Cal factor</b> e incertezza di <b>disadattamento</b>","Il bolometro (barretter) e perché oggi è raro"],
+   tags=["termistore","bolometro","sostituzione DC","cal factor","HP 432A"]),
+  dict(dir="wattmetro-rf/04-preservare-il-wattmetro",pdf="WM_Preservare_IV3HGA.pdf",img="wm-4.jpg",short="Preservarlo",title="Preservare il wattmetro",slides=9,meta="non romperlo · non farlo leggere sbagliato",
+   learn=["Limiti di <b>potenza e tensione</b> dei wattmetri passanti","Come trattare <b>testine</b> e strumento a lancetta, trasporto e conservazione","<b>Sensori terminali</b>: attenuatori, DC, statica, connettori","Misurare un TX senza danni e <b>verifiche periodiche</b>"],
+   tags=["protezione","testine","sensori","statica","verifiche"]),
+  dict(dir="wattmetro-rf/05-misure-inconsuete-e-problemi",pdf="WM_Misure_Inconsuete_Problemi_IV3HGA.pdf",img="wm-5.jpg",short="Inconsuete e problemi",title="Misure inconsuete e problemi di misura",slides=11,meta="quando il wattmetro sbaglia · cosa misurare oltre ai watt",
+   learn=["<b>Armoniche</b>, <b>modulazione</b> (media e PEP) e segnali a <b>burst</b> TDMA","Disadattamento, direttività, cavi e adattatori","Perdita di un cavo con uno o due wattmetri e <b>calorimetria</b>","Efficienza di un finale e <b>SWR vero all'antenna</b> dalla stazione"],
+   tags=["PEP","TDMA","perdita cavi","calorimetria","efficienza"]),
+  dict(dir="wattmetro-rf/06-potenza-segnale-spettro-bessel",pdf="Potenza_Segnale_Spettro_Bessel_IV3HGA.pdf",img="wm-6.jpg",short="Potenza e Bessel",title="Potenza del segnale e potenza dello spettro",slides=14,meta="approfondimento matematico con esempi concreti",
+   learn=["Il teorema di <b>Parseval</b>: il ponte tra wattmetro e analizzatore","<b>AM</b>: portante, bande laterali, media e PEP con i numeri","<b>SSB</b> a due toni: PEP = 2 × media","<b>FM</b> e funzioni di <b>Bessel</b>: la potenza si ridistribuisce, non cambia","Regola di Carson, densità spettrale e RBW, somme in dB, fattore di cresta"],
+   tags=["Parseval","AM","SSB","FM","Bessel","Carson","PAPR"])])]
 CSS=open(os.path.join(ROOT,"tools/site.css")).read()
 nmod=sum(len(c["mods"]) for c in CHAPTERS); nsl=sum(m["slides"] for c in CHAPTERS for m in c["mods"])
 def mod_html(c,i,m):
@@ -62,13 +83,13 @@ for c in CHAPTERS:
 toc="".join(f'<a href="#{c["id"]}"><small>{c["num"]}</small><h3>{c["title"]}</h3><p>{c["intro"]}</p></a>' for c in CHAPTERS)
 page=f'''<!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ham Radio Pills · Corso su VNA, analizzatore di spettro e misure RF · IV3HGA</title>
-<meta name="description" content="Corso gratuito per radioamatori: VNA, carta di Smith, analizzatore di spettro e misure RF. {len(CHAPTERS)} capitoli, {nmod} moduli in PDF. A cura di IV3HGA.">
+<title>Ham Radio Pills · Corso su VNA, analizzatore di spettro, wattmetro RF e misure · IV3HGA</title>
+<meta name="description" content="Corso gratuito per radioamatori: VNA, carta di Smith, analizzatore di spettro, wattmetro RF e misure. {len(CHAPTERS)} capitoli, {nmod} moduli in PDF. A cura di IV3HGA.">
 <link rel="icon" href="assets/logo.png"><style>{CSS}</style></head><body>
 <header class="hero"><div class="wrap"><div>
   <span class="kicker">Corso · RF e strumentazione per radioamatori</span>
   <h1>Ham Radio <span>Pills</span></h1>
-  <p class="lead">Un corso in pillole per capire davvero gli strumenti da banco e usarli sull'antenna e sul trasmettitore: il VNA e la carta di Smith, l'analizzatore di spettro, dalle basi ai trucchi del mestiere.</p>
+  <p class="lead">Un corso in pillole per capire davvero gli strumenti da banco e usarli sull'antenna e sul trasmettitore: il VNA e la carta di Smith, l'analizzatore di spettro e il wattmetro RF, dalle basi ai trucchi del mestiere.</p>
   <div class="btns"><a class="btn primary" href="#capitoli">Inizia il corso ↓</a><a class="btn ghost" href="https://github.com/metallarox/hamradio-pills">Sorgenti su GitHub</a></div>
   <div class="stats"><div><b>{len(CHAPTERS)}</b>capitoli</div><div><b>{nmod}</b>moduli</div><div><b>{nsl}</b>slide</div><div><b>PDF</b>gratuiti</div></div>
 </div><img src="assets/logo.png" alt="Logo IV3HGA"></div></header>
@@ -79,7 +100,7 @@ page=f'''<!DOCTYPE html>
 <section class="info"><div class="wrap"><h2>Come seguire il corso</h2>
 <p class="sub">Non serve un laboratorio: bastano strumenti economici e la voglia di provare sul banco quello che leggi.</p>
 <div class="grid3">
-<div class="card"><h4>📡 Cosa serve</h4><p>Un VNA anche economico (NanoVNA, LiteVNA o simili) con kit SOL, un analizzatore di spettro (anche un tinySA), attenuatori, un DC block e qualche cavo SMA.</p></div>
+<div class="card"><h4>📡 Cosa serve</h4><p>Un VNA anche economico (NanoVNA, LiteVNA o simili) con kit SOL, un analizzatore di spettro (anche un tinySA), un wattmetro passante, un carico fittizio, attenuatori, un DC block e qualche cavo.</p></div>
 <div class="card"><h4>🧭 Come procedere</h4><p>Leggi un modulo, poi rifai la misura sul banco. Ogni presentazione ha formule pronte, esempi numerici e checklist finali.</p></div>
 <div class="card"><h4>🧪 Esempi e sorgenti</h4><p>Grafici ed esempi vengono da simulazioni verificate. Gli script Python che generano slide e grafici sono nel repository: modificali per i tuoi casi.</p></div>
 </div></div></section>
