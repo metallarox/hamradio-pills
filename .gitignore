@@ -2,6 +2,5 @@
 vals.txt
 vals*.json
 slides.html
-src/*.pdf
-*/src/*.pdf
+**/src/*.pdf
 __pycache__/

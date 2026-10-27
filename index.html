@@ -1,13 +1,8 @@
 <!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ham Radio Pills · Corso breve su VNA e misure RF · IV3HGA</title>
-<meta name="description" content="Corso gratuito in cinque moduli su VNA, misure di base, carta di Smith, misura dei quarzi e misure RF inconsuete. A cura di IV3HGA.">
-<link rel="icon" href="assets/logo.png">
-<style>
-:root{--navy:#0a1a2e;--navy2:#0f2747;--cyan:#22b8f0;--blue:#1593d1;--ice:#e8f6fd;--ink:#1b2430;--mute:#5a6676;--line:#e1e6ee}
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ham Radio Pills · Corso su VNA, analizzatore di spettro e misure RF · IV3HGA</title>
+<meta name="description" content="Corso gratuito per radioamatori: VNA, carta di Smith, analizzatore di spettro e misure RF. 2 capitoli, 9 moduli in PDF. A cura di IV3HGA.">
+<link rel="icon" href="assets/logo.png"><style>:root{--navy:#0a1a2e;--navy2:#0f2747;--cyan:#22b8f0;--blue:#1593d1;--ice:#e8f6fd;--ink:#1b2430;--mute:#5a6676;--line:#e1e6ee}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"DejaVu Sans",sans-serif;color:var(--ink);background:#fff;line-height:1.55}
@@ -68,165 +63,99 @@ footer b{color:#fff}footer a{color:var(--cyan)}
  .mod{grid-template-columns:1fr;gap:24px}.mod:nth-of-type(even) .shot{order:0}
 }
 @media (max-width:520px){.path,.grid3{grid-template-columns:1fr!important}.stats{gap:24px}}
-</style>
-</head>
-<body>
-
-<header class="hero">
-  <div class="wrap">
-    <div>
-      <span class="kicker">Corso breve · RF e strumentazione</span>
-      <h1>Ham Radio <span>Pills</span></h1>
-      <p class="lead">Cinque moduli per capire davvero il VNA e la carta di Smith, e usarli sul banco e sull'antenna: dalla teoria alle misure pratiche, con esempi pensati per i radioamatori.</p>
-      <div class="btns">
-        <a class="btn primary" href="#moduli">Inizia il corso ↓</a>
-        <a class="btn ghost" href="https://github.com/metallarox/hamradio-pills">Sorgenti su GitHub</a>
-      </div>
-      <div class="stats">
-        <div><b>5</b>moduli</div>
-        <div><b>66</b>slide</div>
-        <div><b>Open</b>sorgenti Python</div>
-        <div><b>PDF</b>gratuiti</div>
-      </div>
-    </div>
-    <img src="assets/logo.png" alt="Logo IV3HGA">
-  </div>
-</header>
-
-<section id="moduli">
-  <div class="wrap">
-    <h2>Il percorso</h2>
-    <p class="sub">I moduli si possono leggere anche da soli, ma in quest'ordine ognuno costruisce sul precedente: prima lo strumento e come usarlo, poi il linguaggio per leggerlo, infine le applicazioni.</p>
-    <div class="path" style="grid-template-columns:repeat(5,1fr)">
-      <a class="step" href="#m1"><small>Modulo 1</small><div>Come funziona un VNA</div></a>
-      <a class="step" href="#m2"><small>Modulo 2</small><div>Misure di base</div></a>
-      <a class="step" href="#m3"><small>Modulo 3</small><div>La carta di Smith</div></a>
-      <a class="step" href="#m4"><small>Modulo 4</small><div>Misurare un quarzo</div></a>
-      <a class="step" href="#m5"><small>Modulo 5</small><div>Misure inconsuete</div></a>
-    </div>
-
-    <article class="mod" id="m1">
-      <a class="shot" href="01-vna-come-funziona/VNA_Come_Funziona_IV3HGA.pdf"><img src="assets/m1.jpg" alt="Slide: architettura a blocchi di un VNA" loading="lazy"></a>
-      <div>
-        <div class="num">Modulo 1</div>
-        <h3>Come funziona un VNA</h3>
-        <div class="meta">15 slide · le basi · consigliato come punto di partenza</div>
-        <ul>
-          <li>Cosa sono le onde incidenti e riflesse e i <b>parametri S</b></li>
-          <li>Com'è fatto dentro: sorgente, ponte o accoppiatore, ricevitori R/A/B, LO e DSP</li>
-          <li>Perché la <b>direttività</b> limita quello che puoi misurare</li>
-          <li>Il modello d'errore a 3 e 12 termini e come la <b>calibrazione SOL</b> lo cancella</li>
-          <li>SOLT, TRL, port extension, buone pratiche e specifiche che contano</li>
-        </ul>
+.chapter{padding:64px 0 8px}.chapter+.chapter{border-top:6px solid var(--ice)}
+.chap-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:6px}
+.chap-num{font-size:14px;font-weight:800;letter-spacing:.16em;color:#fff;background:var(--navy);padding:6px 12px;border-radius:8px;text-transform:uppercase}
+.path.p4{grid-template-columns:repeat(4,1fr)!important}.path.p5{grid-template-columns:repeat(5,1fr)!important}
+.toc{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:6px}
+.toc a{display:block;background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px;text-decoration:none;color:inherit;transition:box-shadow .15s,transform .15s}
+.toc a:hover{box-shadow:0 10px 30px rgba(10,26,46,.12);transform:translateY(-2px)}
+.toc small{color:var(--blue);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:12px}
+.toc h3{margin:6px 0 6px;color:var(--navy);font-size:22px}.toc p{margin:0;color:var(--mute);font-size:15.5px}
+@media (max-width:1000px){.path.p5,.path.p4{grid-template-columns:repeat(3,1fr)!important}}
+@media (max-width:860px){.toc{grid-template-columns:1fr}.path.p5,.path.p4{grid-template-columns:1fr 1fr!important}}
+@media (max-width:520px){.path.p5,.path.p4{grid-template-columns:1fr!important}}</style></head><body>
+<header class="hero"><div class="wrap"><div>
+  <span class="kicker">Corso · RF e strumentazione per radioamatori</span>
+  <h1>Ham Radio <span>Pills</span></h1>
+  <p class="lead">Un corso in pillole per capire davvero gli strumenti da banco e usarli sull'antenna e sul trasmettitore: il VNA e la carta di Smith, l'analizzatore di spettro, dalle basi ai trucchi del mestiere.</p>
+  <div class="btns"><a class="btn primary" href="#capitoli">Inizia il corso ↓</a><a class="btn ghost" href="https://github.com/metallarox/hamradio-pills">Sorgenti su GitHub</a></div>
+  <div class="stats"><div><b>2</b>capitoli</div><div><b>9</b>moduli</div><div><b>116</b>slide</div><div><b>PDF</b>gratuiti</div></div>
+</div><img src="assets/logo.png" alt="Logo IV3HGA"></div></header>
+<section id="capitoli" style="padding-bottom:20px"><div class="wrap"><h2>I capitoli</h2>
+<p class="sub">Ogni capitolo parte da come funziona lo strumento, passa all'uso corretto e arriva alle misure avanzate. I moduli si possono leggere anche da soli.</p>
+<div class="toc"><a href="#vna"><small>Capitolo 1</small><h3>Il VNA (analizzatore di reti vettoriale)</h3><p>Dallo strumento alle applicazioni: come funziona, come si usa e si calibra, la carta di Smith e le misure più particolari.</p></a><a href="#sa"><small>Capitolo 2</small><h3>L'analizzatore di spettro</h3><p>Come funziona, come usarlo senza romperlo, le misure classiche fatte bene e i trucchi che non trovi nei manuali.</p></a></div></div></section>
+<section class="chapter" id="vna"><div class="wrap">
+  <div class="chap-head"><span class="chap-num">Capitolo 1</span><h2>Il VNA (analizzatore di reti vettoriale)</h2></div>
+  <p class="sub">Dallo strumento alle applicazioni: come funziona, come si usa e si calibra, la carta di Smith e le misure più particolari. 5 moduli, 66 slide.</p>
+  <div class="path p5"><a class="step" href="#vna1"><small>Modulo 1</small><div>Come funziona un VNA</div></a><a class="step" href="#vna2"><small>Modulo 2</small><div>Misure di base</div></a><a class="step" href="#vna3"><small>Modulo 3</small><div>La carta di Smith</div></a><a class="step" href="#vna4"><small>Modulo 4</small><div>Misurare un quarzo</div></a><a class="step" href="#vna5"><small>Modulo 5</small><div>Misure inconsuete</div></a></div>
+  <article class="mod" id="vna1">
+      <a class="shot" href="vna/01-vna-come-funziona/VNA_Come_Funziona_IV3HGA.pdf"><img src="assets/vna-1.jpg" alt="Anteprima: Come funziona un VNA" loading="lazy"></a>
+      <div><div class="num">Capitolo 1 · Modulo 1</div><h3>Come funziona un VNA</h3><div class="meta">15 slide · le basi · consigliato come punto di partenza</div>
+        <ul><li>Cosa sono le onde incidenti e riflesse e i <b>parametri S</b></li><li>Com'è fatto dentro: sorgente, ponte o accoppiatore, ricevitori R/A/B, LO e DSP</li><li>Perché la <b>direttività</b> limita quello che puoi misurare</li><li>Il modello d'errore a 3 e 12 termini e come la <b>calibrazione SOL</b> lo cancella</li><li>SOLT, TRL, port extension, buone pratiche e specifiche che contano</li></ul>
         <div class="tags"><span>parametri S</span><span>IF bandwidth</span><span>direttività</span><span>calibrazione</span><span>T/R vs 2 porte</span></div>
-        <div class="btns">
-          <a class="btn primary" href="01-vna-come-funziona/VNA_Come_Funziona_IV3HGA.pdf" download>⬇ Scarica PDF</a>
-          <a class="btn ghost" href="01-vna-come-funziona/VNA_Come_Funziona_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="mod" id="m2">
-      <a class="shot" href="02-vna-misure-di-base/VNA_Misure_di_Base_IV3HGA.pdf"><img src="assets/m2.jpg" alt="Slide: misura di un filtro in S21" loading="lazy"></a>
-      <div>
-        <div class="num">Modulo 2</div>
-        <h3>Misure di base con il VNA</h3>
-        <div class="meta">13 slide · pratica sul banco · uso, calibrazione e misure corrette</div>
-        <ul>
-          <li>Preparare cavi e connettori e <b>proteggere lo strumento</b> (statica, potenze, DC)</li>
-          <li>Impostare lo sweep: punti, IF bandwidth, potenza, media</li>
-          <li><b>Calibrare</b> al piano giusto e <b>verificare</b> che la calibrazione sia buona</li>
-          <li>Misurare un'<b>antenna</b>, un <b>filtro</b>, un <b>cavo</b> (perdita, VF, Z0), un amplificatore e un componente</li>
-          <li>Gli errori più comuni e una checklist da usare prima di ogni misura</li>
-        </ul>
+        <div class="btns"><a class="btn primary" href="vna/01-vna-come-funziona/VNA_Come_Funziona_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="vna/01-vna-come-funziona/VNA_Come_Funziona_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
+    </article><article class="mod" id="vna2">
+      <a class="shot" href="vna/02-vna-misure-di-base/VNA_Misure_di_Base_IV3HGA.pdf"><img src="assets/vna-2.jpg" alt="Anteprima: Misure di base con il VNA" loading="lazy"></a>
+      <div><div class="num">Capitolo 1 · Modulo 2</div><h3>Misure di base con il VNA</h3><div class="meta">13 slide · pratica sul banco · uso, calibrazione e misure corrette</div>
+        <ul><li>Preparare cavi e connettori e <b>proteggere lo strumento</b> (statica, potenze, DC)</li><li>Impostare lo sweep: punti, IF bandwidth, potenza, media</li><li><b>Calibrare</b> al piano giusto e <b>verificare</b> che la calibrazione sia buona</li><li>Misurare un'<b>antenna</b>, un <b>filtro</b>, un <b>cavo</b> (perdita, VF, Z0), un amplificatore e un componente</li><li>Gli errori più comuni e una checklist da usare prima di ogni misura</li></ul>
         <div class="tags"><span>calibrazione</span><span>verifica</span><span>antenne</span><span>filtri</span><span>cavi coassiali</span><span>amplificatori</span></div>
-        <div class="btns">
-          <a class="btn primary" href="02-vna-misure-di-base/VNA_Misure_di_Base_IV3HGA.pdf" download>⬇ Scarica PDF</a>
-          <a class="btn ghost" href="02-vna-misure-di-base/VNA_Misure_di_Base_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="mod" id="m3">
-      <a class="shot" href="03-carta-di-smith/Carta_di_Smith_IV3HGA.pdf"><img src="assets/m3.jpg" alt="Slide: rete a L sulla carta di Smith" loading="lazy"></a>
-      <div>
-        <div class="num">Modulo 3</div>
-        <h3>La carta di Smith</h3>
-        <div class="meta">13 slide · 6 esempi radioamatoriali</div>
-        <ul>
-          <li>Leggere impedenze, |Γ| e SWR a colpo d'occhio</li>
-          <li>Muoversi sulla carta con L e C in serie e in parallelo, e lungo le linee</li>
-          <li>Capire se un <b>dipolo</b> è troppo lungo o troppo corto</li>
-          <li>Progettare una <b>rete a L</b> e uno <b>stub</b> di adattamento</li>
-          <li>Perché un cavo con perdite "migliora" l'SWR, il λ/4 e cosa fa davvero l'accordatore</li>
-        </ul>
+        <div class="btns"><a class="btn primary" href="vna/02-vna-misure-di-base/VNA_Misure_di_Base_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="vna/02-vna-misure-di-base/VNA_Misure_di_Base_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
+    </article><article class="mod" id="vna3">
+      <a class="shot" href="vna/03-carta-di-smith/Carta_di_Smith_IV3HGA.pdf"><img src="assets/vna-3.jpg" alt="Anteprima: La carta di Smith" loading="lazy"></a>
+      <div><div class="num">Capitolo 1 · Modulo 3</div><h3>La carta di Smith</h3><div class="meta">13 slide · 6 esempi radioamatoriali</div>
+        <ul><li>Leggere impedenze, |Γ| e SWR a colpo d'occhio</li><li>Muoversi sulla carta con L e C in serie e in parallelo, e lungo le linee</li><li>Capire se un <b>dipolo</b> è troppo lungo o troppo corto</li><li>Progettare una <b>rete a L</b> e uno <b>stub</b> di adattamento</li><li>Perché un cavo con perdite "migliora" l'SWR, il λ/4 e cosa fa davvero l'accordatore</li></ul>
         <div class="tags"><span>SWR</span><span>dipolo 40 m</span><span>rete a L</span><span>stub 145 MHz</span><span>stacking</span><span>ATU</span></div>
-        <div class="btns">
-          <a class="btn primary" href="03-carta-di-smith/Carta_di_Smith_IV3HGA.pdf" download>⬇ Scarica PDF</a>
-          <a class="btn ghost" href="03-carta-di-smith/Carta_di_Smith_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="mod" id="m4">
-      <a class="shot" href="04-quarzo-vna/Quarzo_VNA_IV3HGA.pdf"><img src="assets/m4.jpg" alt="Slide: risposta S21 di un quarzo" loading="lazy"></a>
-      <div>
-        <div class="num">Modulo 4</div>
-        <h3>Misurare un quarzo con il VNA</h3>
-        <div class="meta">10 slide · un'applicazione completa, passo per passo</div>
-        <ul>
-          <li>Il modello equivalente <b>Butterworth–Van Dyke</b>: fs, fp, Rm, Lm, Cm, C0</li>
-          <li>Misura con il quarzo <b>in serie (S21)</b> e verso massa <b>(S11)</b></li>
-          <li>Estrazione dei parametri dai punti di fase a <b>±45°</b> e calcolo del Q</li>
-          <li>Pi-network da 12,5 Ω, parassiti del fixture e frequenza con capacità di carico</li>
-        </ul>
+        <div class="btns"><a class="btn primary" href="vna/03-carta-di-smith/Carta_di_Smith_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="vna/03-carta-di-smith/Carta_di_Smith_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
+    </article><article class="mod" id="vna4">
+      <a class="shot" href="vna/04-quarzo-vna/Quarzo_VNA_IV3HGA.pdf"><img src="assets/vna-4.jpg" alt="Anteprima: Misurare un quarzo con il VNA" loading="lazy"></a>
+      <div><div class="num">Capitolo 1 · Modulo 4</div><h3>Misurare un quarzo con il VNA</h3><div class="meta">10 slide · un'applicazione completa, passo per passo</div>
+        <ul><li>Il modello equivalente <b>Butterworth–Van Dyke</b>: fs, fp, Rm, Lm, Cm, C0</li><li>Misura con il quarzo <b>in serie (S21)</b> e verso massa <b>(S11)</b></li><li>Estrazione dei parametri dai punti di fase a <b>±45°</b> e calcolo del Q</li><li>Pi-network da 12,5 Ω, parassiti del fixture e frequenza con capacità di carico</li></ul>
         <div class="tags"><span>quarzi</span><span>modello BVD</span><span>Q a vuoto</span><span>S21 e S11</span><span>IEC 60444</span></div>
-        <div class="btns">
-          <a class="btn primary" href="04-quarzo-vna/Quarzo_VNA_IV3HGA.pdf" download>⬇ Scarica PDF</a>
-          <a class="btn ghost" href="04-quarzo-vna/Quarzo_VNA_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="mod" id="m5">
-      <a class="shot" href="05-vna-misure-inconsuete/VNA_Misure_Inconsuete_IV3HGA.pdf"><img src="assets/m5.jpg" alt="Slide: panoramica delle misure inconsuete" loading="lazy"></a>
-      <div>
-        <div class="num">Modulo 5</div>
-        <h3>Misure inconsuete con il VNA</h3>
-        <div class="meta">15 slide · 12 misure oltre SWR e filtri</div>
-        <ul>
-          <li><b>Ferriti</b> sconosciute, SRF/ESR dei componenti, choke in modo comune</li>
-          <li><b>Shunt-through</b> per i milliohm e group delay di risonatori e cavità</li>
-          <li><b>TDR</b> per trovare guasti nei cavi, εr e tan δ di un PCB, umidità dei materiali</li>
-          <li>Grid-dip moderno e NFC, accoppiamento k, isolamento tra antenne, schermatura, time-gating</li>
-        </ul>
+        <div class="btns"><a class="btn primary" href="vna/04-quarzo-vna/Quarzo_VNA_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="vna/04-quarzo-vna/Quarzo_VNA_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
+    </article><article class="mod" id="vna5">
+      <a class="shot" href="vna/05-vna-misure-inconsuete/VNA_Misure_Inconsuete_IV3HGA.pdf"><img src="assets/vna-5.jpg" alt="Anteprima: Misure inconsuete con il VNA" loading="lazy"></a>
+      <div><div class="num">Capitolo 1 · Modulo 5</div><h3>Misure inconsuete con il VNA</h3><div class="meta">15 slide · 12 misure oltre SWR e filtri</div>
+        <ul><li><b>Ferriti</b> sconosciute, SRF/ESR dei componenti, choke in modo comune</li><li><b>Shunt-through</b> per i milliohm e group delay di risonatori e cavità</li><li><b>TDR</b> per trovare guasti nei cavi, εr e tan δ di un PCB, umidità dei materiali</li><li>Grid-dip moderno e NFC, accoppiamento k, isolamento tra antenne, schermatura, time-gating</li></ul>
         <div class="tags"><span>ferriti</span><span>TDR</span><span>choke</span><span>PCB εr</span><span>grid-dip</span><span>time-gating</span></div>
-        <div class="btns">
-          <a class="btn primary" href="05-vna-misure-inconsuete/VNA_Misure_Inconsuete_IV3HGA.pdf" download>⬇ Scarica PDF</a>
-          <a class="btn ghost" href="05-vna-misure-inconsuete/VNA_Misure_Inconsuete_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a>
-        </div>
-      </div>
+        <div class="btns"><a class="btn primary" href="vna/05-vna-misure-inconsuete/VNA_Misure_Inconsuete_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="vna/05-vna-misure-inconsuete/VNA_Misure_Inconsuete_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article>
-  </div>
-</section>
-
-<section class="info">
-  <div class="wrap">
-    <h2>Come seguire il corso</h2>
-    <p class="sub">Non serve un laboratorio: basta un VNA economico e la voglia di provare sul banco quello che leggi.</p>
-    <div class="grid3">
-      <div class="card"><h4>📡 Cosa serve</h4><p>Un VNA anche economico (NanoVNA, LiteVNA o simili), un kit di calibrazione SOL, qualche cavo e connettore SMA. Per il modulo 4 un quarzo e un piccolo fixture.</p></div>
-      <div class="card"><h4>🧭 Come procedere</h4><p>Leggi un modulo, poi rifai la misura sul banco. Ogni presentazione ha formule pronte e una checklist finale da seguire.</p></div>
-      <div class="card"><h4>🧪 Esempi e sorgenti</h4><p>Grafici ed esempi numerici vengono da simulazioni verificate. Gli script Python che generano slide e grafici sono nel repository: modificali per i tuoi casi.</p></div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <div><b>Ham Radio Pills</b> · a cura di Elia, IV3HGA · 73!</div>
-    <div><a href="https://github.com/metallarox/hamradio-pills">github.com/metallarox/hamradio-pills</a></div>
-  </div>
-</footer>
-</body>
-</html>
+</div></section><section class="chapter" id="sa"><div class="wrap">
+  <div class="chap-head"><span class="chap-num">Capitolo 2</span><h2>L'analizzatore di spettro</h2></div>
+  <p class="sub">Come funziona, come usarlo senza romperlo, le misure classiche fatte bene e i trucchi che non trovi nei manuali. 4 moduli, 50 slide.</p>
+  <div class="path p4"><a class="step" href="#sa1"><small>Modulo 1</small><div>Come funziona</div></a><a class="step" href="#sa2"><small>Modulo 2</small><div>Uso corretto e protezioni</div></a><a class="step" href="#sa3"><small>Modulo 3</small><div>Misure classiche</div></a><a class="step" href="#sa4"><small>Modulo 4</small><div>Inconsuete e trucchi</div></a></div>
+  <article class="mod" id="sa1">
+      <a class="shot" href="analizzatore-di-spettro/01-come-funziona/SA_Come_Funziona_IV3HGA.pdf"><img src="assets/sa-1.jpg" alt="Anteprima: Come funziona l&#x27;analizzatore di spettro" loading="lazy"></a>
+      <div><div class="num">Capitolo 2 · Modulo 1</div><h3>Come funziona l'analizzatore di spettro</h3><div class="meta">13 slide · le basi · supereterodina, RBW, rivelatori</div>
+        <ul><li>Unità di misura: dBm, dBµV, dBc, dBm/Hz e livelli S9</li><li>L'architettura <b>supereterodina a scansione</b> e le frequenze immagine</li><li><b>RBW</b> e VBW: risoluzione, rumore e tempo di sweep</li><li>Rivelatori, attenuatore d'ingresso e <b>livello al mixer</b> ottimale</li><li>Rumore di fondo, rumore di fase, dinamica, FFT/real-time e tracking generator</li></ul>
+        <div class="tags"><span>supereterodina</span><span>RBW</span><span>VBW</span><span>rivelatori</span><span>DANL</span><span>dinamica</span></div>
+        <div class="btns"><a class="btn primary" href="analizzatore-di-spettro/01-come-funziona/SA_Come_Funziona_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="analizzatore-di-spettro/01-come-funziona/SA_Come_Funziona_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
+    </article><article class="mod" id="sa2">
+      <a class="shot" href="analizzatore-di-spettro/02-uso-corretto-e-impostazioni/SA_Uso_Corretto_IV3HGA.pdf"><img src="assets/sa-2.jpg" alt="Anteprima: Usare bene l&#x27;analizzatore: protezioni e impostazioni" loading="lazy"></a>
+      <div><div class="num">Capitolo 2 · Modulo 2</div><h3>Usare bene l'analizzatore: protezioni e impostazioni</h3><div class="meta">12 slide · non rompere lo strumento · impostare le misure</div>
+        <ul><li>Perché gli analizzatori si rompono: <b>DC</b>, sovraccarichi, <b>spike</b>, statica</li><li>Leggere l'etichetta dell'ingresso e costruire la <b>catena di protezione</b></li><li>Misurare un <b>trasmettitore</b> in sicurezza: budget di potenza e campionatori</li><li>Reference level, offset, RBW/VBW, tracce e marker scelti per l'obiettivo</li><li>Controllare la salute dello strumento e una checklist finale</li></ul>
+        <div class="tags"><span>DC block</span><span>limitatore</span><span>attenuatori</span><span>reference offset</span><span>marker</span><span>checklist</span></div>
+        <div class="btns"><a class="btn primary" href="analizzatore-di-spettro/02-uso-corretto-e-impostazioni/SA_Uso_Corretto_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="analizzatore-di-spettro/02-uso-corretto-e-impostazioni/SA_Uso_Corretto_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
+    </article><article class="mod" id="sa3">
+      <a class="shot" href="analizzatore-di-spettro/03-misure-classiche/SA_Misure_Classiche_IV3HGA.pdf"><img src="assets/sa-3.jpg" alt="Anteprima: Le misure classiche con l&#x27;analizzatore" loading="lazy"></a>
+      <div><div class="num">Capitolo 2 · Modulo 3</div><h3>Le misure classiche con l'analizzatore</h3><div class="meta">12 slide · 9 misure spiegate passo per passo</div>
+        <ul><li>Potenza e frequenza di una portante, <b>armoniche</b> e spurie di un TX</li><li><b>Intermodulazione</b> a due toni e calcolo del TOI</li><li>Profondità <b>AM</b> dalle bande laterali e deviazione <b>FM</b> con il nullo di Bessel</li><li>Potenza di canale, OBW e ACP; <b>zero span</b> per i burst TDMA</li><li>Tracking generator per filtri e duplexer, rumore di fase in dBc/Hz</li></ul>
+        <div class="tags"><span>armoniche</span><span>IM3 / TOI</span><span>AM</span><span>FM Bessel</span><span>zero span</span><span>rumore di fase</span></div>
+        <div class="btns"><a class="btn primary" href="analizzatore-di-spettro/03-misure-classiche/SA_Misure_Classiche_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="analizzatore-di-spettro/03-misure-classiche/SA_Misure_Classiche_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
+    </article><article class="mod" id="sa4">
+      <a class="shot" href="analizzatore-di-spettro/04-misure-inconsuete-e-trucchi/SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf"><img src="assets/sa-4.jpg" alt="Anteprima: Misure inconsuete e trucchi" loading="lazy"></a>
+      <div><div class="num">Capitolo 2 · Modulo 4</div><h3>Misure inconsuete e trucchi</h3><div class="meta">13 slide · tips and tricks da banco</div>
+        <ul><li>Capire se una riga è <b>vera</b>: test dell'attenuazione e altri tre controlli</li><li>Misurare vicino al rumore e la <b>cifra di rumore</b> con il metodo Y-factor</li><li><b>Sonde near-field</b> per la caccia al QRM e misure di campo in dBµV/m</li><li>Ascoltare i segnali, <b>slope detection</b> della FM e il trucco della RBW</li><li>Più dinamica con notch e filtri, riferimento a 10 MHz e altri trucchi</li></ul>
+        <div class="tags"><span>righe false</span><span>Y-factor</span><span>near-field</span><span>QRM</span><span>slope detection</span><span>dBµV/m</span></div>
+        <div class="btns"><a class="btn primary" href="analizzatore-di-spettro/04-misure-inconsuete-e-trucchi/SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="analizzatore-di-spettro/04-misure-inconsuete-e-trucchi/SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
+    </article>
+</div></section>
+<section class="info"><div class="wrap"><h2>Come seguire il corso</h2>
+<p class="sub">Non serve un laboratorio: bastano strumenti economici e la voglia di provare sul banco quello che leggi.</p>
+<div class="grid3">
+<div class="card"><h4>📡 Cosa serve</h4><p>Un VNA anche economico (NanoVNA, LiteVNA o simili) con kit SOL, un analizzatore di spettro (anche un tinySA), attenuatori, un DC block e qualche cavo SMA.</p></div>
+<div class="card"><h4>🧭 Come procedere</h4><p>Leggi un modulo, poi rifai la misura sul banco. Ogni presentazione ha formule pronte, esempi numerici e checklist finali.</p></div>
+<div class="card"><h4>🧪 Esempi e sorgenti</h4><p>Grafici ed esempi vengono da simulazioni verificate. Gli script Python che generano slide e grafici sono nel repository: modificali per i tuoi casi.</p></div>
+</div></div></section>
+<footer><div class="wrap"><div><b>Ham Radio Pills</b> · a cura di Elia, IV3HGA · 73!</div><div><a href="https://github.com/metallarox/hamradio-pills">github.com/metallarox/hamradio-pills</a></div></div></footer>
+</body></html>
