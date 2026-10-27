@@ -2,7 +2,35 @@
 import os, html
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CHAPTERS=[
- dict(id="osc",num="Capitolo 1",title="L'oscilloscopio",
+ dict(id="mm",num="Capitolo 1",title="Il multimetro",
+  intro="Lo strumento di tutti i giorni, conosciuto davvero: sicurezza, tensione, corrente e shunt, ohm e diodi, funzioni secondarie, funzioni nascoste per esperti ed esempi pratici con i numeri.",
+  mods=[
+  dict(dir="multimetro/01-introduzione",pdf="MM_Introduzione_IV3HGA.pdf",img="mm-1.jpg",short="Introduzione",title="Il multimetro: introduzione",slides=10,meta="le basi · come leggerlo e sceglierlo",
+   learn=['Che cosa misura, analogico e digitale', 'Boccole e selettore: dove va il puntale rosso', '<b>Cifre e conteggi</b>: 2000, 6000, 50 000', '<b>Risoluzione e precisione</b>: ±(% lettura + digit) con esempi', 'Valore medio e <b>true RMS</b>, autorange, come scegliere un multimetro'],
+   tags=['conteggi', 'precisione', 'true RMS', 'boccole', 'autorange']),
+  dict(dir="multimetro/02-sicurezza",pdf="MM_Sicurezza_IV3HGA.pdf",img="mm-2.jpg",short="Sicurezza",title="Il multimetro: sicurezza",slides=10,meta="non farsi male",
+   learn=['Categorie <b>CAT</b> e sovratensioni transitorie', "L'errore più pericoloso: il puntale nella <b>boccola di corrente</b>", 'Fusibili HRC e il trucco per controllarli senza aprire', 'Puntali, metodo <b>live-dead-live</b>, tensioni fantasma e NCV', 'Le situazioni tipiche della stazione radio'],
+   tags=['CAT', 'fusibili HRC', 'live-dead-live', 'LoZ', 'stazione radio']),
+  dict(dir="multimetro/03-tensione",pdf="MM_Tensione_IV3HGA.pdf",img="mm-3.jpg",short="Tensione",title="Misurare la tensione",slides=10,meta="impedenza d'ingresso, true RMS, ripple",
+   learn=['Il collegamento in parallelo e lo strumento flottante', "<b>Impedenza d'ingresso</b> ed effetto di carico, con numeri", 'Tensioni fantasma e <b>LoZ</b>', 'Valore medio contro <b>true RMS</b>: errori su quadra, triangolare, impulsi', 'Fattore di cresta, banda AC e il <b>ripple</b> letto con il multimetro'],
+   tags=['10 MΩ', 'effetto di carico', 'LoZ', 'true RMS', 'ripple']),
+  dict(dir="multimetro/04-corrente-e-shunt",pdf="MM_Corrente_Shunt_IV3HGA.pdf",img="mm-4.jpg",short="Corrente e shunt",title="Misurare la corrente e gli shunt",slides=11,meta="burden, shunt, corrente letta in tensione",
+   learn=['Il collegamento in serie e lo <b>shunt interno</b>', '<b>Burden voltage</b>: quando la misura cambia il circuito', '<b>Leggere una corrente in modalità tensione</b> su una resistenza nota', 'Shunt esterni, cavi e piste usati come shunt, pinze amperometriche', 'Il multimetro come nanoamperometro e le correnti di sleep'],
+   tags=['shunt', 'burden', 'I = V/R', 'pinze', 'nA']),
+  dict(dir="multimetro/05-resistenza-continuita-diodi",pdf="MM_Resistenza_Diodi_IV3HGA.pdf",img="mm-5.jpg",short="Ohm e diodi",title="Resistenza, continuità e prova diodi",slides=11,meta="ohm, 4 fili, diodi, transistor e MOSFET",
+   learn=['Come misura gli ohm, <b>REL</b> e misura a <b>4 fili</b>', 'Misure in circuito e resistenze alte', '<b>Continuità</b>: coassiali e antenne (il corto che è normale)', '<b>Prova diodi</b>: Si, Schottky, germanio, LED', 'Provare <b>transistor</b> e <b>MOSFET</b>, e altri componenti'],
+   tags=['REL', '4 fili', 'continuità', 'prova diodi', 'BJT', 'MOSFET']),
+  dict(dir="multimetro/06-capacita-frequenza-hfe-temperatura",pdf="MM_Capacita_Frequenza_hFE_Temperatura_IV3HGA.pdf",img="mm-6.jpg",short="Capacità, Hz, hFE, °C",title="Capacità, frequenza, hFE e temperatura",slides=9,meta="le funzioni secondarie, con usi pratici",
+   learn=['Come misura la <b>capacità</b> e i suoi limiti (ESR!)', 'Trucco: la <b>lunghezza di un coassiale</b> dalla sua capacità', 'Frequenza e duty cycle: controllare un <b>CTCSS</b>', '<b>hFE</b> allo zoccolo e in condizioni reali', 'Temperatura con termocoppia e altre funzioni'],
+   tags=['capacità', 'coassiale', 'CTCSS', 'hFE', 'termocoppia']),
+  dict(dir="multimetro/07-funzioni-nascoste-e-trucchi",pdf="MM_Funzioni_Nascoste_Trucchi_IV3HGA.pdf",img="mm-7.jpg",short="Funzioni nascoste",title="Funzioni nascoste e trucchi da esperti",slides=11,meta="tips and tricks per esperti",
+   learn=['<b>REL</b>, <b>MIN/MAX/AVG</b>, peak, hold, bargraph e logging', '<b>Resistenza interna</b> di batterie e alimentatori', '<b>Caduta di tensione sotto carico</b> su cavi e connettori', 'Controllare un <b>fusibile in circuito</b>', 'La <b>sonda RF a diodo</b> e altri trucchi da stazione'],
+   tags=['MIN/MAX', 'R interna', 'caduta di tensione', 'sonda RF', 'ground loop']),
+  dict(dir="multimetro/08-esempi-pratici-ed-errori",pdf="MM_Esempi_Errori_IV3HGA.pdf",img="mm-8.jpg",short="Esempi ed errori",title="Esempi pratici ed errori di misura",slides=10,meta="quanto fidarsi di una misura",
+   learn=['Da dove vengono gli errori e come combinarli', 'Quattro <b>esempi numerici</b>: tensione, corrente di riposo, milliohm, AC', 'Errori subdoli: termocoppie parassite, batteria, RF', '<b>Ricerca guasti</b> in stazione: tre casi', 'Manutenzione dello strumento e prontuario finale'],
+   tags=['incertezza', 'esempi', 'ricerca guasti', 'manutenzione']),
+  ]),
+ dict(id="osc",num="Capitolo 2",title="L'oscilloscopio",
   intro="Lo strumento da cui partire: come funziona, come usarlo senza farsi male né romperlo, le sonde, le misure classiche, gli errori da evitare e i trucchi da banco.",
   mods=[
   dict(dir="oscilloscopio/01-come-funziona",pdf="OSC_Come_Funziona_IV3HGA.pdf",img="osc-1.jpg",short="Come funziona",title="L'oscilloscopio: come funziona",slides=10,meta="le basi · analogico e digitale",
@@ -23,7 +51,7 @@ CHAPTERS=[
   dict(dir="oscilloscopio/06-misure-inconsuete-e-trucchi",pdf="OSC_Misure_Inconsuete_Trucchi_IV3HGA.pdf",img="osc-6.jpg",short="Inconsuete e trucchi",title="Misure inconsuete e trucchi",slides=11,meta="tips and tricks da banco",
    learn=["Il <b>ripple</b> dei condensatori di filtro in accoppiamento AC, ESR e invecchiamento","Misure differenziali <b>A − B</b> e corrente di spunto con trigger single","<b>Prova componenti</b> in modalità XY","<b>TDR</b> con generatore, T e oscilloscopio","PTT, burst TDMA, inviluppo CW e altri trucchi (line trigger, sonda-spira)"],
    tags=["ripple","ESR","A − B","XY tester","TDR","key click"])]),
- dict(id="vna",num="Capitolo 2",title="Il VNA (analizzatore di reti vettoriale)",
+ dict(id="vna",num="Capitolo 3",title="Il VNA (analizzatore di reti vettoriale)",
   intro="Dallo strumento alle applicazioni: come funziona, come si usa e si calibra, la carta di Smith e le misure più particolari.",
   mods=[
   dict(dir="vna/01-vna-come-funziona",pdf="VNA_Come_Funziona_IV3HGA.pdf",img="vna-1.jpg",short="Come funziona un VNA",title="Come funziona un VNA",slides=15,meta="le basi · consigliato come punto di partenza",
@@ -41,7 +69,7 @@ CHAPTERS=[
   dict(dir="vna/05-vna-misure-inconsuete",pdf="VNA_Misure_Inconsuete_IV3HGA.pdf",img="vna-5.jpg",short="Misure inconsuete",title="Misure inconsuete con il VNA",slides=15,meta="12 misure oltre SWR e filtri",
    learn=["<b>Ferriti</b> sconosciute, SRF/ESR dei componenti, choke in modo comune","<b>Shunt-through</b> per i milliohm e group delay di risonatori e cavità","<b>TDR</b> per trovare guasti nei cavi, εr e tan δ di un PCB, umidità dei materiali","Grid-dip moderno e NFC, accoppiamento k, isolamento tra antenne, schermatura, time-gating"],
    tags=["ferriti","TDR","choke","PCB εr","grid-dip","time-gating"])]),
- dict(id="sa",num="Capitolo 3",title="L'analizzatore di spettro",
+ dict(id="sa",num="Capitolo 4",title="L'analizzatore di spettro",
   intro="Come funziona, come usarlo senza romperlo, le misure classiche fatte bene, carichi con prelievo, accoppiatori e ponti, e i trucchi che non trovi nei manuali.",
   mods=[
   dict(dir="analizzatore-di-spettro/01-come-funziona",pdf="SA_Come_Funziona_IV3HGA.pdf",img="sa-1.jpg",short="Come funziona",title="Come funziona l'analizzatore di spettro",slides=13,meta="le basi · supereterodina, RBW, rivelatori",
@@ -59,7 +87,7 @@ CHAPTERS=[
   dict(dir="analizzatore-di-spettro/05-misure-inconsuete-e-trucchi",pdf="SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf",img="sa-5.jpg",short="Inconsuete e trucchi",title="Misure inconsuete e trucchi",slides=13,meta="tips and tricks da banco",
    learn=["Capire se una riga è <b>vera</b>: test dell'attenuazione e altri tre controlli","Misurare vicino al rumore e la <b>cifra di rumore</b> con il metodo Y-factor","<b>Sonde near-field</b> per la caccia al QRM e misure di campo in dBµV/m","Ascoltare i segnali, <b>slope detection</b> della FM e il trucco della RBW","Più dinamica con notch e filtri, riferimento a 10 MHz e altri trucchi"],
    tags=["righe false","Y-factor","near-field","QRM","slope detection","dBµV/m"])]),
- dict(id="wm",num="Capitolo 4",title="Il wattmetro RF",
+ dict(id="wm",num="Capitolo 5",title="Il wattmetro RF",
   intro="Come funziona e quali tipi esistono, il Bird 43 con le sue testine, bolometri e termistori, come preservarlo, i problemi di misura e la matematica della potenza.",
   mods=[
   dict(dir="wattmetro-rf/01-come-funziona",pdf="WM_Come_Funziona_IV3HGA.pdf",img="wm-1.jpg",short="Come funziona",title="Il wattmetro RF: come funziona",slides=10,meta="le basi · tipi di wattmetri e di sensori",
@@ -104,13 +132,13 @@ for c in CHAPTERS:
 toc="".join(f'<a href="#{c["id"]}"><small>{c["num"]}</small><h3>{c["title"]}</h3><p>{c["intro"]}</p></a>' for c in CHAPTERS)
 page=f'''<!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ham Radio Pills · Corso su oscilloscopio, VNA, analizzatore di spettro, wattmetro RF · IV3HGA</title>
-<meta name="description" content="Corso gratuito per radioamatori: oscilloscopio, VNA, carta di Smith, analizzatore di spettro, wattmetro RF e misure. {len(CHAPTERS)} capitoli, {nmod} moduli in PDF. A cura di IV3HGA.">
+<title>Ham Radio Pills · Corso su multimetro, oscilloscopio, VNA, analizzatore di spettro, wattmetro RF · IV3HGA</title>
+<meta name="description" content="Corso gratuito per radioamatori: multimetro, oscilloscopio, VNA, carta di Smith, analizzatore di spettro, wattmetro RF e misure. {len(CHAPTERS)} capitoli, {nmod} moduli in PDF. A cura di IV3HGA.">
 <link rel="icon" href="assets/logo.png"><style>{CSS}</style></head><body>
 <header class="hero"><div class="wrap"><div>
   <span class="kicker">Corso · RF e strumentazione per radioamatori</span>
   <h1>Ham Radio <span>Pills</span></h1>
-  <p class="lead">Un corso in pillole per capire davvero gli strumenti da banco e usarli sull'antenna e sul trasmettitore: l'oscilloscopio, il VNA e la carta di Smith, l'analizzatore di spettro e il wattmetro RF, dalle basi ai trucchi del mestiere.</p>
+  <p class="lead">Un corso in pillole per capire davvero gli strumenti da banco e usarli sull'antenna e sul trasmettitore: il multimetro, l'oscilloscopio, il VNA e la carta di Smith, l'analizzatore di spettro e il wattmetro RF, dalle basi ai trucchi del mestiere.</p>
   <div class="btns"><a class="btn primary" href="#capitoli">Inizia il corso ↓</a><a class="btn ghost" href="https://github.com/metallarox/hamradio-pills">Sorgenti su GitHub</a></div>
   <div class="stats"><div><b>{len(CHAPTERS)}</b>capitoli</div><div><b>{nmod}</b>moduli</div><div><b>{nsl}</b>slide</div><div><b>PDF</b>gratuiti</div></div>
 </div><img src="assets/logo.png" alt="Logo IV3HGA"></div></header>
@@ -121,7 +149,7 @@ page=f'''<!DOCTYPE html>
 <section class="info"><div class="wrap"><h2>Come seguire il corso</h2>
 <p class="sub">Non serve un laboratorio: bastano strumenti economici e la voglia di provare sul banco quello che leggi.</p>
 <div class="grid3">
-<div class="card"><h4>📡 Cosa serve</h4><p>Un oscilloscopio con sonde 10×, un VNA anche economico (NanoVNA, LiteVNA o simili) con kit SOL, un analizzatore di spettro (anche un tinySA), un wattmetro passante, un carico fittizio, attenuatori, un DC block e qualche cavo.</p></div>
+<div class="card"><h4>📡 Cosa serve</h4><p>Un buon multimetro true RMS, un oscilloscopio con sonde 10×, un VNA anche economico (NanoVNA, LiteVNA o simili) con kit SOL, un analizzatore di spettro (anche un tinySA), un wattmetro passante, un carico fittizio, attenuatori, un DC block e qualche cavo.</p></div>
 <div class="card"><h4>🧭 Come procedere</h4><p>Leggi un modulo, poi rifai la misura sul banco. Ogni presentazione ha formule pronte, esempi numerici e checklist finali.</p></div>
 <div class="card"><h4>🧪 Esempi e sorgenti</h4><p>Grafici ed esempi vengono da simulazioni verificate. Gli script Python che generano slide e grafici sono nel repository: modificali per i tuoi casi.</p></div>
 </div></div></section>
