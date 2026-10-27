@@ -2,6 +2,22 @@
 import os, html
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CHAPTERS=[
+ dict(id="db",num="Milestone",title="I decibel",
+  intro="Il linguaggio comune di tutto il corso: pensare in logaritmico, dBm, dBu e dBµV, la catena di trasmissione e l'EIRP spiegato con la candela di IW3SMV.",
+  mods=[
+  dict(dir="decibel/01-pensare-in-logaritmico",pdf="DB_Pensare_Logaritmico_IV3HGA.pdf",img="db-1.jpg",short="Pensare in log",title="Il decibel: pensare in logaritmico",slides=9,meta="definizione e trucchi per i conti a mente",
+   learn=['Perché in radio si usano i <b>decibel</b>', '10·log per le potenze, 20·log per le tensioni', 'Il trucco: <b>bastano il 3 e il 10</b>', 'Esempi da stazione, cosa si somma e cosa no, esercizi'],
+   tags=['dB', 'logaritmi', 'conti a mente']),
+  dict(dir="decibel/02-dbm-dbu-dbuv",pdf="DB_Unita_dBm_dBu_IV3HGA.pdf",img="db-2.jpg",short="dBm, dBu, dBµV",title="dBm, dBW, dBu, dBµV e tutti gli altri",slides=8,meta="le unità con riferimento",
+   learn=['La lettera dopo il dB è il <b>riferimento</b>', '<b>dBm</b> e dBW; <b>dBµV</b>, <b>dBu</b> e dBV con le conversioni', 'dBc, <b>dBi e dBd</b>', 'Rumore in dBm/Hz e una tabella da banco'],
+   tags=['dBm', 'dBu', 'dBµV', 'dBi', 'dBm/Hz']),
+  dict(dir="decibel/03-catena-di-trasmissione",pdf="DB_Catena_Trasmissione_IV3HGA.pdf",img="db-3.jpg",short="Catena di trasmissione",title="La catena di trasmissione in decibel",slides=8,meta="dal TX al RX con le somme",
+   learn=['Una catena è una somma: il <b>diagramma dei livelli</b>', "Perdite dei <b>cavi</b> e costo reale dell'SWR", 'Attenuazione di <b>spazio libero</b>', '<b>Bilancio del collegamento</b> ed esercizio su un ponte radio'],
+   tags=['linea', 'perdite', 'FSPL', 'link budget']),
+  dict(dir="decibel/04-eirp-antenne-candela",pdf="DB_EIRP_Antenne_Candela_IV3HGA.pdf",img="db-4.jpg",short="EIRP e la candela",title="EIRP e antenne: la candela di IW3SMV",slides=13,meta="trattazione discorsiva, poi i conti",
+   learn=["Un'antenna non crea energia: la <b>candela di IW3SMV</b>", 'Specchio piano, specchio curvo, <b>parabola</b> con la candela nel fuoco', 'Dal paragone al <b>diagramma di irradiazione</b>; antenne vere', 'Fascio e guadagno, <b>EIRP ed ERP</b> con esempi'],
+   tags=['EIRP', 'ERP', 'dBi', 'diagramma', 'parabola']),
+  ]),
  dict(id="mm",num="Capitolo 1",title="Il multimetro",
   intro="Lo strumento di tutti i giorni, conosciuto davvero: sicurezza, tensione, corrente e shunt, ohm e diodi, funzioni secondarie, funzioni nascoste per esperti ed esempi pratici con i numeri.",
   mods=[
@@ -132,7 +148,52 @@ CHAPTERS=[
    tags=["PEP","TDMA","perdita cavi","calorimetria","efficienza"]),
   dict(dir="wattmetro-rf/06-potenza-segnale-spettro-bessel",pdf="Potenza_Segnale_Spettro_Bessel_IV3HGA.pdf",img="wm-6.jpg",short="Potenza e Bessel",title="Potenza del segnale e potenza dello spettro",slides=14,meta="approfondimento matematico con esempi concreti",
    learn=["Il teorema di <b>Parseval</b>: il ponte tra wattmetro e analizzatore","<b>AM</b>: portante, bande laterali, media e PEP con i numeri","<b>SSB</b> a due toni: PEP = 2 × media","<b>FM</b> e funzioni di <b>Bessel</b>: la potenza si ridistribuisce, non cambia","Regola di Carson, densità spettrale e RBW, somme in dB, fattore di cresta"],
-   tags=["Parseval","AM","SSB","FM","Bessel","Carson","PAPR"])])]
+   tags=["Parseval","AM","SSB","FM","Bessel","Carson","PAPR"])]),
+ dict(id="mod",num="Capitolo 7",title="Le modulazioni",
+  intro="Dalle basi ai sistemi: CW, AM, SSB (USB e LSB), FM e PM; modulazioni numeriche, costellazioni e diagramma ad occhio; DMR, TETRA e gli altri.",
+  mods=[
+  dict(dir="modulazioni/01-analogiche",pdf="MOD_Analogiche_IV3HGA.pdf",img="mod-1.jpg",short="Analogiche",title="Le modulazioni analogiche",slides=10,meta="CW, AM, SSB, FM, PM",
+   learn=["Che cos'è una modulazione: ampiezza, frequenza, fase", '<b>CW</b> e i key click', '<b>AM</b>, DSB e <b>SSB</b>: USB e LSB, generazione e ricezione', '<b>FM</b> e modulazione di fase; confronto'],
+   tags=['CW', 'AM', 'SSB', 'USB/LSB', 'FM', 'PM']),
+  dict(dir="modulazioni/02-numeriche-costellazione-occhio",pdf="MOD_Numeriche_Costellazione_Occhio_IV3HGA.pdf",img="mod-2.jpg",short="Numeriche",title="Le modulazioni numeriche",slides=11,meta="costellazioni e diagramma ad occhio",
+   learn=['Perché il numerico; bit, simboli e baud', 'ASK, FSK, PSK e il <b>piano I/Q</b>', '<b>Costellazioni</b>: BPSK, QPSK, 8PSK, 16/64QAM, con il rumore', 'Coseno rialzato, <b>diagramma ad occhio</b>, Shannon'],
+   tags=['QPSK', 'QAM', 'costellazione', 'occhio', 'I/Q']),
+  dict(dir="modulazioni/03-dmr-tetra-sistemi",pdf="MOD_DMR_TETRA_Sistemi_IV3HGA.pdf",img="mod-3.jpg",short="DMR e TETRA",title="Sistemi numerici: DMR, TETRA e gli altri",slides=10,meta="dalla teoria ai sistemi veri",
+   learn=['<b>DMR</b>: 4FSK e TDMA a 2 slot, dentro un burst', '<b>TETRA</b>: π/4-DQPSK, 4 slot e servizi', 'D-STAR, C4FM e gli altri', 'Vantaggi e limiti del digitale nella pratica'],
+   tags=['DMR', 'TETRA', '4FSK', 'π/4-DQPSK', 'D-STAR']),
+  ]),
+ dict(id="ft8",num="Capitolo 8",title="FT8",
+  intro="Il modo digitale per segnali deboli: cicli di 15 secondi, 8-GFSK, sincronismo Costas, correzione d'errore LDPC e perché si decodifica sotto il rumore.",
+  mods=[
+  dict(dir="ft8/01-come-funziona",pdf="FT8_Come_Funziona_IV3HGA.pdf",img="ft8-1.jpg",short="Come funziona",title="FT8: come funziona",slides=11,meta="modulazione, codifica, vantaggi",
+   learn=["Cicli di 15 s e precisione dell'orologio", '<b>8-GFSK</b>: 8 toni da 6,25 Hz, 50 Hz di banda', 'Sincronismo <b>Costas</b>, CRC e <b>LDPC</b>', 'Il waterfall, perché funziona a −21 dB e un QSO tipico'],
+   tags=['FT8', '8-GFSK', 'Costas', 'LDPC', 'waterfall']),
+  ]),
+ dict(id="acc",num="Capitolo 9",title="L'accesso multiplo",
+  intro="Come tanti utenti condividono lo spettro: FDMA, TDMA, CDMA, OFDMA, duplex FDD e TDD, accesso casuale.",
+  mods=[
+  dict(dir="accesso-multiplo/01-fdma-tdma-cdma",pdf="ACC_FDMA_TDMA_CDMA_IV3HGA.pdf",img="acc-1.jpg",short="FDMA, TDMA, CDMA",title="Accesso multiplo: FDMA, TDMA, CDMA",slides=10,meta="dividere frequenza, tempo, codice",
+   learn=['Quattro modi di dividere lo spettro', '<b>FDMA</b> e <b>TDMA</b> con esempi reali', '<b>CDMA</b>: spreading, guadagno di processo, vicino-lontano', 'Duplex <b>FDD e TDD</b>, ALOHA e CSMA'],
+   tags=['FDMA', 'TDMA', 'CDMA', 'OFDMA', 'FDD/TDD']),
+  ]),
+ dict(id="tel",num="Capitolo 10",title="La telefonia cellulare",
+  intro="Come funzionano davvero GSM e WCDMA: modulazioni, trame, codici, equalizzatori, RAKE e controllo di potenza.",
+  mods=[
+  dict(dir="telefonia/01-gsm",pdf="TEL_GSM_IV3HGA.pdf",img="tel-1.jpg",short="GSM",title="La telefonia cellulare: il GSM",slides=9,meta="FDMA+TDMA, GMSK, Viterbi",
+   learn=['Celle e riuso delle frequenze', '8 slot per portante e modulazione <b>GMSK</b>', 'Il <b>burst</b> e la training sequence', 'Dalla voce ai bit, <b>equalizzatore di Viterbi</b>, timing advance'],
+   tags=['GSM', 'GMSK', 'TDMA', 'burst', 'timing advance']),
+  dict(dir="telefonia/02-wcdma",pdf="TEL_WCDMA_IV3HGA.pdf",img="tel-2.jpg",short="WCDMA",title="La telefonia cellulare: WCDMA (UMTS)",slides=8,meta="CDMA a banda larga",
+   learn=['Chip rate, portanti da 5 MHz, trama da 10 ms', 'Codici <b>OVSF</b> e di scrambling', '<b>Guadagno di processo</b> e ricevitore <b>RAKE</b>', 'Controllo di potenza, soft handover e confronto con LTE'],
+   tags=['WCDMA', 'UMTS', 'OVSF', 'RAKE', 'LTE']),
+  ]),
+ dict(id="vit",num="Bonus",title="L'algoritmo di Viterbi",
+  intro="Come un ricevitore ricostruisce i bit giusti anche quando ne arrivano di sbagliati, spiegato in modo semplice con un esempio passo per passo.",
+  mods=[
+  dict(dir="bonus-viterbi/01-algoritmo-di-viterbi",pdf="BONUS_Viterbi_IV3HGA.pdf",img="vit-1.jpg",short="Viterbi",title="Bonus: l'algoritmo di Viterbi",slides=9,meta="ricostruire il segnale, in modo semplice",
+   learn=['Codifica <b>convoluzionale</b> e stati', 'Il <b>traliccio</b> e la distanza di Hamming', 'Add-compare-select ed <b>esempio passo per passo</b> con un errore corretto', 'Decisioni morbide e dove si usa'],
+   tags=['Viterbi', 'trellis', 'convoluzionale', 'FEC']),
+  ]),
+]
 CSS=open(os.path.join(ROOT,"tools/site.css")).read()
 nmod=sum(len(c["mods"]) for c in CHAPTERS); nsl=sum(m["slides"] for c in CHAPTERS for m in c["mods"])
 def mod_html(c,i,m):
@@ -163,7 +224,7 @@ page=f'''<!DOCTYPE html>
 <header class="hero"><div class="wrap"><div>
   <span class="kicker">Corso · RF e strumentazione per radioamatori</span>
   <h1>Ham Radio <span>Pills</span></h1>
-  <p class="lead">Un corso in pillole per capire davvero gli strumenti da banco e usarli sull'antenna e sul trasmettitore: il multimetro, l'oscilloscopio, il VNA e la carta di Smith, l'analizzatore di spettro, il generatore RF e il wattmetro RF, dalle basi ai trucchi del mestiere.</p>
+  <p class="lead">Un corso in pillole per capire davvero gli strumenti da banco e usarli sull'antenna e sul trasmettitore: il multimetro, l'oscilloscopio, il VNA e la carta di Smith, l'analizzatore di spettro, il generatore RF e il wattmetro RF, dalle basi ai trucchi del mestiere, e poi la teoria: decibel, modulazioni, FT8, accesso multiplo, telefonia.</p>
   <div class="btns"><a class="btn primary" href="#capitoli">Inizia il corso ↓</a><a class="btn ghost" href="https://github.com/metallarox/hamradio-pills">Sorgenti su GitHub</a></div>
   <div class="stats"><div><b>{len(CHAPTERS)}</b>capitoli</div><div><b>{nmod}</b>moduli</div><div><b>{nsl}</b>slide</div><div><b>PDF</b>gratuiti</div></div>
 </div><img src="assets/logo.png" alt="Logo IV3HGA"></div></header>
@@ -193,7 +254,7 @@ readme=f'''<p align="center"><img src="assets/logo.png" width="180" alt="IV3HGA"
 
 🌐 **Sito del corso: https://metallarox.github.io/hamradio-pills/**
 
-Un corso in pillole su strumentazione RF e misure per radioamatori, a cura di **Elia, IV3HGA**: {len(CHAPTERS)} capitoli, {nmod} moduli, {nsl} slide.
+Un corso in pillole su strumentazione RF, misure e teoria delle radiocomunicazioni per radioamatori, a cura di **Elia, IV3HGA**: {len(CHAPTERS)} capitoli, {nmod} moduli, {nsl} slide.
 Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti Python che lo generano (simulazioni, grafici e slide).
 {rows}
 ## Rigenerare un PDF

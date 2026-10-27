@@ -4,8 +4,17 @@
 
 🌐 **Sito del corso: https://metallarox.github.io/hamradio-pills/**
 
-Un corso in pillole su strumentazione RF e misure per radioamatori, a cura di **Elia, IV3HGA**: 6 capitoli, 37 moduli, 399 slide.
+Un corso in pillole su strumentazione RF, misure e teoria delle radiocomunicazioni per radioamatori, a cura di **Elia, IV3HGA**: 12 capitoli, 49 moduli, 515 slide.
 Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti Python che lo generano (simulazioni, grafici e slide).
+
+### Milestone · I decibel
+
+| Modulo | Presentazione | Slide |
+|---|---|---|
+| 1 | [Il decibel: pensare in logaritmico](decibel/01-pensare-in-logaritmico/DB_Pensare_Logaritmico_IV3HGA.pdf) | 9 |
+| 2 | [dBm, dBW, dBu, dBµV e tutti gli altri](decibel/02-dbm-dbu-dbuv/DB_Unita_dBm_dBu_IV3HGA.pdf) | 8 |
+| 3 | [La catena di trasmissione in decibel](decibel/03-catena-di-trasmissione/DB_Catena_Trasmissione_IV3HGA.pdf) | 8 |
+| 4 | [EIRP e antenne: la candela di IW3SMV](decibel/04-eirp-antenne-candela/DB_EIRP_Antenne_Candela_IV3HGA.pdf) | 13 |
 
 ### Capitolo 1 · Il multimetro
 
@@ -73,6 +82,39 @@ Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti 
 | 4 | [Preservare il wattmetro](wattmetro-rf/04-preservare-il-wattmetro/WM_Preservare_IV3HGA.pdf) | 9 |
 | 5 | [Misure inconsuete e problemi di misura](wattmetro-rf/05-misure-inconsuete-e-problemi/WM_Misure_Inconsuete_Problemi_IV3HGA.pdf) | 11 |
 | 6 | [Potenza del segnale e potenza dello spettro](wattmetro-rf/06-potenza-segnale-spettro-bessel/Potenza_Segnale_Spettro_Bessel_IV3HGA.pdf) | 14 |
+
+### Capitolo 7 · Le modulazioni
+
+| Modulo | Presentazione | Slide |
+|---|---|---|
+| 1 | [Le modulazioni analogiche](modulazioni/01-analogiche/MOD_Analogiche_IV3HGA.pdf) | 10 |
+| 2 | [Le modulazioni numeriche](modulazioni/02-numeriche-costellazione-occhio/MOD_Numeriche_Costellazione_Occhio_IV3HGA.pdf) | 11 |
+| 3 | [Sistemi numerici: DMR, TETRA e gli altri](modulazioni/03-dmr-tetra-sistemi/MOD_DMR_TETRA_Sistemi_IV3HGA.pdf) | 10 |
+
+### Capitolo 8 · FT8
+
+| Modulo | Presentazione | Slide |
+|---|---|---|
+| 1 | [FT8: come funziona](ft8/01-come-funziona/FT8_Come_Funziona_IV3HGA.pdf) | 11 |
+
+### Capitolo 9 · L'accesso multiplo
+
+| Modulo | Presentazione | Slide |
+|---|---|---|
+| 1 | [Accesso multiplo: FDMA, TDMA, CDMA](accesso-multiplo/01-fdma-tdma-cdma/ACC_FDMA_TDMA_CDMA_IV3HGA.pdf) | 10 |
+
+### Capitolo 10 · La telefonia cellulare
+
+| Modulo | Presentazione | Slide |
+|---|---|---|
+| 1 | [La telefonia cellulare: il GSM](telefonia/01-gsm/TEL_GSM_IV3HGA.pdf) | 9 |
+| 2 | [La telefonia cellulare: WCDMA (UMTS)](telefonia/02-wcdma/TEL_WCDMA_IV3HGA.pdf) | 8 |
+
+### Bonus · L'algoritmo di Viterbi
+
+| Modulo | Presentazione | Slide |
+|---|---|---|
+| 1 | [Bonus: l'algoritmo di Viterbi](bonus-viterbi/01-algoritmo-di-viterbi/BONUS_Viterbi_IV3HGA.pdf) | 9 |
 
 ## Rigenerare un PDF
 
