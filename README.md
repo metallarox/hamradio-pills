@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/logo.png" width="180" alt="IV3HGA"></p>
+<p align="center"><img src="assets/logo.png" width="180" alt="IV3HGA">&nbsp;&nbsp;<img src="assets/iv3hga-traliccio.jpg" height="180" alt="Elia, IV3HGA, al lavoro su un traliccio"></p>
 
 # Ham Radio Pills
 

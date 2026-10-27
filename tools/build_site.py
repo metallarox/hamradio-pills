@@ -266,10 +266,12 @@ page=f'''<!DOCTYPE html>
   <div class="btns"><a class="btn primary" href="#capitoli">Inizia il corso ↓</a><a class="btn ghost" href="https://github.com/metallarox/hamradio-pills">Sorgenti su GitHub</a></div>
   <div class="stats"><div><b>{len(CHAPTERS)}</b>capitoli</div><div><b>{nmod}</b>moduli</div><div><b>{nsl}</b>slide</div><div><b>PDF</b>gratuiti</div></div>
 </div><img src="assets/logo.png" alt="Logo IV3HGA"></div></header>
-<section class="mission"><div class="wrap"><div class="mgrid"><div>
+<section class="mission"><div class="wrap"><div class="mgrid">
+<figure class="author"><img src="assets/iv3hga-traliccio.jpg" alt="Elia, IV3HGA, al lavoro su un traliccio"><figcaption>Elia · IV3HGA, al lavoro in quota</figcaption></figure>
+<div>
 <h2>Lo scopo</h2>
-<p>Questo sito vuole spiegare qualche concetto che ci può tornare utile nelle nostre attività di laboratorio e in stazione. La trattazione è <b>pratica e non troppo accademica</b>: si parte da quello che vediamo sul banco, con qualche pillola di teoria qua e là, quando serve a capire davvero cosa succede.</p></div>
-<blockquote>La matematica, per quanto indigesta, è il linguaggio che ci permette di collegare tutte le materie del mondo e di rappresentare qualsiasi cosa in un unico linguaggio che non conosce confini.</blockquote>
+<p>Questo sito vuole spiegare qualche concetto che ci può tornare utile nelle nostre attività di laboratorio e in stazione. La trattazione è <b>pratica e non troppo accademica</b>: si parte da quello che vediamo sul banco, con qualche pillola di teoria qua e là, quando serve a capire davvero cosa succede.</p>
+<blockquote>La matematica, per quanto indigesta, è il linguaggio che ci permette di collegare tutte le materie del mondo e di rappresentare qualsiasi cosa in un unico linguaggio che non conosce confini.</blockquote></div>
 </div></div></section>
 <section id="capitoli" style="padding-bottom:20px"><div class="wrap"><h2>I capitoli</h2>
 <p class="sub">Il corso è diviso in due sezioni, elettronica e radiofrequenza, precedute dai decibel che servono a entrambe. I moduli si possono leggere anche da soli.</p>
@@ -293,7 +295,7 @@ for c in CHAPTERS:
     rows+=f"\n### {c['num']} · {c['title']}\n\n| Modulo | Presentazione | Slide |\n|---|---|---|\n"
     for i,m in enumerate(c["mods"]):
         rows+=f"| {i+1} | [{m['title']}]({m['dir']}/{m['pdf']}) | {m['slides']} |\n"
-readme=f'''<p align="center"><img src="assets/logo.png" width="180" alt="IV3HGA"></p>
+readme=f'''<p align="center"><img src="assets/logo.png" width="180" alt="IV3HGA">&nbsp;&nbsp;<img src="assets/iv3hga-traliccio.jpg" height="180" alt="Elia, IV3HGA, al lavoro su un traliccio"></p>
 
 # Ham Radio Pills
 
