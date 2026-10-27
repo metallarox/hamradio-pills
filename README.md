@@ -4,7 +4,7 @@
 
 🌐 **Sito del corso: https://metallarox.github.io/hamradio-pills/**
 
-Un corso in pillole su strumentazione RF, misure e teoria delle radiocomunicazioni per radioamatori, a cura di **Elia, IV3HGA**: 12 capitoli, 49 moduli, 515 slide.
+Un corso in pillole su strumentazione RF, misure e teoria delle radiocomunicazioni per radioamatori, a cura di **Elia, IV3HGA**: 14 capitoli, 55 moduli, 577 slide.
 Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti Python che lo generano (simulazioni, grafici e slide).
 
 ### Milestone · I decibel
@@ -88,8 +88,10 @@ Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti 
 | Modulo | Presentazione | Slide |
 |---|---|---|
 | 1 | [Le modulazioni analogiche](modulazioni/01-analogiche/MOD_Analogiche_IV3HGA.pdf) | 10 |
-| 2 | [Le modulazioni numeriche](modulazioni/02-numeriche-costellazione-occhio/MOD_Numeriche_Costellazione_Occhio_IV3HGA.pdf) | 11 |
-| 3 | [Sistemi numerici: DMR, TETRA e gli altri](modulazioni/03-dmr-tetra-sistemi/MOD_DMR_TETRA_Sistemi_IV3HGA.pdf) | 10 |
+| 2 | [La FM in profondità](modulazioni/02-fm-approfondita/MOD_FM_Approfondita_IV3HGA.pdf) | 10 |
+| 3 | [L'intermodulazione](modulazioni/03-intermodulazione/MOD_Intermodulazione_IV3HGA.pdf) | 9 |
+| 4 | [Le modulazioni numeriche](modulazioni/04-numeriche-costellazione-occhio/MOD_Numeriche_Costellazione_Occhio_IV3HGA.pdf) | 11 |
+| 5 | [Sistemi numerici: DMR, TETRA e gli altri](modulazioni/05-dmr-tetra-sistemi/MOD_DMR_TETRA_Sistemi_IV3HGA.pdf) | 10 |
 
 ### Capitolo 8 · FT8
 
@@ -109,6 +111,20 @@ Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti 
 |---|---|---|
 | 1 | [La telefonia cellulare: il GSM](telefonia/01-gsm/TEL_GSM_IV3HGA.pdf) | 9 |
 | 2 | [La telefonia cellulare: WCDMA (UMTS)](telefonia/02-wcdma/TEL_WCDMA_IV3HGA.pdf) | 8 |
+
+### Capitolo 11 · Il rumore
+
+| Modulo | Presentazione | Slide |
+|---|---|---|
+| 1 | [Il rumore: cos'è e da dove viene](rumore/01-cos-e-e-tipi/Rumore_1_Cos_e_IV3HGA.pdf) | 11 |
+| 2 | [Il rumore: quando fa male e quando ci serve](rumore/02-cifra-di-rumore-danno-e-uso/Rumore_2_Cifra_di_rumore_IV3HGA.pdf) | 12 |
+
+### Capitolo 12 · Le correnti di modo comune
+
+| Modulo | Presentazione | Slide |
+|---|---|---|
+| 1 | [Le correnti di modo comune: cosa sono](modo-comune/01-cosa-sono/Modo_comune_1_Cosa_sono_IV3HGA.pdf) | 9 |
+| 2 | [Le correnti di modo comune: rimedi e falsi miti](modo-comune/02-rimedi-e-falsi-miti/Modo_comune_2_Rimedi_e_miti_IV3HGA.pdf) | 11 |
 
 ### Bonus · L'algoritmo di Viterbi
 
