@@ -21,7 +21,7 @@ CHAPTERS=[
    learn=["<b>Ferriti</b> sconosciute, SRF/ESR dei componenti, choke in modo comune","<b>Shunt-through</b> per i milliohm e group delay di risonatori e cavità","<b>TDR</b> per trovare guasti nei cavi, εr e tan δ di un PCB, umidità dei materiali","Grid-dip moderno e NFC, accoppiamento k, isolamento tra antenne, schermatura, time-gating"],
    tags=["ferriti","TDR","choke","PCB εr","grid-dip","time-gating"])]),
  dict(id="sa",num="Capitolo 2",title="L'analizzatore di spettro",
-  intro="Come funziona, come usarlo senza romperlo, le misure classiche fatte bene e i trucchi che non trovi nei manuali.",
+  intro="Come funziona, come usarlo senza romperlo, le misure classiche fatte bene, carichi con prelievo, accoppiatori e ponti, e i trucchi che non trovi nei manuali.",
   mods=[
   dict(dir="analizzatore-di-spettro/01-come-funziona",pdf="SA_Come_Funziona_IV3HGA.pdf",img="sa-1.jpg",short="Come funziona",title="Come funziona l'analizzatore di spettro",slides=13,meta="le basi · supereterodina, RBW, rivelatori",
    learn=["Unità di misura: dBm, dBµV, dBc, dBm/Hz e livelli S9","L'architettura <b>supereterodina a scansione</b> e le frequenze immagine","<b>RBW</b> e VBW: risoluzione, rumore e tempo di sweep","Rivelatori, attenuatore d'ingresso e <b>livello al mixer</b> ottimale","Rumore di fondo, rumore di fase, dinamica, FFT/real-time e tracking generator"],
@@ -32,7 +32,10 @@ CHAPTERS=[
   dict(dir="analizzatore-di-spettro/03-misure-classiche",pdf="SA_Misure_Classiche_IV3HGA.pdf",img="sa-3.jpg",short="Misure classiche",title="Le misure classiche con l'analizzatore",slides=12,meta="9 misure spiegate passo per passo",
    learn=["Potenza e frequenza di una portante, <b>armoniche</b> e spurie di un TX","<b>Intermodulazione</b> a due toni e calcolo del TOI","Profondità <b>AM</b> dalle bande laterali e deviazione <b>FM</b> con il nullo di Bessel","Potenza di canale, OBW e ACP; <b>zero span</b> per i burst TDMA","Tracking generator per filtri e duplexer, rumore di fase in dBc/Hz"],
    tags=["armoniche","IM3 / TOI","AM","FM Bessel","zero span","rumore di fase"]),
-  dict(dir="analizzatore-di-spettro/04-misure-inconsuete-e-trucchi",pdf="SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf",img="sa-4.jpg",short="Inconsuete e trucchi",title="Misure inconsuete e trucchi",slides=13,meta="tips and tricks da banco",
+  dict(dir="analizzatore-di-spettro/04-prelievi-accoppiatori-ponti",pdf="SA_Prelievi_Accoppiatori_Ponti_IV3HGA.pdf",img="sa-4.jpg",short="Prelievi, accoppiatori, ponti",title="Carico con prelievo, accoppiatore e ponte",slides=14,meta="misure sul trasmettitore e di adattamento",
+   learn=["Il <b>carico con prelievo</b>: budget di potenza, durata e SWR del carico","Perché un prelievo capacitivo <b>sovrastima le armoniche</b> e come calibrarlo","L'<b>accoppiatore direzionale</b>: spettro in servizio, return loss sotto potenza, segnali dall'antenna","Il <b>ponte riflettometrico</b> con tracking generator: return loss, direttività e distanza delle discontinuità","Test a due toni su un TX SSB e cosa si vede: splatter, key click, ALC, autooscillazioni"],
+   tags=["carico fittizio","prelievo","accoppiatore","direttività","ponte RL","two-tone"]),
+  dict(dir="analizzatore-di-spettro/05-misure-inconsuete-e-trucchi",pdf="SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf",img="sa-5.jpg",short="Inconsuete e trucchi",title="Misure inconsuete e trucchi",slides=13,meta="tips and tricks da banco",
    learn=["Capire se una riga è <b>vera</b>: test dell'attenuazione e altri tre controlli","Misurare vicino al rumore e la <b>cifra di rumore</b> con il metodo Y-factor","<b>Sonde near-field</b> per la caccia al QRM e misure di campo in dBµV/m","Ascoltare i segnali, <b>slope detection</b> della FM e il trucco della RBW","Più dinamica con notch e filtri, riferimento a 10 MHz e altri trucchi"],
    tags=["righe false","Y-factor","near-field","QRM","slope detection","dBµV/m"])])]
 CSS=open(os.path.join(ROOT,"tools/site.css")).read()

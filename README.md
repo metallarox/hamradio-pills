@@ -4,7 +4,7 @@
 
 🌐 **Sito del corso: https://metallarox.github.io/hamradio-pills/**
 
-Un corso in pillole su strumentazione RF e misure per radioamatori, a cura di **Elia, IV3HGA**: 2 capitoli, 9 moduli, 116 slide.
+Un corso in pillole su strumentazione RF e misure per radioamatori, a cura di **Elia, IV3HGA**: 2 capitoli, 10 moduli, 130 slide.
 Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti Python che lo generano (simulazioni, grafici e slide).
 
 ### Capitolo 1 · Il VNA (analizzatore di reti vettoriale)
@@ -24,7 +24,8 @@ Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti 
 | 1 | [Come funziona l'analizzatore di spettro](analizzatore-di-spettro/01-come-funziona/SA_Come_Funziona_IV3HGA.pdf) | 13 |
 | 2 | [Usare bene l'analizzatore: protezioni e impostazioni](analizzatore-di-spettro/02-uso-corretto-e-impostazioni/SA_Uso_Corretto_IV3HGA.pdf) | 12 |
 | 3 | [Le misure classiche con l'analizzatore](analizzatore-di-spettro/03-misure-classiche/SA_Misure_Classiche_IV3HGA.pdf) | 12 |
-| 4 | [Misure inconsuete e trucchi](analizzatore-di-spettro/04-misure-inconsuete-e-trucchi/SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf) | 13 |
+| 4 | [Carico con prelievo, accoppiatore e ponte](analizzatore-di-spettro/04-prelievi-accoppiatori-ponti/SA_Prelievi_Accoppiatori_Ponti_IV3HGA.pdf) | 14 |
+| 5 | [Misure inconsuete e trucchi](analizzatore-di-spettro/05-misure-inconsuete-e-trucchi/SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf) | 13 |
 
 ## Rigenerare un PDF
 
