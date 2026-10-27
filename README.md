@@ -4,7 +4,7 @@
 
 🌐 **Sito del corso: https://metallarox.github.io/hamradio-pills/**
 
-Un corso in pillole su strumentazione RF e misure per radioamatori, a cura di **Elia, IV3HGA**: 5 capitoli, 30 moduli, 336 slide.
+Un corso in pillole su strumentazione RF e misure per radioamatori, a cura di **Elia, IV3HGA**: 6 capitoli, 37 moduli, 399 slide.
 Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti Python che lo generano (simulazioni, grafici e slide).
 
 ### Capitolo 1 · Il multimetro
@@ -51,7 +51,19 @@ Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti 
 | 4 | [Carico con prelievo, accoppiatore e ponte](analizzatore-di-spettro/04-prelievi-accoppiatori-ponti/SA_Prelievi_Accoppiatori_Ponti_IV3HGA.pdf) | 14 |
 | 5 | [Misure inconsuete e trucchi](analizzatore-di-spettro/05-misure-inconsuete-e-trucchi/SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf) | 13 |
 
-### Capitolo 5 · Il wattmetro RF
+### Capitolo 5 · Il generatore di segnali RF
+
+| Modulo | Presentazione | Slide |
+|---|---|---|
+| 1 | [Il generatore RF: come funziona](generatore-rf/01-come-funziona/GEN_Come_Funziona_IV3HGA.pdf) | 9 |
+| 2 | [Livelli e attenuatori](generatore-rf/02-livelli-e-attenuatori/GEN_Livelli_Attenuatori_IV3HGA.pdf) | 9 |
+| 3 | [Le modulazioni del generatore](generatore-rf/03-modulazioni/GEN_Modulazioni_IV3HGA.pdf) | 8 |
+| 4 | [La purezza spettrale](generatore-rf/04-purezza-spettrale/GEN_Purezza_Spettrale_IV3HGA.pdf) | 9 |
+| 5 | [Test di sensibilità: SINAD e MDS](generatore-rf/05-sensibilita-sinad-mds/GEN_Sensibilita_SINAD_MDS_IV3HGA.pdf) | 10 |
+| 6 | [Selettività e dinamica del ricevitore](generatore-rf/06-selettivita-e-dinamica/GEN_Selettivita_Dinamica_IV3HGA.pdf) | 9 |
+| 7 | [Usi pratici e trucchi](generatore-rf/07-usi-pratici-e-trucchi/GEN_Usi_Pratici_Trucchi_IV3HGA.pdf) | 9 |
+
+### Capitolo 6 · Il wattmetro RF
 
 | Modulo | Presentazione | Slide |
 |---|---|---|

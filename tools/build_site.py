@@ -87,7 +87,32 @@ CHAPTERS=[
   dict(dir="analizzatore-di-spettro/05-misure-inconsuete-e-trucchi",pdf="SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf",img="sa-5.jpg",short="Inconsuete e trucchi",title="Misure inconsuete e trucchi",slides=13,meta="tips and tricks da banco",
    learn=["Capire se una riga è <b>vera</b>: test dell'attenuazione e altri tre controlli","Misurare vicino al rumore e la <b>cifra di rumore</b> con il metodo Y-factor","<b>Sonde near-field</b> per la caccia al QRM e misure di campo in dBµV/m","Ascoltare i segnali, <b>slope detection</b> della FM e il trucco della RBW","Più dinamica con notch e filtri, riferimento a 10 MHz e altri trucchi"],
    tags=["righe false","Y-factor","near-field","QRM","slope detection","dBµV/m"])]),
- dict(id="wm",num="Capitolo 5",title="Il wattmetro RF",
+ dict(id="gen",num="Capitolo 5",title="Il generatore di segnali RF",
+  intro="Il compagno dell'analizzatore: come funziona, livelli e attenuatori, modulazioni, purezza spettrale e i test di sensibilità, selettività e dinamica dei ricevitori.",
+  mods=[
+  dict(dir="generatore-rf/01-come-funziona",pdf="GEN_Come_Funziona_IV3HGA.pdf",img="gen-1.jpg",short="Come funziona",title="Il generatore RF: come funziona",slides=9,meta="le basi · architettura e specifiche",
+   learn=["A cosa serve: il compagno dell'analizzatore", '<b>Architettura</b>: riferimento, PLL/DDS, modulatore, ALC, attenuatore', 'Il <b>riferimento a 10 MHz</b> e la precisione in frequenza', 'Protezione dalla potenza inversa, tipi di generatori e specifiche'],
+   tags=['PLL', 'DDS', 'OCXO', 'ALC', 'attenuatore']),
+  dict(dir="generatore-rf/02-livelli-e-attenuatori",pdf="GEN_Livelli_Attenuatori_IV3HGA.pdf",img="gen-2.jpg",short="Livelli e attenuatori",title="Livelli e attenuatori",slides=9,meta="dBm, µV, EMF e PD",
+   learn=['Tabella <b>dBm, µV e dBµV</b> su 50 Ω', '<b>EMF e PD</b>: il fattore 2 nei datasheet', 'Attenuatori a π e T con le resistenze calcolate', 'Perdite, combinatori, <b>leakage</b> e livelli tipici dei test'],
+   tags=['dBm', 'µV', 'EMF/PD', 'attenuatori', 'leakage']),
+  dict(dir="generatore-rf/03-modulazioni",pdf="GEN_Modulazioni_IV3HGA.pdf",img="gen-3.jpg",short="Modulazioni",title="Le modulazioni del generatore",slides=8,meta="AM, FM, impulsi, esterna",
+   learn=['Le <b>convenzioni dei test</b>: 1 kHz, 3 kHz di deviazione, 30 % AM', '<b>AM</b>: profondità, bande laterali, picchi', '<b>FM</b> e ΦM: deviazione e verifica con il nullo di Bessel', 'Impulsi, modulazione esterna e segnali per test speciali'],
+   tags=['AM', 'FM', 'ΦM', 'impulsi', 'CTCSS']),
+  dict(dir="generatore-rf/04-purezza-spettrale",pdf="GEN_Purezza_Spettrale_IV3HGA.pdf",img="gen-4.jpg",short="Purezza spettrale",title="La purezza spettrale",slides=9,meta="armoniche, spurie, rumore di fase",
+   learn=['Perché il generatore deve essere <b>10 dB migliore</b> del ricevitore', '<b>Armoniche</b> e <b>spurie</b>: quando sono innocue e quando no', '<b>Rumore di fase</b>: quanto ne finisce nel canale del ricevitore', 'Come verificare e migliorare il tuo generatore'],
+   tags=['armoniche', 'spurie', 'rumore di fase', 'filtri']),
+  dict(dir="generatore-rf/05-sensibilita-sinad-mds",pdf="GEN_Sensibilita_SINAD_MDS_IV3HGA.pdf",img="gen-5.jpg",short="Sensibilità",title="Test di sensibilità: SINAD e MDS",slides=10,meta="passo per passo, con esempi",
+   learn=['Che cosa vuol dire <b>sensibilità</b> e perché serve la condizione', '<b>SINAD 12 dB</b> in FM: setup, procedura ed esempio a 145 MHz', 'S/N 10 dB in <b>AM e SSB</b>', '<b>MDS</b> e cifra di rumore; errori tipici'],
+   tags=['SINAD', '12 dB', 'S/N', 'MDS', 'NF']),
+  dict(dir="generatore-rf/06-selettivita-e-dinamica",pdf="GEN_Selettivita_Dinamica_IV3HGA.pdf",img="gen-6.jpg",short="Selettività e dinamica",title="Selettività e dinamica del ricevitore",slides=9,meta="con due generatori",
+   learn=['Il <b>setup con due generatori</b> e combinatore', '<b>Canale adiacente</b> in FM', '<b>Blocking</b> e <b>reciprocal mixing</b>', 'Intermodulazione: <b>DR3 e IP3</b> con esempio; frequenza immagine'],
+   tags=['canale adiacente', 'blocking', 'reciprocal mixing', 'DR3', 'IP3']),
+  dict(dir="generatore-rf/07-usi-pratici-e-trucchi",pdf="GEN_Usi_Pratici_Trucchi_IV3HGA.pdf",img="gen-7.jpg",short="Usi pratici",title="Usi pratici e trucchi",slides=9,meta="sul banco e in stazione",
+   learn=["Tarare l'<b>S-meter</b> con la convenzione IARU", 'Allineare filtri e IF; <b>iniezione di segnale</b> per la ricerca guasti', '<b>Proteggere il generatore</b> nelle prove sui ricetrasmettitori', 'Generatore e analizzatore insieme, altri trucchi ed errori da evitare'],
+   tags=['S-meter', 'allineamento', 'iniezione', 'protezione']),
+  ]),
+ dict(id="wm",num="Capitolo 6",title="Il wattmetro RF",
   intro="Come funziona e quali tipi esistono, il Bird 43 con le sue testine, bolometri e termistori, come preservarlo, i problemi di misura e la matematica della potenza.",
   mods=[
   dict(dir="wattmetro-rf/01-come-funziona",pdf="WM_Come_Funziona_IV3HGA.pdf",img="wm-1.jpg",short="Come funziona",title="Il wattmetro RF: come funziona",slides=10,meta="le basi · tipi di wattmetri e di sensori",
@@ -138,7 +163,7 @@ page=f'''<!DOCTYPE html>
 <header class="hero"><div class="wrap"><div>
   <span class="kicker">Corso · RF e strumentazione per radioamatori</span>
   <h1>Ham Radio <span>Pills</span></h1>
-  <p class="lead">Un corso in pillole per capire davvero gli strumenti da banco e usarli sull'antenna e sul trasmettitore: il multimetro, l'oscilloscopio, il VNA e la carta di Smith, l'analizzatore di spettro e il wattmetro RF, dalle basi ai trucchi del mestiere.</p>
+  <p class="lead">Un corso in pillole per capire davvero gli strumenti da banco e usarli sull'antenna e sul trasmettitore: il multimetro, l'oscilloscopio, il VNA e la carta di Smith, l'analizzatore di spettro, il generatore RF e il wattmetro RF, dalle basi ai trucchi del mestiere.</p>
   <div class="btns"><a class="btn primary" href="#capitoli">Inizia il corso ↓</a><a class="btn ghost" href="https://github.com/metallarox/hamradio-pills">Sorgenti su GitHub</a></div>
   <div class="stats"><div><b>{len(CHAPTERS)}</b>capitoli</div><div><b>{nmod}</b>moduli</div><div><b>{nsl}</b>slide</div><div><b>PDF</b>gratuiti</div></div>
 </div><img src="assets/logo.png" alt="Logo IV3HGA"></div></header>
@@ -149,7 +174,7 @@ page=f'''<!DOCTYPE html>
 <section class="info"><div class="wrap"><h2>Come seguire il corso</h2>
 <p class="sub">Non serve un laboratorio: bastano strumenti economici e la voglia di provare sul banco quello che leggi.</p>
 <div class="grid3">
-<div class="card"><h4>📡 Cosa serve</h4><p>Un buon multimetro true RMS, un oscilloscopio con sonde 10×, un VNA anche economico (NanoVNA, LiteVNA o simili) con kit SOL, un analizzatore di spettro (anche un tinySA), un wattmetro passante, un carico fittizio, attenuatori, un DC block e qualche cavo.</p></div>
+<div class="card"><h4>📡 Cosa serve</h4><p>Un buon multimetro true RMS, un oscilloscopio con sonde 10×, un VNA anche economico (NanoVNA, LiteVNA o simili) con kit SOL, un analizzatore di spettro (anche un tinySA), un generatore RF, un wattmetro passante, un carico fittizio, attenuatori, un DC block e qualche cavo.</p></div>
 <div class="card"><h4>🧭 Come procedere</h4><p>Leggi un modulo, poi rifai la misura sul banco. Ogni presentazione ha formule pronte, esempi numerici e checklist finali.</p></div>
 <div class="card"><h4>🧪 Esempi e sorgenti</h4><p>Grafici ed esempi vengono da simulazioni verificate. Gli script Python che generano slide e grafici sono nel repository: modificali per i tuoi casi.</p></div>
 </div></div></section>
