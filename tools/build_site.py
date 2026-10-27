@@ -228,7 +228,8 @@ SECTIONS=[
 _byid={c["id"]:c for c in CHAPTERS}
 assert sorted(i for x in SECTIONS for i in x["ids"])==sorted(_byid), "capitoli non assegnati a una sezione"
 CHAPTERS=[_byid[i] for x in SECTIONS for i in x["ids"]]
-CSS=open(os.path.join(ROOT,"tools/site.css")).read()
+import shutil
+shutil.copy(os.path.join(ROOT,"tools/site.css"),os.path.join(ROOT,"assets/site.css"))
 nmod=sum(len(c["mods"]) for c in CHAPTERS); nsl=sum(m["slides"] for c in CHAPTERS for m in c["mods"])
 def mod_html(c,i,m):
     href=f'{m["dir"]}/{m["pdf"]}'
@@ -239,26 +240,70 @@ def mod_html(c,i,m):
         <div class="tags">{"".join(f"<span>{t}</span>" for t in m["tags"])}</div>
         <div class="btns"><a class="btn primary" href="{href}" download>⬇ Scarica PDF</a><a class="btn ghost" href="{href}" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article>'''
-chap=""
 def sec_of(c): return next(x for x in SECTIONS if c["id"] in x["ids"])
-for c in CHAPTERS:
-    x=sec_of(c)
-    if c["id"]==x["ids"][0]:
-        chap+=f'''<section class="secband" id="{x["id"]}"><div class="wrap"><span class="kicker">{x["kicker"]}</span><h2>{x["title"]}</h2><p class="sub">{x["intro"]}</p></div></section>'''
-    n=len(c["mods"])
-    steps="".join(f'<a class="step" href="#{c["id"]}{i+1}"><small>Modulo {i+1}</small><div>{m["short"]}</div></a>' for i,m in enumerate(c["mods"]))
-    chap+=f'''<section class="chapter" id="{c["id"]}"><div class="wrap">
-  <div class="chap-head"><span class="chap-num">{c["num"]}</span><h2>{c["title"]}</h2></div>
-  <p class="sub">{c["intro"]} {n} moduli, {sum(m["slides"] for m in c["mods"])} slide.</p>
-  <div class="path p{n}">{steps}</div>
-  {"".join(mod_html(c,i+1,m) for i,m in enumerate(c["mods"]))}
-</div></section>'''
-toc="".join(f'<h3 class="tochead"><a href="#{x["id"]}">{x["kicker"]} · {x["title"]}</a></h3><div class="toc">'+"".join(f'<a href="#{c["id"]}"><small>{c["num"]}</small><h3>{c["title"]}</h3><p>{c["intro"]}</p></a>' for c in (_byid[i] for i in x["ids"]))+'</div>' for x in SECTIONS)
-page=f'''<!DOCTYPE html>
+def cdir(c): return c["mods"][0]["dir"].split("/")[0]
+ALL=[(c,i+1,m) for c in CHAPTERS for i,m in enumerate(c["mods"])]
+FOOT='<footer><div class="wrap"><div><b>Ham Radio Pills</b> · a cura di Elia, IV3HGA · 73!</div><div><a href="https://github.com/metallarox/hamradio-pills">github.com/metallarox/hamradio-pills</a></div></div></footer>'
+def head(title,desc,up):
+    return f'''<!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ham Radio Pills · Corso su multimetro, oscilloscopio, VNA, analizzatore di spettro, wattmetro RF · IV3HGA</title>
-<meta name="description" content="Corso gratuito per radioamatori, diviso in elettronica e radiofrequenza: multimetro, oscilloscopio, VNA, carta di Smith, analizzatore di spettro, wattmetro RF, modulazioni, rumore, modo comune. {len(CHAPTERS)} capitoli, {nmod} moduli in PDF. A cura di IV3HGA.">
-<link rel="icon" href="assets/logo.png"><style>{CSS}</style></head><body>
+<title>{html.escape(title)}</title><meta name="description" content="{html.escape(desc)}">
+<link rel="icon" href="{up}assets/logo.png"><link rel="stylesheet" href="{up}assets/site.css"></head><body>'''
+def topbar(up,crumbs):
+    cr=" <span>›</span> ".join(f'<a href="{h}">{t}</a>' if h else f'<b>{t}</b>' for t,h in crumbs)
+    return f'''<nav class="topbar"><div class="wrap"><a class="brand" href="{up}index.html"><img src="{up}assets/logo.png" alt="">Ham Radio <span>Pills</span></a><div class="crumbs">{cr}</div></div></nav>'''
+def pager(prev,nxt):
+    l=f'<a class="pg prev" href="{prev[0]}"><small>← precedente</small><b>{prev[1]}</b></a>' if prev else '<span></span>'
+    r=f'<a class="pg next" href="{nxt[0]}"><small>successivo →</small><b>{nxt[1]}</b></a>' if nxt else '<span></span>'
+    return f'<div class="pager">{l}{r}</div>'
+def mod_card(c,i,m,up):
+    page=f'{up}{m["dir"]}/index.html'; pdf_=f'{up}{m["dir"]}/{m["pdf"]}'
+    return f'''<article class="mod" id="m{i}">
+      <a class="shot" href="{page}"><img src="{up}assets/{m["img"]}" alt="Anteprima: {html.escape(m["title"])}" loading="lazy"></a>
+      <div><div class="num">{c["num"]} · Modulo {i}</div><h3><a class="plain" href="{page}">{m["title"]}</a></h3><div class="meta">{m["slides"]} slide · {m["meta"]}</div>
+        <ul>{"".join(f"<li>{x}</li>" for x in m["learn"])}</ul>
+        <div class="tags">{"".join(f"<span>{t}</span>" for t in m["tags"])}</div>
+        <div class="btns"><a class="btn primary" href="{page}">Apri il modulo →</a><a class="btn ghost" href="{pdf_}" download>⬇ PDF</a></div></div>
+    </article>'''
+def W(path,txt):
+    os.makedirs(os.path.dirname(path),exist_ok=True); open(path,"w").write(txt)
+# --- pagine dei capitoli
+for k,c in enumerate(CHAPTERS):
+    x=sec_of(c); up="../"; n=len(c["mods"])
+    steps="".join(f'<a class="step" href="{m["dir"].split("/",1)[1]}/index.html"><small>Modulo {i+1}</small><div>{m["short"]}</div></a>' for i,m in enumerate(c["mods"]))
+    cards="".join(mod_card(c,i+1,m,up) for i,m in enumerate(c["mods"]))
+    pv=CHAPTERS[k-1] if k>0 else None; nx=CHAPTERS[k+1] if k+1<len(CHAPTERS) else None
+    pg=pager((f'{up}{cdir(pv)}/index.html',f'{pv["num"]} · {pv["title"]}') if pv else None,(f'{up}{cdir(nx)}/index.html',f'{nx["num"]} · {nx["title"]}') if nx else None)
+    W(os.path.join(ROOT,cdir(c),"index.html"),head(f'{c["num"]} · {c["title"]} · Ham Radio Pills',c["intro"],up)+topbar(up,[("Home",f"{up}index.html"),(x["title"],f'{up}index.html#{x["id"]}'),(c["title"],None)])+f'''
+<header class="chero"><div class="wrap"><span class="kicker">{x["kicker"]} · {x["title"]}</span><div class="chap-head"><span class="chap-num">{c["num"]}</span><h1>{c["title"]}</h1></div>
+<p class="lead">{c["intro"]}</p><div class="cstats">{n} {"modulo" if n==1 else "moduli"} · {sum(m["slides"] for m in c["mods"])} slide</div></div></header>
+<section class="chapter"><div class="wrap"><div class="path p{n}">{steps}</div>{cards}{pg}</div></section>
+{FOOT}</body></html>''')
+# --- pagine dei moduli
+for k,(c,i,m) in enumerate(ALL):
+    x=sec_of(c); up="../../"; ch=f'{up}{cdir(c)}/index.html'
+    pv=ALL[k-1] if k>0 else None; nx=ALL[k+1] if k+1<len(ALL) else None
+    lk=lambda t:(f'{up}{t[2]["dir"]}/index.html',t[2]["title"])
+    pg=pager(lk(pv) if pv else None,lk(nx) if nx else None)
+    others="".join(f'<a class="{"on" if j+1==i else ""}" href="{up}{mm["dir"]}/index.html"><small>Modulo {j+1}</small>{mm["short"]}</a>' for j,mm in enumerate(c["mods"]))
+    W(os.path.join(ROOT,m["dir"],"index.html"),head(f'{m["title"]} · Ham Radio Pills',f'{c["num"]} · {c["title"]}: {m["meta"]}',up)+topbar(up,[("Home",f"{up}index.html"),(c["title"],ch),(m["short"],None)])+f'''
+<header class="chero"><div class="wrap"><span class="kicker">{c["num"]} · {c["title"]} · Modulo {i} di {len(c["mods"])}</span><h1>{m["title"]}</h1>
+<p class="lead">{m["slides"]} slide · {m["meta"]}</p>
+<div class="btns"><a class="btn primary" href="{m["pdf"]}" download>⬇ Scarica PDF</a><a class="btn ghost" href="{m["pdf"]}" target="_blank" rel="noopener">Apri a schermo intero</a></div></div></header>
+<section class="modpage"><div class="wrap"><div class="slider" data-pdf="{m["pdf"]}"><div class="stage"><canvas></canvas></div>
+<div class="sctl"><button class="prev" aria-label="Slide precedente">‹</button><span class="cnt">caricamento…</span><button class="next" aria-label="Slide successiva">›</button><button class="fs" aria-label="Schermo intero">⛶</button></div></div>
+<p class="vnote">Sfoglia con le frecce, la tastiera o con uno swipe. Per stampare o salvare usa <a href="{m["pdf"]}" target="_blank" rel="noopener">Apri a schermo intero</a> o Scarica PDF.</p>
+<script type="module" src="{up}assets/viewer.js"></script>
+<div style="height:44px"></div><div class="mgrid2"><div>
+<h2>Cosa imparerai</h2><ul class="learn">{"".join(f"<li>{t}</li>" for t in m["learn"])}</ul>
+<div class="tags">{"".join(f"<span>{t}</span>" for t in m["tags"])}</div></div>
+<aside class="siblings"><h4>Nel capitolo</h4>{others}<a class="back" href="{ch}">← Torna al capitolo</a></aside></div>
+
+{pg}</div></section>
+{FOOT}</body></html>''')
+# --- homepage
+sect="".join(f'''<div class="secblock" id="{x["id"]}"><span class="kicker">{x["kicker"]}</span><h2>{x["title"]}</h2><p class="sub">{x["intro"]}</p><div class="toc">'''+"".join(f'<a href="{cdir(c)}/index.html"><small>{c["num"]} · {len(c["mods"])} {"modulo" if len(c["mods"])==1 else "moduli"}</small><h3>{c["title"]}</h3><p>{c["intro"]}</p><span class="go">Vai al capitolo →</span></a>' for c in (_byid[i] for i in x["ids"]))+'</div></div>' for x in SECTIONS)
+page=head("Ham Radio Pills · corso di elettronica e radiofrequenza · IV3HGA","Corso gratuito per radioamatori, diviso in elettronica e radiofrequenza: multimetro, oscilloscopio, VNA, carta di Smith, analizzatore di spettro, wattmetro RF, modulazioni, rumore, modo comune. A cura di IV3HGA.","")+f'''
 <header class="hero"><div class="wrap"><div>
   <span class="kicker">Corso · elettronica e radiofrequenza per radioamatori</span>
   <h1>Ham Radio <span>Pills</span></h1>
@@ -273,10 +318,9 @@ page=f'''<!DOCTYPE html>
 <p>Questo sito vuole spiegare qualche concetto che ci può tornare utile nelle nostre attività di laboratorio e in stazione. La trattazione è <b>pratica e non troppo accademica</b>: si parte da quello che vediamo sul banco, con qualche pillola di teoria qua e là, quando serve a capire davvero cosa succede.</p>
 <blockquote>La matematica, per quanto indigesta, è il linguaggio che ci permette di collegare tutte le materie del mondo e di rappresentare qualsiasi cosa in un unico linguaggio che non conosce confini.</blockquote></div>
 </div></div></section>
-<section id="capitoli" style="padding-bottom:20px"><div class="wrap"><h2>I capitoli</h2>
-<p class="sub">Il corso è diviso in due sezioni, elettronica e radiofrequenza, precedute dai decibel che servono a entrambe. I moduli si possono leggere anche da soli.</p>
-{toc}</div></section>
-{chap}
+<section id="capitoli"><div class="wrap"><h2>I capitoli</h2>
+<p class="sub">Il corso è diviso in due sezioni, elettronica e radiofrequenza, precedute dai decibel che servono a entrambe. Ogni capitolo ha la sua pagina, e ogni modulo la sua: si possono leggere anche da soli.</p>
+{sect}</div></section>
 <section class="info"><div class="wrap"><h2>Come seguire il corso</h2>
 <p class="sub">Non serve un laboratorio: bastano strumenti economici e la voglia di provare sul banco quello che leggi.</p>
 <div class="grid3">
@@ -284,8 +328,7 @@ page=f'''<!DOCTYPE html>
 <div class="card"><h4>🧭 Come procedere</h4><p>Leggi un modulo, poi rifai la misura sul banco. Ogni presentazione ha formule pronte, esempi numerici e checklist finali.</p></div>
 <div class="card"><h4>🧪 Esempi e sorgenti</h4><p>Grafici ed esempi vengono da simulazioni verificate. Gli script Python che generano slide e grafici sono nel repository: modificali per i tuoi casi.</p></div>
 </div></div></section>
-<footer><div class="wrap"><div><b>Ham Radio Pills</b> · a cura di Elia, IV3HGA · 73!</div><div><a href="https://github.com/metallarox/hamradio-pills">github.com/metallarox/hamradio-pills</a></div></div></footer>
-</body></html>'''
+{FOOT}</body></html>'''
 open(os.path.join(ROOT,"index.html"),"w").write(page)
 # README
 rows=""
