@@ -2,7 +2,28 @@
 import os, html
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CHAPTERS=[
- dict(id="vna",num="Capitolo 1",title="Il VNA (analizzatore di reti vettoriale)",
+ dict(id="osc",num="Capitolo 1",title="L'oscilloscopio",
+  intro="Lo strumento da cui partire: come funziona, come usarlo senza farsi male né romperlo, le sonde, le misure classiche, gli errori da evitare e i trucchi da banco.",
+  mods=[
+  dict(dir="oscilloscopio/01-come-funziona",pdf="OSC_Come_Funziona_IV3HGA.pdf",img="osc-1.jpg",short="Come funziona",title="L'oscilloscopio: come funziona",slides=10,meta="le basi · analogico e digitale",
+   learn=["Analogico e digitale, lo <b>schema a blocchi</b> di un DSO","<b>Banda</b> e tempo di salita: t<sub>s</sub> ≈ 0,35 / banda","<b>Campionamento</b>, aliasing e il legame tra memoria e sample rate","Il <b>trigger</b> e i modi di acquisizione (peak detect, average, persistenza)","Le specifiche che contano"],
+   tags=["DSO","banda","sample rate","aliasing","trigger","memoria"]),
+  dict(dir="oscilloscopio/02-sicurezza-e-protezione",pdf="OSC_Sicurezza_Protezione_IV3HGA.pdf",img="osc-2.jpg",short="Sicurezza",title="Oscilloscopio: sicurezza e protezione",slides=9,meta="non farsi male · non romperlo",
+   learn=["La <b>clip di massa è collegata a terra</b>: il cortocircuito sulla rete","Perché non si toglie <b>mai</b> la terra, e cosa usare invece","Limiti degli ingressi a 1 MΩ e a 50 Ω, categorie CAT, derating delle sonde","Oscilloscopio e <b>trasmettitori</b>: tensioni su 50 Ω e attenuatori","Tensioni nascoste, condensatori carichi e regole d'oro"],
+   tags=["massa a terra","sonda differenziale","CAT","50 Ω","alta tensione"]),
+  dict(dir="oscilloscopio/03-sonde-e-impostazioni",pdf="OSC_Sonde_Impostazioni_IV3HGA.pdf",img="osc-3.jpg",short="Sonde e impostazioni",title="Sonde e impostazioni",slides=10,meta="la sonda giusta, impostata bene",
+   learn=["La sonda passiva <b>10×</b> e la <b>compensazione</b>","Quanto la sonda <b>carica</b> il circuito: 159 Ω a 100 MHz","La <b>massa corta</b> e le oscillazioni finte del cavetto","Sonde attive, differenziali, di corrente e per alta tensione","Impostare verticale, base dei tempi e trigger con un metodo"],
+   tags=["sonda 10×","compensazione","carico","molla di massa","trigger"]),
+  dict(dir="oscilloscopio/04-misure-classiche",pdf="OSC_Misure_Classiche_IV3HGA.pdf",img="osc-4.jpg",short="Misure classiche",title="Le misure con l'oscilloscopio",slides=10,meta="come farle bene e quanto fidarsi",
+   learn=["<b>Cursori</b> e misure automatiche: quando fidarsi","Ampiezza, frequenza, periodo e duty cycle","<b>Tempo di salita</b> e correzione per lo strumento","<b>Fase</b> tra due segnali e modalità <b>XY</b> (Lissajous)","Modulazione AM con <b>inviluppo e trapezio</b>, FFT, correnti e potenza"],
+   tags=["cursori","rise time","fase","XY","trapezio AM","FFT"]),
+  dict(dir="oscilloscopio/05-come-non-usarlo",pdf="OSC_Come_Non_Usarlo_IV3HGA.pdf",img="osc-5.jpg",short="Come non usarlo",title="Come NON usare l'oscilloscopio",slides=10,meta="nove errori classici e come evitarli",
+   learn=["Immagini ingannevoli: <b>aliasing</b> e banda insufficiente","Fattore sonda sbagliato e sonde scompensate","<b>Masse</b> nel punto sbagliato e due masse su punti diversi","Accoppiamento <b>AC</b> dove serve DC; 1 MΩ al posto di 50 Ω","Autoset e misure automatiche alla cieca; lo strumento sbagliato"],
+   tags=["errori","aliasing","masse","AC/DC","50 Ω","autoset"]),
+  dict(dir="oscilloscopio/06-misure-inconsuete-e-trucchi",pdf="OSC_Misure_Inconsuete_Trucchi_IV3HGA.pdf",img="osc-6.jpg",short="Inconsuete e trucchi",title="Misure inconsuete e trucchi",slides=11,meta="tips and tricks da banco",
+   learn=["Il <b>ripple</b> dei condensatori di filtro in accoppiamento AC, ESR e invecchiamento","Misure differenziali <b>A − B</b> e corrente di spunto con trigger single","<b>Prova componenti</b> in modalità XY","<b>TDR</b> con generatore, T e oscilloscopio","PTT, burst TDMA, inviluppo CW e altri trucchi (line trigger, sonda-spira)"],
+   tags=["ripple","ESR","A − B","XY tester","TDR","key click"])]),
+ dict(id="vna",num="Capitolo 2",title="Il VNA (analizzatore di reti vettoriale)",
   intro="Dallo strumento alle applicazioni: come funziona, come si usa e si calibra, la carta di Smith e le misure più particolari.",
   mods=[
   dict(dir="vna/01-vna-come-funziona",pdf="VNA_Come_Funziona_IV3HGA.pdf",img="vna-1.jpg",short="Come funziona un VNA",title="Come funziona un VNA",slides=15,meta="le basi · consigliato come punto di partenza",
@@ -20,7 +41,7 @@ CHAPTERS=[
   dict(dir="vna/05-vna-misure-inconsuete",pdf="VNA_Misure_Inconsuete_IV3HGA.pdf",img="vna-5.jpg",short="Misure inconsuete",title="Misure inconsuete con il VNA",slides=15,meta="12 misure oltre SWR e filtri",
    learn=["<b>Ferriti</b> sconosciute, SRF/ESR dei componenti, choke in modo comune","<b>Shunt-through</b> per i milliohm e group delay di risonatori e cavità","<b>TDR</b> per trovare guasti nei cavi, εr e tan δ di un PCB, umidità dei materiali","Grid-dip moderno e NFC, accoppiamento k, isolamento tra antenne, schermatura, time-gating"],
    tags=["ferriti","TDR","choke","PCB εr","grid-dip","time-gating"])]),
- dict(id="sa",num="Capitolo 2",title="L'analizzatore di spettro",
+ dict(id="sa",num="Capitolo 3",title="L'analizzatore di spettro",
   intro="Come funziona, come usarlo senza romperlo, le misure classiche fatte bene, carichi con prelievo, accoppiatori e ponti, e i trucchi che non trovi nei manuali.",
   mods=[
   dict(dir="analizzatore-di-spettro/01-come-funziona",pdf="SA_Come_Funziona_IV3HGA.pdf",img="sa-1.jpg",short="Come funziona",title="Come funziona l'analizzatore di spettro",slides=13,meta="le basi · supereterodina, RBW, rivelatori",
@@ -38,7 +59,7 @@ CHAPTERS=[
   dict(dir="analizzatore-di-spettro/05-misure-inconsuete-e-trucchi",pdf="SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf",img="sa-5.jpg",short="Inconsuete e trucchi",title="Misure inconsuete e trucchi",slides=13,meta="tips and tricks da banco",
    learn=["Capire se una riga è <b>vera</b>: test dell'attenuazione e altri tre controlli","Misurare vicino al rumore e la <b>cifra di rumore</b> con il metodo Y-factor","<b>Sonde near-field</b> per la caccia al QRM e misure di campo in dBµV/m","Ascoltare i segnali, <b>slope detection</b> della FM e il trucco della RBW","Più dinamica con notch e filtri, riferimento a 10 MHz e altri trucchi"],
    tags=["righe false","Y-factor","near-field","QRM","slope detection","dBµV/m"])]),
- dict(id="wm",num="Capitolo 3",title="Il wattmetro RF",
+ dict(id="wm",num="Capitolo 4",title="Il wattmetro RF",
   intro="Come funziona e quali tipi esistono, il Bird 43 con le sue testine, bolometri e termistori, come preservarlo, i problemi di misura e la matematica della potenza.",
   mods=[
   dict(dir="wattmetro-rf/01-come-funziona",pdf="WM_Come_Funziona_IV3HGA.pdf",img="wm-1.jpg",short="Come funziona",title="Il wattmetro RF: come funziona",slides=10,meta="le basi · tipi di wattmetri e di sensori",
@@ -83,13 +104,13 @@ for c in CHAPTERS:
 toc="".join(f'<a href="#{c["id"]}"><small>{c["num"]}</small><h3>{c["title"]}</h3><p>{c["intro"]}</p></a>' for c in CHAPTERS)
 page=f'''<!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ham Radio Pills · Corso su VNA, analizzatore di spettro, wattmetro RF e misure · IV3HGA</title>
-<meta name="description" content="Corso gratuito per radioamatori: VNA, carta di Smith, analizzatore di spettro, wattmetro RF e misure. {len(CHAPTERS)} capitoli, {nmod} moduli in PDF. A cura di IV3HGA.">
+<title>Ham Radio Pills · Corso su oscilloscopio, VNA, analizzatore di spettro, wattmetro RF · IV3HGA</title>
+<meta name="description" content="Corso gratuito per radioamatori: oscilloscopio, VNA, carta di Smith, analizzatore di spettro, wattmetro RF e misure. {len(CHAPTERS)} capitoli, {nmod} moduli in PDF. A cura di IV3HGA.">
 <link rel="icon" href="assets/logo.png"><style>{CSS}</style></head><body>
 <header class="hero"><div class="wrap"><div>
   <span class="kicker">Corso · RF e strumentazione per radioamatori</span>
   <h1>Ham Radio <span>Pills</span></h1>
-  <p class="lead">Un corso in pillole per capire davvero gli strumenti da banco e usarli sull'antenna e sul trasmettitore: il VNA e la carta di Smith, l'analizzatore di spettro e il wattmetro RF, dalle basi ai trucchi del mestiere.</p>
+  <p class="lead">Un corso in pillole per capire davvero gli strumenti da banco e usarli sull'antenna e sul trasmettitore: l'oscilloscopio, il VNA e la carta di Smith, l'analizzatore di spettro e il wattmetro RF, dalle basi ai trucchi del mestiere.</p>
   <div class="btns"><a class="btn primary" href="#capitoli">Inizia il corso ↓</a><a class="btn ghost" href="https://github.com/metallarox/hamradio-pills">Sorgenti su GitHub</a></div>
   <div class="stats"><div><b>{len(CHAPTERS)}</b>capitoli</div><div><b>{nmod}</b>moduli</div><div><b>{nsl}</b>slide</div><div><b>PDF</b>gratuiti</div></div>
 </div><img src="assets/logo.png" alt="Logo IV3HGA"></div></header>
@@ -100,7 +121,7 @@ page=f'''<!DOCTYPE html>
 <section class="info"><div class="wrap"><h2>Come seguire il corso</h2>
 <p class="sub">Non serve un laboratorio: bastano strumenti economici e la voglia di provare sul banco quello che leggi.</p>
 <div class="grid3">
-<div class="card"><h4>📡 Cosa serve</h4><p>Un VNA anche economico (NanoVNA, LiteVNA o simili) con kit SOL, un analizzatore di spettro (anche un tinySA), un wattmetro passante, un carico fittizio, attenuatori, un DC block e qualche cavo.</p></div>
+<div class="card"><h4>📡 Cosa serve</h4><p>Un oscilloscopio con sonde 10×, un VNA anche economico (NanoVNA, LiteVNA o simili) con kit SOL, un analizzatore di spettro (anche un tinySA), un wattmetro passante, un carico fittizio, attenuatori, un DC block e qualche cavo.</p></div>
 <div class="card"><h4>🧭 Come procedere</h4><p>Leggi un modulo, poi rifai la misura sul banco. Ogni presentazione ha formule pronte, esempi numerici e checklist finali.</p></div>
 <div class="card"><h4>🧪 Esempi e sorgenti</h4><p>Grafici ed esempi vengono da simulazioni verificate. Gli script Python che generano slide e grafici sono nel repository: modificali per i tuoi casi.</p></div>
 </div></div></section>

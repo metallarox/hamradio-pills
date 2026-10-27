@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ham Radio Pills · Corso su VNA, analizzatore di spettro, wattmetro RF e misure · IV3HGA</title>
-<meta name="description" content="Corso gratuito per radioamatori: VNA, carta di Smith, analizzatore di spettro, wattmetro RF e misure. 3 capitoli, 16 moduli in PDF. A cura di IV3HGA.">
+<title>Ham Radio Pills · Corso su oscilloscopio, VNA, analizzatore di spettro, wattmetro RF · IV3HGA</title>
+<meta name="description" content="Corso gratuito per radioamatori: oscilloscopio, VNA, carta di Smith, analizzatore di spettro, wattmetro RF e misure. 4 capitoli, 22 moduli in PDF. A cura di IV3HGA.">
 <link rel="icon" href="assets/logo.png"><style>:root{--navy:#0a1a2e;--navy2:#0f2747;--cyan:#22b8f0;--blue:#1593d1;--ice:#e8f6fd;--ink:#1b2430;--mute:#5a6676;--line:#e1e6ee}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -75,127 +75,168 @@ footer b{color:#fff}footer a{color:var(--cyan)}
 @media (max-width:1000px){.path.p5,.path.p4{grid-template-columns:repeat(3,1fr)!important}}
 @media (max-width:860px){.toc{grid-template-columns:1fr}.path.p5,.path.p4{grid-template-columns:1fr 1fr!important}}
 @media (max-width:520px){.path.p5,.path.p4{grid-template-columns:1fr!important}}
-.path.p6{grid-template-columns:repeat(6,1fr)!important}.toc{grid-template-columns:repeat(3,1fr)}
+.path.p6{grid-template-columns:repeat(6,1fr)!important}.toc{grid-template-columns:repeat(2,1fr)}
 @media (max-width:1000px){.path.p6{grid-template-columns:repeat(3,1fr)!important}}
 @media (max-width:860px){.path.p6{grid-template-columns:1fr 1fr!important}.toc{grid-template-columns:1fr}}
 @media (max-width:520px){.path.p6{grid-template-columns:1fr!important}}</style></head><body>
 <header class="hero"><div class="wrap"><div>
   <span class="kicker">Corso · RF e strumentazione per radioamatori</span>
   <h1>Ham Radio <span>Pills</span></h1>
-  <p class="lead">Un corso in pillole per capire davvero gli strumenti da banco e usarli sull'antenna e sul trasmettitore: il VNA e la carta di Smith, l'analizzatore di spettro e il wattmetro RF, dalle basi ai trucchi del mestiere.</p>
+  <p class="lead">Un corso in pillole per capire davvero gli strumenti da banco e usarli sull'antenna e sul trasmettitore: l'oscilloscopio, il VNA e la carta di Smith, l'analizzatore di spettro e il wattmetro RF, dalle basi ai trucchi del mestiere.</p>
   <div class="btns"><a class="btn primary" href="#capitoli">Inizia il corso ↓</a><a class="btn ghost" href="https://github.com/metallarox/hamradio-pills">Sorgenti su GitHub</a></div>
-  <div class="stats"><div><b>3</b>capitoli</div><div><b>16</b>moduli</div><div><b>194</b>slide</div><div><b>PDF</b>gratuiti</div></div>
+  <div class="stats"><div><b>4</b>capitoli</div><div><b>22</b>moduli</div><div><b>254</b>slide</div><div><b>PDF</b>gratuiti</div></div>
 </div><img src="assets/logo.png" alt="Logo IV3HGA"></div></header>
 <section id="capitoli" style="padding-bottom:20px"><div class="wrap"><h2>I capitoli</h2>
 <p class="sub">Ogni capitolo parte da come funziona lo strumento, passa all'uso corretto e arriva alle misure avanzate. I moduli si possono leggere anche da soli.</p>
-<div class="toc"><a href="#vna"><small>Capitolo 1</small><h3>Il VNA (analizzatore di reti vettoriale)</h3><p>Dallo strumento alle applicazioni: come funziona, come si usa e si calibra, la carta di Smith e le misure più particolari.</p></a><a href="#sa"><small>Capitolo 2</small><h3>L'analizzatore di spettro</h3><p>Come funziona, come usarlo senza romperlo, le misure classiche fatte bene, carichi con prelievo, accoppiatori e ponti, e i trucchi che non trovi nei manuali.</p></a><a href="#wm"><small>Capitolo 3</small><h3>Il wattmetro RF</h3><p>Come funziona e quali tipi esistono, il Bird 43 con le sue testine, bolometri e termistori, come preservarlo, i problemi di misura e la matematica della potenza.</p></a></div></div></section>
-<section class="chapter" id="vna"><div class="wrap">
-  <div class="chap-head"><span class="chap-num">Capitolo 1</span><h2>Il VNA (analizzatore di reti vettoriale)</h2></div>
+<div class="toc"><a href="#osc"><small>Capitolo 1</small><h3>L'oscilloscopio</h3><p>Lo strumento da cui partire: come funziona, come usarlo senza farsi male né romperlo, le sonde, le misure classiche, gli errori da evitare e i trucchi da banco.</p></a><a href="#vna"><small>Capitolo 2</small><h3>Il VNA (analizzatore di reti vettoriale)</h3><p>Dallo strumento alle applicazioni: come funziona, come si usa e si calibra, la carta di Smith e le misure più particolari.</p></a><a href="#sa"><small>Capitolo 3</small><h3>L'analizzatore di spettro</h3><p>Come funziona, come usarlo senza romperlo, le misure classiche fatte bene, carichi con prelievo, accoppiatori e ponti, e i trucchi che non trovi nei manuali.</p></a><a href="#wm"><small>Capitolo 4</small><h3>Il wattmetro RF</h3><p>Come funziona e quali tipi esistono, il Bird 43 con le sue testine, bolometri e termistori, come preservarlo, i problemi di misura e la matematica della potenza.</p></a></div></div></section>
+<section class="chapter" id="osc"><div class="wrap">
+  <div class="chap-head"><span class="chap-num">Capitolo 1</span><h2>L'oscilloscopio</h2></div>
+  <p class="sub">Lo strumento da cui partire: come funziona, come usarlo senza farsi male né romperlo, le sonde, le misure classiche, gli errori da evitare e i trucchi da banco. 6 moduli, 60 slide.</p>
+  <div class="path p6"><a class="step" href="#osc1"><small>Modulo 1</small><div>Come funziona</div></a><a class="step" href="#osc2"><small>Modulo 2</small><div>Sicurezza</div></a><a class="step" href="#osc3"><small>Modulo 3</small><div>Sonde e impostazioni</div></a><a class="step" href="#osc4"><small>Modulo 4</small><div>Misure classiche</div></a><a class="step" href="#osc5"><small>Modulo 5</small><div>Come non usarlo</div></a><a class="step" href="#osc6"><small>Modulo 6</small><div>Inconsuete e trucchi</div></a></div>
+  <article class="mod" id="osc1">
+      <a class="shot" href="oscilloscopio/01-come-funziona/OSC_Come_Funziona_IV3HGA.pdf"><img src="assets/osc-1.jpg" alt="Anteprima: L&#x27;oscilloscopio: come funziona" loading="lazy"></a>
+      <div><div class="num">Capitolo 1 · Modulo 1</div><h3>L'oscilloscopio: come funziona</h3><div class="meta">10 slide · le basi · analogico e digitale</div>
+        <ul><li>Analogico e digitale, lo <b>schema a blocchi</b> di un DSO</li><li><b>Banda</b> e tempo di salita: t<sub>s</sub> ≈ 0,35 / banda</li><li><b>Campionamento</b>, aliasing e il legame tra memoria e sample rate</li><li>Il <b>trigger</b> e i modi di acquisizione (peak detect, average, persistenza)</li><li>Le specifiche che contano</li></ul>
+        <div class="tags"><span>DSO</span><span>banda</span><span>sample rate</span><span>aliasing</span><span>trigger</span><span>memoria</span></div>
+        <div class="btns"><a class="btn primary" href="oscilloscopio/01-come-funziona/OSC_Come_Funziona_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="oscilloscopio/01-come-funziona/OSC_Come_Funziona_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
+    </article><article class="mod" id="osc2">
+      <a class="shot" href="oscilloscopio/02-sicurezza-e-protezione/OSC_Sicurezza_Protezione_IV3HGA.pdf"><img src="assets/osc-2.jpg" alt="Anteprima: Oscilloscopio: sicurezza e protezione" loading="lazy"></a>
+      <div><div class="num">Capitolo 1 · Modulo 2</div><h3>Oscilloscopio: sicurezza e protezione</h3><div class="meta">9 slide · non farsi male · non romperlo</div>
+        <ul><li>La <b>clip di massa è collegata a terra</b>: il cortocircuito sulla rete</li><li>Perché non si toglie <b>mai</b> la terra, e cosa usare invece</li><li>Limiti degli ingressi a 1 MΩ e a 50 Ω, categorie CAT, derating delle sonde</li><li>Oscilloscopio e <b>trasmettitori</b>: tensioni su 50 Ω e attenuatori</li><li>Tensioni nascoste, condensatori carichi e regole d'oro</li></ul>
+        <div class="tags"><span>massa a terra</span><span>sonda differenziale</span><span>CAT</span><span>50 Ω</span><span>alta tensione</span></div>
+        <div class="btns"><a class="btn primary" href="oscilloscopio/02-sicurezza-e-protezione/OSC_Sicurezza_Protezione_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="oscilloscopio/02-sicurezza-e-protezione/OSC_Sicurezza_Protezione_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
+    </article><article class="mod" id="osc3">
+      <a class="shot" href="oscilloscopio/03-sonde-e-impostazioni/OSC_Sonde_Impostazioni_IV3HGA.pdf"><img src="assets/osc-3.jpg" alt="Anteprima: Sonde e impostazioni" loading="lazy"></a>
+      <div><div class="num">Capitolo 1 · Modulo 3</div><h3>Sonde e impostazioni</h3><div class="meta">10 slide · la sonda giusta, impostata bene</div>
+        <ul><li>La sonda passiva <b>10×</b> e la <b>compensazione</b></li><li>Quanto la sonda <b>carica</b> il circuito: 159 Ω a 100 MHz</li><li>La <b>massa corta</b> e le oscillazioni finte del cavetto</li><li>Sonde attive, differenziali, di corrente e per alta tensione</li><li>Impostare verticale, base dei tempi e trigger con un metodo</li></ul>
+        <div class="tags"><span>sonda 10×</span><span>compensazione</span><span>carico</span><span>molla di massa</span><span>trigger</span></div>
+        <div class="btns"><a class="btn primary" href="oscilloscopio/03-sonde-e-impostazioni/OSC_Sonde_Impostazioni_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="oscilloscopio/03-sonde-e-impostazioni/OSC_Sonde_Impostazioni_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
+    </article><article class="mod" id="osc4">
+      <a class="shot" href="oscilloscopio/04-misure-classiche/OSC_Misure_Classiche_IV3HGA.pdf"><img src="assets/osc-4.jpg" alt="Anteprima: Le misure con l&#x27;oscilloscopio" loading="lazy"></a>
+      <div><div class="num">Capitolo 1 · Modulo 4</div><h3>Le misure con l'oscilloscopio</h3><div class="meta">10 slide · come farle bene e quanto fidarsi</div>
+        <ul><li><b>Cursori</b> e misure automatiche: quando fidarsi</li><li>Ampiezza, frequenza, periodo e duty cycle</li><li><b>Tempo di salita</b> e correzione per lo strumento</li><li><b>Fase</b> tra due segnali e modalità <b>XY</b> (Lissajous)</li><li>Modulazione AM con <b>inviluppo e trapezio</b>, FFT, correnti e potenza</li></ul>
+        <div class="tags"><span>cursori</span><span>rise time</span><span>fase</span><span>XY</span><span>trapezio AM</span><span>FFT</span></div>
+        <div class="btns"><a class="btn primary" href="oscilloscopio/04-misure-classiche/OSC_Misure_Classiche_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="oscilloscopio/04-misure-classiche/OSC_Misure_Classiche_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
+    </article><article class="mod" id="osc5">
+      <a class="shot" href="oscilloscopio/05-come-non-usarlo/OSC_Come_Non_Usarlo_IV3HGA.pdf"><img src="assets/osc-5.jpg" alt="Anteprima: Come NON usare l&#x27;oscilloscopio" loading="lazy"></a>
+      <div><div class="num">Capitolo 1 · Modulo 5</div><h3>Come NON usare l'oscilloscopio</h3><div class="meta">10 slide · nove errori classici e come evitarli</div>
+        <ul><li>Immagini ingannevoli: <b>aliasing</b> e banda insufficiente</li><li>Fattore sonda sbagliato e sonde scompensate</li><li><b>Masse</b> nel punto sbagliato e due masse su punti diversi</li><li>Accoppiamento <b>AC</b> dove serve DC; 1 MΩ al posto di 50 Ω</li><li>Autoset e misure automatiche alla cieca; lo strumento sbagliato</li></ul>
+        <div class="tags"><span>errori</span><span>aliasing</span><span>masse</span><span>AC/DC</span><span>50 Ω</span><span>autoset</span></div>
+        <div class="btns"><a class="btn primary" href="oscilloscopio/05-come-non-usarlo/OSC_Come_Non_Usarlo_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="oscilloscopio/05-come-non-usarlo/OSC_Come_Non_Usarlo_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
+    </article><article class="mod" id="osc6">
+      <a class="shot" href="oscilloscopio/06-misure-inconsuete-e-trucchi/OSC_Misure_Inconsuete_Trucchi_IV3HGA.pdf"><img src="assets/osc-6.jpg" alt="Anteprima: Misure inconsuete e trucchi" loading="lazy"></a>
+      <div><div class="num">Capitolo 1 · Modulo 6</div><h3>Misure inconsuete e trucchi</h3><div class="meta">11 slide · tips and tricks da banco</div>
+        <ul><li>Il <b>ripple</b> dei condensatori di filtro in accoppiamento AC, ESR e invecchiamento</li><li>Misure differenziali <b>A − B</b> e corrente di spunto con trigger single</li><li><b>Prova componenti</b> in modalità XY</li><li><b>TDR</b> con generatore, T e oscilloscopio</li><li>PTT, burst TDMA, inviluppo CW e altri trucchi (line trigger, sonda-spira)</li></ul>
+        <div class="tags"><span>ripple</span><span>ESR</span><span>A − B</span><span>XY tester</span><span>TDR</span><span>key click</span></div>
+        <div class="btns"><a class="btn primary" href="oscilloscopio/06-misure-inconsuete-e-trucchi/OSC_Misure_Inconsuete_Trucchi_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="oscilloscopio/06-misure-inconsuete-e-trucchi/OSC_Misure_Inconsuete_Trucchi_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
+    </article>
+</div></section><section class="chapter" id="vna"><div class="wrap">
+  <div class="chap-head"><span class="chap-num">Capitolo 2</span><h2>Il VNA (analizzatore di reti vettoriale)</h2></div>
   <p class="sub">Dallo strumento alle applicazioni: come funziona, come si usa e si calibra, la carta di Smith e le misure più particolari. 5 moduli, 66 slide.</p>
   <div class="path p5"><a class="step" href="#vna1"><small>Modulo 1</small><div>Come funziona un VNA</div></a><a class="step" href="#vna2"><small>Modulo 2</small><div>Misure di base</div></a><a class="step" href="#vna3"><small>Modulo 3</small><div>La carta di Smith</div></a><a class="step" href="#vna4"><small>Modulo 4</small><div>Misurare un quarzo</div></a><a class="step" href="#vna5"><small>Modulo 5</small><div>Misure inconsuete</div></a></div>
   <article class="mod" id="vna1">
       <a class="shot" href="vna/01-vna-come-funziona/VNA_Come_Funziona_IV3HGA.pdf"><img src="assets/vna-1.jpg" alt="Anteprima: Come funziona un VNA" loading="lazy"></a>
-      <div><div class="num">Capitolo 1 · Modulo 1</div><h3>Come funziona un VNA</h3><div class="meta">15 slide · le basi · consigliato come punto di partenza</div>
+      <div><div class="num">Capitolo 2 · Modulo 1</div><h3>Come funziona un VNA</h3><div class="meta">15 slide · le basi · consigliato come punto di partenza</div>
         <ul><li>Cosa sono le onde incidenti e riflesse e i <b>parametri S</b></li><li>Com'è fatto dentro: sorgente, ponte o accoppiatore, ricevitori R/A/B, LO e DSP</li><li>Perché la <b>direttività</b> limita quello che puoi misurare</li><li>Il modello d'errore a 3 e 12 termini e come la <b>calibrazione SOL</b> lo cancella</li><li>SOLT, TRL, port extension, buone pratiche e specifiche che contano</li></ul>
         <div class="tags"><span>parametri S</span><span>IF bandwidth</span><span>direttività</span><span>calibrazione</span><span>T/R vs 2 porte</span></div>
         <div class="btns"><a class="btn primary" href="vna/01-vna-come-funziona/VNA_Come_Funziona_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="vna/01-vna-come-funziona/VNA_Come_Funziona_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article><article class="mod" id="vna2">
       <a class="shot" href="vna/02-vna-misure-di-base/VNA_Misure_di_Base_IV3HGA.pdf"><img src="assets/vna-2.jpg" alt="Anteprima: Misure di base con il VNA" loading="lazy"></a>
-      <div><div class="num">Capitolo 1 · Modulo 2</div><h3>Misure di base con il VNA</h3><div class="meta">13 slide · pratica sul banco · uso, calibrazione e misure corrette</div>
+      <div><div class="num">Capitolo 2 · Modulo 2</div><h3>Misure di base con il VNA</h3><div class="meta">13 slide · pratica sul banco · uso, calibrazione e misure corrette</div>
         <ul><li>Preparare cavi e connettori e <b>proteggere lo strumento</b> (statica, potenze, DC)</li><li>Impostare lo sweep: punti, IF bandwidth, potenza, media</li><li><b>Calibrare</b> al piano giusto e <b>verificare</b> che la calibrazione sia buona</li><li>Misurare un'<b>antenna</b>, un <b>filtro</b>, un <b>cavo</b> (perdita, VF, Z0), un amplificatore e un componente</li><li>Gli errori più comuni e una checklist da usare prima di ogni misura</li></ul>
         <div class="tags"><span>calibrazione</span><span>verifica</span><span>antenne</span><span>filtri</span><span>cavi coassiali</span><span>amplificatori</span></div>
         <div class="btns"><a class="btn primary" href="vna/02-vna-misure-di-base/VNA_Misure_di_Base_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="vna/02-vna-misure-di-base/VNA_Misure_di_Base_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article><article class="mod" id="vna3">
       <a class="shot" href="vna/03-carta-di-smith/Carta_di_Smith_IV3HGA.pdf"><img src="assets/vna-3.jpg" alt="Anteprima: La carta di Smith" loading="lazy"></a>
-      <div><div class="num">Capitolo 1 · Modulo 3</div><h3>La carta di Smith</h3><div class="meta">13 slide · 6 esempi radioamatoriali</div>
+      <div><div class="num">Capitolo 2 · Modulo 3</div><h3>La carta di Smith</h3><div class="meta">13 slide · 6 esempi radioamatoriali</div>
         <ul><li>Leggere impedenze, |Γ| e SWR a colpo d'occhio</li><li>Muoversi sulla carta con L e C in serie e in parallelo, e lungo le linee</li><li>Capire se un <b>dipolo</b> è troppo lungo o troppo corto</li><li>Progettare una <b>rete a L</b> e uno <b>stub</b> di adattamento</li><li>Perché un cavo con perdite "migliora" l'SWR, il λ/4 e cosa fa davvero l'accordatore</li></ul>
         <div class="tags"><span>SWR</span><span>dipolo 40 m</span><span>rete a L</span><span>stub 145 MHz</span><span>stacking</span><span>ATU</span></div>
         <div class="btns"><a class="btn primary" href="vna/03-carta-di-smith/Carta_di_Smith_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="vna/03-carta-di-smith/Carta_di_Smith_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article><article class="mod" id="vna4">
       <a class="shot" href="vna/04-quarzo-vna/Quarzo_VNA_IV3HGA.pdf"><img src="assets/vna-4.jpg" alt="Anteprima: Misurare un quarzo con il VNA" loading="lazy"></a>
-      <div><div class="num">Capitolo 1 · Modulo 4</div><h3>Misurare un quarzo con il VNA</h3><div class="meta">10 slide · un'applicazione completa, passo per passo</div>
+      <div><div class="num">Capitolo 2 · Modulo 4</div><h3>Misurare un quarzo con il VNA</h3><div class="meta">10 slide · un'applicazione completa, passo per passo</div>
         <ul><li>Il modello equivalente <b>Butterworth–Van Dyke</b>: fs, fp, Rm, Lm, Cm, C0</li><li>Misura con il quarzo <b>in serie (S21)</b> e verso massa <b>(S11)</b></li><li>Estrazione dei parametri dai punti di fase a <b>±45°</b> e calcolo del Q</li><li>Pi-network da 12,5 Ω, parassiti del fixture e frequenza con capacità di carico</li></ul>
         <div class="tags"><span>quarzi</span><span>modello BVD</span><span>Q a vuoto</span><span>S21 e S11</span><span>IEC 60444</span></div>
         <div class="btns"><a class="btn primary" href="vna/04-quarzo-vna/Quarzo_VNA_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="vna/04-quarzo-vna/Quarzo_VNA_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article><article class="mod" id="vna5">
       <a class="shot" href="vna/05-vna-misure-inconsuete/VNA_Misure_Inconsuete_IV3HGA.pdf"><img src="assets/vna-5.jpg" alt="Anteprima: Misure inconsuete con il VNA" loading="lazy"></a>
-      <div><div class="num">Capitolo 1 · Modulo 5</div><h3>Misure inconsuete con il VNA</h3><div class="meta">15 slide · 12 misure oltre SWR e filtri</div>
+      <div><div class="num">Capitolo 2 · Modulo 5</div><h3>Misure inconsuete con il VNA</h3><div class="meta">15 slide · 12 misure oltre SWR e filtri</div>
         <ul><li><b>Ferriti</b> sconosciute, SRF/ESR dei componenti, choke in modo comune</li><li><b>Shunt-through</b> per i milliohm e group delay di risonatori e cavità</li><li><b>TDR</b> per trovare guasti nei cavi, εr e tan δ di un PCB, umidità dei materiali</li><li>Grid-dip moderno e NFC, accoppiamento k, isolamento tra antenne, schermatura, time-gating</li></ul>
         <div class="tags"><span>ferriti</span><span>TDR</span><span>choke</span><span>PCB εr</span><span>grid-dip</span><span>time-gating</span></div>
         <div class="btns"><a class="btn primary" href="vna/05-vna-misure-inconsuete/VNA_Misure_Inconsuete_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="vna/05-vna-misure-inconsuete/VNA_Misure_Inconsuete_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article>
 </div></section><section class="chapter" id="sa"><div class="wrap">
-  <div class="chap-head"><span class="chap-num">Capitolo 2</span><h2>L'analizzatore di spettro</h2></div>
+  <div class="chap-head"><span class="chap-num">Capitolo 3</span><h2>L'analizzatore di spettro</h2></div>
   <p class="sub">Come funziona, come usarlo senza romperlo, le misure classiche fatte bene, carichi con prelievo, accoppiatori e ponti, e i trucchi che non trovi nei manuali. 5 moduli, 64 slide.</p>
   <div class="path p5"><a class="step" href="#sa1"><small>Modulo 1</small><div>Come funziona</div></a><a class="step" href="#sa2"><small>Modulo 2</small><div>Uso corretto e protezioni</div></a><a class="step" href="#sa3"><small>Modulo 3</small><div>Misure classiche</div></a><a class="step" href="#sa4"><small>Modulo 4</small><div>Prelievi, accoppiatori, ponti</div></a><a class="step" href="#sa5"><small>Modulo 5</small><div>Inconsuete e trucchi</div></a></div>
   <article class="mod" id="sa1">
       <a class="shot" href="analizzatore-di-spettro/01-come-funziona/SA_Come_Funziona_IV3HGA.pdf"><img src="assets/sa-1.jpg" alt="Anteprima: Come funziona l&#x27;analizzatore di spettro" loading="lazy"></a>
-      <div><div class="num">Capitolo 2 · Modulo 1</div><h3>Come funziona l'analizzatore di spettro</h3><div class="meta">13 slide · le basi · supereterodina, RBW, rivelatori</div>
+      <div><div class="num">Capitolo 3 · Modulo 1</div><h3>Come funziona l'analizzatore di spettro</h3><div class="meta">13 slide · le basi · supereterodina, RBW, rivelatori</div>
         <ul><li>Unità di misura: dBm, dBµV, dBc, dBm/Hz e livelli S9</li><li>L'architettura <b>supereterodina a scansione</b> e le frequenze immagine</li><li><b>RBW</b> e VBW: risoluzione, rumore e tempo di sweep</li><li>Rivelatori, attenuatore d'ingresso e <b>livello al mixer</b> ottimale</li><li>Rumore di fondo, rumore di fase, dinamica, FFT/real-time e tracking generator</li></ul>
         <div class="tags"><span>supereterodina</span><span>RBW</span><span>VBW</span><span>rivelatori</span><span>DANL</span><span>dinamica</span></div>
         <div class="btns"><a class="btn primary" href="analizzatore-di-spettro/01-come-funziona/SA_Come_Funziona_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="analizzatore-di-spettro/01-come-funziona/SA_Come_Funziona_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article><article class="mod" id="sa2">
       <a class="shot" href="analizzatore-di-spettro/02-uso-corretto-e-impostazioni/SA_Uso_Corretto_IV3HGA.pdf"><img src="assets/sa-2.jpg" alt="Anteprima: Usare bene l&#x27;analizzatore: protezioni e impostazioni" loading="lazy"></a>
-      <div><div class="num">Capitolo 2 · Modulo 2</div><h3>Usare bene l'analizzatore: protezioni e impostazioni</h3><div class="meta">12 slide · non rompere lo strumento · impostare le misure</div>
+      <div><div class="num">Capitolo 3 · Modulo 2</div><h3>Usare bene l'analizzatore: protezioni e impostazioni</h3><div class="meta">12 slide · non rompere lo strumento · impostare le misure</div>
         <ul><li>Perché gli analizzatori si rompono: <b>DC</b>, sovraccarichi, <b>spike</b>, statica</li><li>Leggere l'etichetta dell'ingresso e costruire la <b>catena di protezione</b></li><li>Misurare un <b>trasmettitore</b> in sicurezza: budget di potenza e campionatori</li><li>Reference level, offset, RBW/VBW, tracce e marker scelti per l'obiettivo</li><li>Controllare la salute dello strumento e una checklist finale</li></ul>
         <div class="tags"><span>DC block</span><span>limitatore</span><span>attenuatori</span><span>reference offset</span><span>marker</span><span>checklist</span></div>
         <div class="btns"><a class="btn primary" href="analizzatore-di-spettro/02-uso-corretto-e-impostazioni/SA_Uso_Corretto_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="analizzatore-di-spettro/02-uso-corretto-e-impostazioni/SA_Uso_Corretto_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article><article class="mod" id="sa3">
       <a class="shot" href="analizzatore-di-spettro/03-misure-classiche/SA_Misure_Classiche_IV3HGA.pdf"><img src="assets/sa-3.jpg" alt="Anteprima: Le misure classiche con l&#x27;analizzatore" loading="lazy"></a>
-      <div><div class="num">Capitolo 2 · Modulo 3</div><h3>Le misure classiche con l'analizzatore</h3><div class="meta">12 slide · 9 misure spiegate passo per passo</div>
+      <div><div class="num">Capitolo 3 · Modulo 3</div><h3>Le misure classiche con l'analizzatore</h3><div class="meta">12 slide · 9 misure spiegate passo per passo</div>
         <ul><li>Potenza e frequenza di una portante, <b>armoniche</b> e spurie di un TX</li><li><b>Intermodulazione</b> a due toni e calcolo del TOI</li><li>Profondità <b>AM</b> dalle bande laterali e deviazione <b>FM</b> con il nullo di Bessel</li><li>Potenza di canale, OBW e ACP; <b>zero span</b> per i burst TDMA</li><li>Tracking generator per filtri e duplexer, rumore di fase in dBc/Hz</li></ul>
         <div class="tags"><span>armoniche</span><span>IM3 / TOI</span><span>AM</span><span>FM Bessel</span><span>zero span</span><span>rumore di fase</span></div>
         <div class="btns"><a class="btn primary" href="analizzatore-di-spettro/03-misure-classiche/SA_Misure_Classiche_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="analizzatore-di-spettro/03-misure-classiche/SA_Misure_Classiche_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article><article class="mod" id="sa4">
       <a class="shot" href="analizzatore-di-spettro/04-prelievi-accoppiatori-ponti/SA_Prelievi_Accoppiatori_Ponti_IV3HGA.pdf"><img src="assets/sa-4.jpg" alt="Anteprima: Carico con prelievo, accoppiatore e ponte" loading="lazy"></a>
-      <div><div class="num">Capitolo 2 · Modulo 4</div><h3>Carico con prelievo, accoppiatore e ponte</h3><div class="meta">14 slide · misure sul trasmettitore e di adattamento</div>
+      <div><div class="num">Capitolo 3 · Modulo 4</div><h3>Carico con prelievo, accoppiatore e ponte</h3><div class="meta">14 slide · misure sul trasmettitore e di adattamento</div>
         <ul><li>Il <b>carico con prelievo</b>: budget di potenza, durata e SWR del carico</li><li>Perché un prelievo capacitivo <b>sovrastima le armoniche</b> e come calibrarlo</li><li>L'<b>accoppiatore direzionale</b>: spettro in servizio, return loss sotto potenza, segnali dall'antenna</li><li>Il <b>ponte riflettometrico</b> con tracking generator: return loss, direttività e distanza delle discontinuità</li><li>Test a due toni su un TX SSB e cosa si vede: splatter, key click, ALC, autooscillazioni</li></ul>
         <div class="tags"><span>carico fittizio</span><span>prelievo</span><span>accoppiatore</span><span>direttività</span><span>ponte RL</span><span>two-tone</span></div>
         <div class="btns"><a class="btn primary" href="analizzatore-di-spettro/04-prelievi-accoppiatori-ponti/SA_Prelievi_Accoppiatori_Ponti_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="analizzatore-di-spettro/04-prelievi-accoppiatori-ponti/SA_Prelievi_Accoppiatori_Ponti_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article><article class="mod" id="sa5">
       <a class="shot" href="analizzatore-di-spettro/05-misure-inconsuete-e-trucchi/SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf"><img src="assets/sa-5.jpg" alt="Anteprima: Misure inconsuete e trucchi" loading="lazy"></a>
-      <div><div class="num">Capitolo 2 · Modulo 5</div><h3>Misure inconsuete e trucchi</h3><div class="meta">13 slide · tips and tricks da banco</div>
+      <div><div class="num">Capitolo 3 · Modulo 5</div><h3>Misure inconsuete e trucchi</h3><div class="meta">13 slide · tips and tricks da banco</div>
         <ul><li>Capire se una riga è <b>vera</b>: test dell'attenuazione e altri tre controlli</li><li>Misurare vicino al rumore e la <b>cifra di rumore</b> con il metodo Y-factor</li><li><b>Sonde near-field</b> per la caccia al QRM e misure di campo in dBµV/m</li><li>Ascoltare i segnali, <b>slope detection</b> della FM e il trucco della RBW</li><li>Più dinamica con notch e filtri, riferimento a 10 MHz e altri trucchi</li></ul>
         <div class="tags"><span>righe false</span><span>Y-factor</span><span>near-field</span><span>QRM</span><span>slope detection</span><span>dBµV/m</span></div>
         <div class="btns"><a class="btn primary" href="analizzatore-di-spettro/05-misure-inconsuete-e-trucchi/SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="analizzatore-di-spettro/05-misure-inconsuete-e-trucchi/SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article>
 </div></section><section class="chapter" id="wm"><div class="wrap">
-  <div class="chap-head"><span class="chap-num">Capitolo 3</span><h2>Il wattmetro RF</h2></div>
+  <div class="chap-head"><span class="chap-num">Capitolo 4</span><h2>Il wattmetro RF</h2></div>
   <p class="sub">Come funziona e quali tipi esistono, il Bird 43 con le sue testine, bolometri e termistori, come preservarlo, i problemi di misura e la matematica della potenza. 6 moduli, 64 slide.</p>
   <div class="path p6"><a class="step" href="#wm1"><small>Modulo 1</small><div>Come funziona</div></a><a class="step" href="#wm2"><small>Modulo 2</small><div>Il Bird 43</div></a><a class="step" href="#wm3"><small>Modulo 3</small><div>Bolometri e termistori</div></a><a class="step" href="#wm4"><small>Modulo 4</small><div>Preservarlo</div></a><a class="step" href="#wm5"><small>Modulo 5</small><div>Inconsuete e problemi</div></a><a class="step" href="#wm6"><small>Modulo 6</small><div>Potenza e Bessel</div></a></div>
   <article class="mod" id="wm1">
       <a class="shot" href="wattmetro-rf/01-come-funziona/WM_Come_Funziona_IV3HGA.pdf"><img src="assets/wm-1.jpg" alt="Anteprima: Il wattmetro RF: come funziona" loading="lazy"></a>
-      <div><div class="num">Capitolo 3 · Modulo 1</div><h3>Il wattmetro RF: come funziona</h3><div class="meta">10 slide · le basi · tipi di wattmetri e di sensori</div>
+      <div><div class="num">Capitolo 4 · Modulo 1</div><h3>Il wattmetro RF: come funziona</h3><div class="meta">10 slide · le basi · tipi di wattmetri e di sensori</div>
         <ul><li>Che cosa vuol dire misurare la <b>potenza</b> in RF: P = V²/R, dBm e tensioni</li><li>Wattmetri <b>passanti</b> (direzionali) e <b>terminali</b> (sensore + carico)</li><li>Sensori a <b>diodo</b>, termocoppia, <b>termistore</b>, <b>bolometro</b> e calorimetro a confronto</li><li>Potenza media, di picco e <b>PEP</b>, e le specifiche da leggere</li></ul>
         <div class="tags"><span>passante</span><span>terminale</span><span>diodo</span><span>termocoppia</span><span>termistore</span><span>PEP</span></div>
         <div class="btns"><a class="btn primary" href="wattmetro-rf/01-come-funziona/WM_Come_Funziona_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="wattmetro-rf/01-come-funziona/WM_Come_Funziona_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article><article class="mod" id="wm2">
       <a class="shot" href="wattmetro-rf/02-bird-43-e-testine/WM_Bird43_Testine_IV3HGA.pdf"><img src="assets/wm-2.jpg" alt="Anteprima: Il Bird 43 e le sue testine" loading="lazy"></a>
-      <div><div class="num">Capitolo 3 · Modulo 2</div><h3>Il Bird 43 e le sue testine</h3><div class="meta">9 slide · esempio pratico · misure passo per passo</div>
+      <div><div class="num">Capitolo 4 · Modulo 2</div><h3>Il Bird 43 e le sue testine</h3><div class="meta">9 slide · esempio pratico · misure passo per passo</div>
         <ul><li>Come funziona un wattmetro passante con <b>testina</b> rotante</li><li>Le testine: <b>lettera = banda</b>, numero = fondo scala</li><li>Misurare potenza <b>diretta</b>, <b>riflessa</b>, SWR e potenza netta</li><li>Perché la precisione è in % del <b>fondo scala</b>; esempio a 145 MHz</li><li>Modulazioni, lettura di picco ed errori tipici</li></ul>
         <div class="tags"><span>Bird 43</span><span>testine</span><span>diretta/riflessa</span><span>SWR</span><span>fondo scala</span></div>
         <div class="btns"><a class="btn primary" href="wattmetro-rf/02-bird-43-e-testine/WM_Bird43_Testine_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="wattmetro-rf/02-bird-43-e-testine/WM_Bird43_Testine_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article><article class="mod" id="wm3">
       <a class="shot" href="wattmetro-rf/03-bolometri-e-termistori/WM_Bolometri_Termistori_IV3HGA.pdf"><img src="assets/wm-3.jpg" alt="Anteprima: Bolometri e termistori" loading="lazy"></a>
-      <div><div class="num">Capitolo 3 · Modulo 3</div><h3>Bolometri e termistori</h3><div class="meta">11 slide · sostituzione DC e misure di precisione</div>
+      <div><div class="num">Capitolo 4 · Modulo 3</div><h3>Bolometri e termistori</h3><div class="meta">11 slide · sostituzione DC e misure di precisione</div>
         <ul><li>Il principio: la RF scalda, la <b>continua</b> la sostituisce</li><li>Il <b>ponte autobilanciato</b> e la formula con un esempio numerico</li><li>Compensazione, azzeramento e un classico: l'HP 432A</li><li><b>Cal factor</b> e incertezza di <b>disadattamento</b></li><li>Il bolometro (barretter) e perché oggi è raro</li></ul>
         <div class="tags"><span>termistore</span><span>bolometro</span><span>sostituzione DC</span><span>cal factor</span><span>HP 432A</span></div>
         <div class="btns"><a class="btn primary" href="wattmetro-rf/03-bolometri-e-termistori/WM_Bolometri_Termistori_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="wattmetro-rf/03-bolometri-e-termistori/WM_Bolometri_Termistori_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article><article class="mod" id="wm4">
       <a class="shot" href="wattmetro-rf/04-preservare-il-wattmetro/WM_Preservare_IV3HGA.pdf"><img src="assets/wm-4.jpg" alt="Anteprima: Preservare il wattmetro" loading="lazy"></a>
-      <div><div class="num">Capitolo 3 · Modulo 4</div><h3>Preservare il wattmetro</h3><div class="meta">9 slide · non romperlo · non farlo leggere sbagliato</div>
+      <div><div class="num">Capitolo 4 · Modulo 4</div><h3>Preservare il wattmetro</h3><div class="meta">9 slide · non romperlo · non farlo leggere sbagliato</div>
         <ul><li>Limiti di <b>potenza e tensione</b> dei wattmetri passanti</li><li>Come trattare <b>testine</b> e strumento a lancetta, trasporto e conservazione</li><li><b>Sensori terminali</b>: attenuatori, DC, statica, connettori</li><li>Misurare un TX senza danni e <b>verifiche periodiche</b></li></ul>
         <div class="tags"><span>protezione</span><span>testine</span><span>sensori</span><span>statica</span><span>verifiche</span></div>
         <div class="btns"><a class="btn primary" href="wattmetro-rf/04-preservare-il-wattmetro/WM_Preservare_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="wattmetro-rf/04-preservare-il-wattmetro/WM_Preservare_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article><article class="mod" id="wm5">
       <a class="shot" href="wattmetro-rf/05-misure-inconsuete-e-problemi/WM_Misure_Inconsuete_Problemi_IV3HGA.pdf"><img src="assets/wm-5.jpg" alt="Anteprima: Misure inconsuete e problemi di misura" loading="lazy"></a>
-      <div><div class="num">Capitolo 3 · Modulo 5</div><h3>Misure inconsuete e problemi di misura</h3><div class="meta">11 slide · quando il wattmetro sbaglia · cosa misurare oltre ai watt</div>
+      <div><div class="num">Capitolo 4 · Modulo 5</div><h3>Misure inconsuete e problemi di misura</h3><div class="meta">11 slide · quando il wattmetro sbaglia · cosa misurare oltre ai watt</div>
         <ul><li><b>Armoniche</b>, <b>modulazione</b> (media e PEP) e segnali a <b>burst</b> TDMA</li><li>Disadattamento, direttività, cavi e adattatori</li><li>Perdita di un cavo con uno o due wattmetri e <b>calorimetria</b></li><li>Efficienza di un finale e <b>SWR vero all'antenna</b> dalla stazione</li></ul>
         <div class="tags"><span>PEP</span><span>TDMA</span><span>perdita cavi</span><span>calorimetria</span><span>efficienza</span></div>
         <div class="btns"><a class="btn primary" href="wattmetro-rf/05-misure-inconsuete-e-problemi/WM_Misure_Inconsuete_Problemi_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="wattmetro-rf/05-misure-inconsuete-e-problemi/WM_Misure_Inconsuete_Problemi_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
     </article><article class="mod" id="wm6">
       <a class="shot" href="wattmetro-rf/06-potenza-segnale-spettro-bessel/Potenza_Segnale_Spettro_Bessel_IV3HGA.pdf"><img src="assets/wm-6.jpg" alt="Anteprima: Potenza del segnale e potenza dello spettro" loading="lazy"></a>
-      <div><div class="num">Capitolo 3 · Modulo 6</div><h3>Potenza del segnale e potenza dello spettro</h3><div class="meta">14 slide · approfondimento matematico con esempi concreti</div>
+      <div><div class="num">Capitolo 4 · Modulo 6</div><h3>Potenza del segnale e potenza dello spettro</h3><div class="meta">14 slide · approfondimento matematico con esempi concreti</div>
         <ul><li>Il teorema di <b>Parseval</b>: il ponte tra wattmetro e analizzatore</li><li><b>AM</b>: portante, bande laterali, media e PEP con i numeri</li><li><b>SSB</b> a due toni: PEP = 2 × media</li><li><b>FM</b> e funzioni di <b>Bessel</b>: la potenza si ridistribuisce, non cambia</li><li>Regola di Carson, densità spettrale e RBW, somme in dB, fattore di cresta</li></ul>
         <div class="tags"><span>Parseval</span><span>AM</span><span>SSB</span><span>FM</span><span>Bessel</span><span>Carson</span><span>PAPR</span></div>
         <div class="btns"><a class="btn primary" href="wattmetro-rf/06-potenza-segnale-spettro-bessel/Potenza_Segnale_Spettro_Bessel_IV3HGA.pdf" download>⬇ Scarica PDF</a><a class="btn ghost" href="wattmetro-rf/06-potenza-segnale-spettro-bessel/Potenza_Segnale_Spettro_Bessel_IV3HGA.pdf" target="_blank" rel="noopener">Apri nel browser</a></div></div>
@@ -204,7 +245,7 @@ footer b{color:#fff}footer a{color:var(--cyan)}
 <section class="info"><div class="wrap"><h2>Come seguire il corso</h2>
 <p class="sub">Non serve un laboratorio: bastano strumenti economici e la voglia di provare sul banco quello che leggi.</p>
 <div class="grid3">
-<div class="card"><h4>📡 Cosa serve</h4><p>Un VNA anche economico (NanoVNA, LiteVNA o simili) con kit SOL, un analizzatore di spettro (anche un tinySA), un wattmetro passante, un carico fittizio, attenuatori, un DC block e qualche cavo.</p></div>
+<div class="card"><h4>📡 Cosa serve</h4><p>Un oscilloscopio con sonde 10×, un VNA anche economico (NanoVNA, LiteVNA o simili) con kit SOL, un analizzatore di spettro (anche un tinySA), un wattmetro passante, un carico fittizio, attenuatori, un DC block e qualche cavo.</p></div>
 <div class="card"><h4>🧭 Come procedere</h4><p>Leggi un modulo, poi rifai la misura sul banco. Ogni presentazione ha formule pronte, esempi numerici e checklist finali.</p></div>
 <div class="card"><h4>🧪 Esempi e sorgenti</h4><p>Grafici ed esempi vengono da simulazioni verificate. Gli script Python che generano slide e grafici sono nel repository: modificali per i tuoi casi.</p></div>
 </div></div></section>

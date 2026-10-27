@@ -4,10 +4,21 @@
 
 🌐 **Sito del corso: https://metallarox.github.io/hamradio-pills/**
 
-Un corso in pillole su strumentazione RF e misure per radioamatori, a cura di **Elia, IV3HGA**: 3 capitoli, 16 moduli, 194 slide.
+Un corso in pillole su strumentazione RF e misure per radioamatori, a cura di **Elia, IV3HGA**: 4 capitoli, 22 moduli, 254 slide.
 Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti Python che lo generano (simulazioni, grafici e slide).
 
-### Capitolo 1 · Il VNA (analizzatore di reti vettoriale)
+### Capitolo 1 · L'oscilloscopio
+
+| Modulo | Presentazione | Slide |
+|---|---|---|
+| 1 | [L'oscilloscopio: come funziona](oscilloscopio/01-come-funziona/OSC_Come_Funziona_IV3HGA.pdf) | 10 |
+| 2 | [Oscilloscopio: sicurezza e protezione](oscilloscopio/02-sicurezza-e-protezione/OSC_Sicurezza_Protezione_IV3HGA.pdf) | 9 |
+| 3 | [Sonde e impostazioni](oscilloscopio/03-sonde-e-impostazioni/OSC_Sonde_Impostazioni_IV3HGA.pdf) | 10 |
+| 4 | [Le misure con l'oscilloscopio](oscilloscopio/04-misure-classiche/OSC_Misure_Classiche_IV3HGA.pdf) | 10 |
+| 5 | [Come NON usare l'oscilloscopio](oscilloscopio/05-come-non-usarlo/OSC_Come_Non_Usarlo_IV3HGA.pdf) | 10 |
+| 6 | [Misure inconsuete e trucchi](oscilloscopio/06-misure-inconsuete-e-trucchi/OSC_Misure_Inconsuete_Trucchi_IV3HGA.pdf) | 11 |
+
+### Capitolo 2 · Il VNA (analizzatore di reti vettoriale)
 
 | Modulo | Presentazione | Slide |
 |---|---|---|
@@ -17,7 +28,7 @@ Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti 
 | 4 | [Misurare un quarzo con il VNA](vna/04-quarzo-vna/Quarzo_VNA_IV3HGA.pdf) | 10 |
 | 5 | [Misure inconsuete con il VNA](vna/05-vna-misure-inconsuete/VNA_Misure_Inconsuete_IV3HGA.pdf) | 15 |
 
-### Capitolo 2 · L'analizzatore di spettro
+### Capitolo 3 · L'analizzatore di spettro
 
 | Modulo | Presentazione | Slide |
 |---|---|---|
@@ -27,7 +38,7 @@ Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti 
 | 4 | [Carico con prelievo, accoppiatore e ponte](analizzatore-di-spettro/04-prelievi-accoppiatori-ponti/SA_Prelievi_Accoppiatori_Ponti_IV3HGA.pdf) | 14 |
 | 5 | [Misure inconsuete e trucchi](analizzatore-di-spettro/05-misure-inconsuete-e-trucchi/SA_Misure_Inconsuete_Trucchi_IV3HGA.pdf) | 13 |
 
-### Capitolo 3 · Il wattmetro RF
+### Capitolo 4 · Il wattmetro RF
 
 | Modulo | Presentazione | Slide |
 |---|---|---|
