@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fluke Hydra Monitor · Progetti · Ham Radio Pills</title><meta name="description" content="Un&#x27;interfaccia moderna per l&#x27;acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono.">
-<link rel="icon" href="../../assets/logo.png"><link rel="stylesheet" href="../../assets/site.css?v=fd2d5feb"><script src="../../assets/theme.js?v=28624b13"></script></head><body><nav class="topbar"><div class="wrap"><a class="brand" href="../../index.html"><img src="../../assets/logo.png" alt="">Ham Radio <span>Pills</span></a><div class="crumbs"><a href="../../index.html">Home</a> <span>›</span> <a href="../../progetti/index.html">Progetti</a> <span>›</span> <b>Fluke Hydra Monitor</b></div></div></nav>
+<link rel="icon" href="../../assets/logo.png"><link rel="stylesheet" href="../../assets/site.css?v=baeef5b0"><script src="../../assets/theme.js?v=28624b13"></script></head><body><nav class="topbar"><div class="wrap"><a class="brand" href="../../index.html"><img src="../../assets/logo.png" alt="">Ham Radio <span>Pills</span></a><div class="crumbs"><a href="../../index.html">Home</a> <span>›</span> <a href="../../progetti/index.html">Progetti</a> <span>›</span> <b>Fluke Hydra Monitor</b></div></div></nav>
 <header class="chero"><div class="wrap"><span class="kicker">Progetti · Python · ESP8266 · RS-232 · WiFi</span><h1>Fluke Hydra Monitor</h1><p class="lead">Un'interfaccia moderna per l'acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono.</p>
 <div class="tags dark"><span>Fluke Hydra</span><span>RS-232</span><span>Python</span><span>ESP8266</span><span>WiFi</span><span>CSV</span></div></div></header>
 <section class="prj"><div class="wrap">
@@ -119,11 +119,112 @@ _poll() ogni 100 ms ◄── coda eventi ◄── letture, stato, errori
 <li>Le letture sono programmate come <code>next += periodo</code>: il periodo non deriva nel tempo.</li>
 <li>In multicanale legge un canale per giro, così Stop e chiusura della finestra rispondono subito anche durante una scansione lunga.</li></ul>
 <h3>L'ago dello strumento</h3>
-<p>La posizione x dell'ago segue un sistema del secondo ordine, integrato a passi di 8 ms e disegnato a circa 60 fotogrammi al secondo:</p>
-<div class="eq">x'' = ωn²·(obiettivo − x) − 2·ζ·ωn·x'   con ωn = 13 rad/s, ζ = 0,55</div>
-<p class="small">Con ζ = 0,55 l'ago supera di poco il valore e torna indietro, come uno strumento vero; ai fondo scala la velocità si inverte e si riduce al 25 %, e l'ago rimbalza.</p>
+<p>L'ago non salta sul valore: si muove come quello di uno strumento a bobina mobile vero, con un leggero superamento e il rimbalzo sui fermi. Come e perché, con tutta la matematica, è nella sezione <a href="#vezzo">Un vezzo matematico</a>.</p>
 </div></div>
 
+</div></section>
+<section class="vezzo" id="vezzo"><div class="wrap">
+<span class="kicker">Approfondimento</span>
+<h2>Un vezzo matematico: l'ago che si muove come uno vero</h2>
+<p class="lead2">Si poteva spostare l'ago direttamente sul valore letto, e la misura sarebbe stata la stessa. Ma un vero strumento a bobina mobile non fa così: l'ago parte, accelera, supera di poco il valore, torna indietro e si ferma; se lo mandi a fondo scala sbatte sul fermo e rimbalza. Il programma lo imita risolvendo, sessanta volte al secondo, l'equazione di un sistema <b>massa, molla e smorzatore</b>. Non serve alla misura: è un vezzo. Ma è anche un'ottima scusa per guardare da vicino uno dei modelli più usati di tutta l'ingegneria.</p>
+
+<h3>1 · Da dove viene l'equazione</h3>
+<div class="mgrid2"><div>
+<p>Nello strumento a bobina mobile agiscono quattro cose:</p>
+<ul><li>la <b>coppia motrice</b> della bobina immersa nel campo del magnete, proporzionale alla corrente: k<sub>i</sub>·I;</li>
+<li>la <b>molla a spirale</b>, che riporta l'ago indietro con una coppia proporzionale all'angolo: −k·θ;</li>
+<li>l'<b>inerzia</b> J di bobina e ago, che si oppone alle accelerazioni;</li>
+<li>lo <b>smorzamento</b> D·θ', dovuto soprattutto alle correnti parassite indotte nel telaio di alluminio della bobina, e in parte al circuito esterno.</li></ul>
+<div class="eq">J·θ'' + D·θ' + k·θ = k<sub>i</sub>·I</div>
+<p>Dividendo per J e chiamando "obiettivo" la posizione di riposo k<sub>i</sub>·I / k, dove l'ago si fermerebbe:</p>
+<div class="eq">θ'' + 2·ζ·ω<sub>n</sub>·θ' + ω<sub>n</sub>²·θ = ω<sub>n</sub>²·θ<sub>obiettivo</sub></div>
+</div><div>
+<p>I due parametri riassumono tutta la meccanica:</p>
+<table><tr><th>Simbolo</th><th>Formula</th><th>Significato</th></tr>
+<tr><td class="l">ω<sub>n</sub></td><td class="l">√(k / J)</td><td class="l">pulsazione naturale: quanto è "veloce" lo strumento</td></tr>
+<tr><td class="l">ζ</td><td class="l">D / (2·√(k·J))</td><td class="l">smorzamento relativo: quanto oscilla</td></tr></table>
+<p>Il programma scrive la stessa equazione nella forma più comoda da calcolare, con x posizione dell'ago in frazione del fondo scala:</p>
+<div class="eq">x'' = ω<sub>n</sub>²·(obiettivo − x) − 2·ζ·ω<sub>n</sub>·x'   ω<sub>n</sub> = 13 rad/s, ζ = 0,55</div>
+<p class="note">È la stessa equazione del <b>circuito RLC serie</b>, con ω<sub>n</sub> = 1/√(LC) e ζ = (R/2)·√(C/L), e di molti altri sistemi: le sospensioni di un'auto, l'anello di un PLL, la risposta di un filtro passa-basso del secondo ordine.</p>
+</div></div>
+
+<h3>2 · Che cosa fa ζ</h3>
+<div class="mgrid2"><div><figure class="plot"><img src="img/math/step.svg" alt="Risposta al gradino per diversi smorzamenti"></figure></div><div>
+<table><tr><th>Smorzamento</th><th>Comportamento</th></tr>
+<tr><td class="l">ζ = 0</td><td class="l">oscilla per sempre, senza fermarsi</td></tr>
+<tr><td class="l">0 &lt; ζ &lt; 1</td><td class="l"><b>sottosmorzato</b>: supera il valore e oscilla attorno, sempre meno</td></tr>
+<tr><td class="l">ζ = 1</td><td class="l"><b>critico</b>: il più veloce possibile senza superare il valore</td></tr>
+<tr><td class="l">ζ &gt; 1</td><td class="l"><b>sovrasmorzato</b>: arriva lentamente, "si trascina"</td></tr></table>
+<p>Con ζ = 0,2 l'ago danza a lungo, con ζ = 2 arriva troppo piano. ζ = 0,55 è un compromesso realistico: un piccolo superamento ben visibile, che dà l'impressione di uno strumento vero, e un assestamento rapido.</p>
+</div></div>
+
+<h3>3 · La soluzione, con i numeri</h3>
+<div class="mgrid2"><div>
+<p>Per un gradino unitario (l'obiettivo passa da 0 a 1) con ζ &lt; 1 la soluzione esatta è:</p>
+<div class="eq">x(t) = 1 − e<sup>−ζ·ω<sub>n</sub>·t</sup> / √(1 − ζ²) · sin(ω<sub>d</sub>·t + φ)</div>
+<p>con <b>ω<sub>d</sub> = ω<sub>n</sub>·√(1 − ζ²)</b>, la pulsazione dell'oscillazione smorzata, e <b>φ = arccos ζ</b>. È una sinusoide chiusa dentro un inviluppo esponenziale che si restringe.</p>
+<p class="note">Con una lettura ogni 0,5 s, al momento della lettura successiva l'ago è già entro lo 0,45 % del valore: ogni lettura "arriva" prima che ne giunga un'altra.</p>
+</div><div>
+<table><tr><th>Grandezza</th><th>Formula</th><th>Con ω<sub>n</sub> = 13, ζ = 0,55</th></tr>
+<tr><td class="l">pulsazione smorzata</td><td class="l">ω<sub>n</sub>·√(1 − ζ²)</td><td class="l">10,86 rad/s (1,73 Hz)</td></tr>
+<tr><td class="l">sovraelongazione</td><td class="l">e<sup>−π·ζ/√(1−ζ²)</sup></td><td class="l"><b>12,6 %</b></td></tr>
+<tr><td class="l">tempo di picco</td><td class="l">π / ω<sub>d</sub></td><td class="l">0,29 s</td></tr>
+<tr><td class="l">tempo di salita 10–90 %</td><td class="l">(calcolato)</td><td class="l">0,13 s</td></tr>
+<tr><td class="l">assestamento al 2 %</td><td class="l">≈ 4 / (ζ·ω<sub>n</sub>)</td><td class="l">stima 0,56 s, esatto 0,45 s</td></tr>
+<tr><td class="l">costante di tempo dell'inviluppo</td><td class="l">1 / (ζ·ω<sub>n</sub>)</td><td class="l">0,14 s</td></tr></table>
+</div></div>
+
+<h3>4 · I poli nel piano s</h3>
+<div class="mgrid2"><div><figure class="plot narrow"><img src="img/math/poles.svg" alt="Poli nel piano s"></figure></div><div>
+<p>Con la trasformata di Laplace l'equazione diventa una funzione di trasferimento:</p>
+<div class="eq">H(s) = ω<sub>n</sub>² / (s² + 2·ζ·ω<sub>n</sub>·s + ω<sub>n</sub>²)</div>
+<p>I suoi due <b>poli</b> sono s = −ζ·ω<sub>n</sub> ± j·ω<sub>d</sub> = <b>−7,15 ± j·10,86</b>.</p>
+<ul><li>Stanno su una circonferenza di raggio ω<sub>n</sub> = 13: cambiando ζ scorrono lungo il cerchio.</li>
+<li>La <b>parte reale</b> dice quanto in fretta si spegne l'oscillazione, la <b>parte immaginaria</b> a che frequenza oscilla.</li>
+<li>L'angolo rispetto all'asse reale negativo vale arccos ζ = 56,6°. Con ζ = 0,707 l'angolo è 45°; con ζ = 1 i poli si incontrano sull'asse reale.</li></ul>
+<p class="note">È lo stesso modo di ragionare che si usa per i filtri: un Butterworth del secondo ordine è proprio il caso ζ = 0,707.</p>
+</div></div>
+
+<h3>5 · Vista in frequenza: perché l'ago "fa la media"</h3>
+<div class="mgrid2"><div><figure class="plot"><img src="img/math/freq.svg" alt="Risposta in frequenza dell'ago"></figure></div><div>
+<p>Se la lettura cambiasse in modo sinusoidale, l'ago la seguirebbe con un'ampiezza data da |H(jω)|:</p>
+<div class="eq">|H(jω)| = ω<sub>n</sub>² / √((ω<sub>n</sub>² − ω²)² + (2·ζ·ω<sub>n</sub>·ω)²)</div>
+<ul><li>Per ζ &lt; 0,707 c'è un piccolo <b>picco di risonanza</b>: M<sub>r</sub> = 1 / (2·ζ·√(1 − ζ²)) = 1,089, cioè <b>+0,74 dB</b> a ω<sub>r</sub> = ω<sub>n</sub>·√(1 − 2ζ²) = 8,17 rad/s, <b>1,30 Hz</b>.</li>
+<li>La banda a −3 dB arriva a circa <b>2,5 Hz</b>; sopra, ogni decade di frequenza riduce l'ampiezza di 40 dB.</li>
+<li>È un <b>filtro passa-basso del secondo ordine</b>: le variazioni rapide non riescono a muovere l'ago. Per questo uno strumento a bobina mobile vero legge il <b>valore medio</b> di una corrente pulsante, come quella raddrizzata nei voltmetri per alternata.</li>
+<li>Con una lettura ogni 0,5 s le variazioni non possono essere più veloci di 1 Hz: nel caso peggiore l'ago le esagera di 0,6 dB, cioè meno del 7 %.</li></ul>
+</div></div>
+
+<h3>6 · Come lo calcola il programma</h3>
+<div class="mgrid2"><div>
+<pre>wn, zeta, dt = 13.0, 0.55, 0.008
+for _ in range(2):                   # 2 passi da 8 ms ogni fotogramma
+    acc = wn*wn*(target - pos) - 2*zeta*wn*vel
+    vel += acc * dt                  # prima la velocità…
+    pos += vel * dt                  # …poi la posizione con la velocità nuova
+    if pos &gt; hi or pos &lt; lo:         # fermo meccanico
+        pos = min(max(pos, lo), hi)
+        vel *= -0.25                 # rimbalzo
+# il ciclo si ripete ogni 16 ms (circa 60 fotogrammi al secondo)</pre>
+<p class="small">L'animazione si ferma da sola quando l'ago è a meno di 3·10⁻⁴ dal valore con velocità sotto 3·10⁻³: a strumento fermo il programma non consuma processore.</p>
+</div><div>
+<ul><li>È il metodo di <b>Euler semi-implicito</b> (o simplettico): aggiorna la velocità e usa subito quella nuova per la posizione. L'Euler "ingenuo", che usa la velocità vecchia, aggiunge energia a ogni passo e su un oscillatore poco smorzato finirebbe per divergere.</li>
+<li>Due passi da 8 ms ogni 16 ms: il tempo simulato scorre come quello reale, e la fisica è calcolata più fine di quanto venga disegnata.</li>
+<li>Il passo è piccolo rispetto alla dinamica: ω<sub>n</sub>·Δt = 0,104, lontanissimo dal limite di stabilità (circa 2).</li>
+<li>L'approssimazione cambia di poco il sistema: i poli dello schema discreto corrispondono a un sistema continuo con <b>ζ ≈ 0,567</b> e <b>ω<sub>n</sub> ≈ 13,4 rad/s</b>. La sovraelongazione diventa 11,6 % invece di 12,6 %: a occhio è identico.</li></ul>
+<figure class="plot"><img src="img/math/euler.svg" alt="Soluzione esatta e soluzione numerica"></figure>
+</div></div>
+
+<h3>7 · Fermi meccanici e rimbalzo</h3>
+<div class="mgrid2"><div><figure class="plot"><img src="img/math/stop.svg" alt="L'ago sbatte sul fermo e rimbalza"></figure></div><div>
+<ul><li>L'obiettivo è limitato tra −5,5 % e +105,5 % della scala: in overload l'ago punta poco oltre il fondo scala, come uno strumento vero.</li>
+<li>I fermi sono a −6,5 % e +106,5 %. Quando l'ago li raggiunge la velocità <b>cambia segno e si riduce al 25 %</b>: è un urto con coefficiente di restituzione e = 0,25, che conserva e² ≈ 6 % dell'energia cinetica.</li>
+<li>Con una sovraelongazione di circa l'11,6 %, ogni salto da zero oltre il <b>95 % del fondo scala</b> fa sbattere l'ago sul fermo: succede anche con gli strumenti veri, quando si applica di colpo un valore vicino al fondo scala.</li>
+<li>Tratteggiata, la traiettoria che l'ago avrebbe senza fermo: arriverebbe a circa il 118 %.</li></ul>
+<p class="note">Tutto questo per un ago disegnato sullo schermo: è un vezzo, appunto. Ma la matematica è la stessa di filtri, oscillatori, PLL e controlli automatici, e vederla all'opera su qualcosa che si muove davanti agli occhi aiuta a non dimenticarla.</p>
+</div></div>
+</div></section>
+<section class="prj"><div class="wrap">
 <h2>Installazione e avvio</h2>
 <div class="mgrid2"><div>
 <pre># Debian / Ubuntu

@@ -177,3 +177,17 @@ html[data-theme=dark] .prj .btn.ghost{color:#eaf2fb;border-color:#3a4c66}
 .prj h3{margin-top:30px}
 @media (max-width:860px){.gallery-web{grid-template-columns:1fr}.gallery-web .gallery{grid-template-columns:1fr}.phone img{max-width:260px}}
 .prj-intro+.prj-cards{margin-top:36px}
+/* vezzo matematico */
+.vezzo{background:linear-gradient(180deg,var(--ice),#f4f9fd);padding:60px 0 50px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:40px}
+.vezzo h2{margin-top:6px;font-size:34px}.vezzo h3{margin-top:44px;color:var(--navy);font-size:22px}
+.vezzo .lead2{font-size:19px;line-height:1.65;max-width:900px}
+.vezzo table{width:100%;border-collapse:collapse;font-size:15px;margin:10px 0}.vezzo th{text-align:left;color:var(--blue);border-bottom:2px solid var(--line);padding:8px}.vezzo td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top}
+.vezzo .eq{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-family:ui-monospace,monospace;font-size:15px;margin:10px 0}
+.vezzo pre{background:#0a1a2e;color:#d6e6f5;border-radius:12px;padding:16px 18px;overflow-x:auto;font-size:13px;line-height:1.5}
+.plot{margin:0 0 10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}.plot img{width:100%;display:block}.plot.narrow{max-width:420px}
+html[data-theme=dark] .vezzo{background:linear-gradient(180deg,#0f1a2b,#0b1220);border-color:var(--line)}
+html[data-theme=dark] .vezzo h3{color:#eaf2fb}
+html[data-theme=dark] .vezzo .eq{background:#131d2e;border-color:var(--line)}
+html[data-theme=dark] .vezzo pre{background:#070d18;border:1px solid var(--line)}
+html[data-theme=dark] .plot{background:#131d2e;border-color:var(--line)}
+html[data-theme=dark] .plot img{filter:invert(.9) hue-rotate(180deg) brightness(1.05)}
