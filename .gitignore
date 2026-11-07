@@ -4,3 +4,4 @@ vals*.json
 slides.html
 **/src/*.pdf
 __pycache__/
+!progetti/**/img/**/*.svg
