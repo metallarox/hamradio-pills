@@ -1,0 +1,92 @@
+<section class="prj"><div class="wrap">
+<div class="prj-intro"><div>
+<h2>Un'interfaccia moderna per un acquisitore storico</h2>
+<p>Il <b>Fluke Hydra 2620A / 2625A</b> è un acquisitore dati da banco con 21 canali: tensioni continue e alternate, resistenze a 2 e 4 fili, frequenza, termocoppie e termoresistenze Pt100. È ancora uno strumento ottimo, ma il software originale è dell'epoca di DOS e Windows e oggi è difficile farlo funzionare.</p>
+<p><b>Fluke Hydra Monitor</b> è un unico script Python (Tkinter, matplotlib e pyserial) che parla con lo strumento direttamente sulla seriale RS-232, gira su Linux e non richiede altro. Mostra la lettura in grande, uno <b>strumento analogico a bobina mobile</b> disegnato come quelli da pannello, un <b>grafico</b> che scorre, l'acquisizione <b>su più canali</b> e il salvataggio in CSV.</p>
+<div class="btns"><a class="btn primary" href="https://github.com/metallarox/fluke_hydra_monitor" target="_blank" rel="noopener">Vai al progetto su GitHub</a><a class="btn ghost" href="https://github.com/metallarox/fluke_hydra_monitor/archive/refs/heads/main.zip">⬇ Scarica lo ZIP</a></div>
+<p class="vnote">Versione 1.1.0 · 73 de IV3HGA</p>
+</div>
+<a class="prj-hero" href="img/live.png" target="_blank" rel="noopener"><img src="img/live.png" alt="Modalità LIVE con lo strumento analogico"></a></div>
+
+<h2>Che cosa fa</h2>
+<div class="grid3 prj-cards">
+<div class="card"><h4>Tutte le funzioni dell'Hydra</h4><p>V DC, V AC, Ω a 2 e 4 fili, frequenza, termocoppie J K E T N R S B C, Pt100. 21 canali, con il <b>CH0</b> (ingresso frontale) ben evidenziato.</p></div>
+<div class="card"><h4>Quattro modalità</h4><p><b>LIVE</b> con lo strumento analogico, <b>MONITOR</b> con il grafico, <b>Trigger + LAST?</b> per le configurazioni a scansione, <b>MULTI-CHANNEL</b> con più canali insieme.</p></div>
+<div class="card"><h4>Strumento analogico</h4><p>Quadrante color crema, specchio antiparallasse, ago con dinamica del 2° ordine e leggero overshoot, rimbalzo a fondo scala, spia OL. Portate 1-3-10-30 automatiche e scala a zero centrale per valori negativi.</p></div>
+<div class="card"><h4>Grafico intelligente</h4><p>Autoscala che si allarga subito e si restringe solo quando serve, prefissi SI sugli assi, linea della media, finestra da 10 s a 1 h, limiti manuali con suffissi (<code>300m</code>, <code>1.5k</code>).</p></div>
+<div class="card"><h4>Multicanale</h4><p>Qualsiasi insieme dei 21 canali, ognuno con funzione e portata proprie: riquadri con i valori in tempo reale, una traccia per canale e vista <b>normalizzata</b> quando le grandezze sono diverse.</p></div>
+<div class="card"><h4>Dati e robustezza</h4><p>Statistiche min/max/media, gestione degli overload, CSV scritto lettura per lettura. Un solo thread possiede la porta seriale, tre tentativi sugli errori, e lo strumento viene sempre lasciato pulito con <code>MON 0</code>.</p></div>
+</div>
+
+<h2>Le schermate</h2>
+<div class="gallery">
+<a href="img/live_bipolar.png" target="_blank" rel="noopener"><img src="img/live_bipolar.png" alt="" loading="lazy"><span>Ingresso negativo: lo strumento passa da solo a una scala ±3 V a zero centrale.</span></a>
+<a href="img/live_ol.png" target="_blank" rel="noopener"><img src="img/live_ol.png" alt="" loading="lazy"><span>Overload: ago a fondo scala, spia OL accesa e lettura in rosso.</span></a>
+<a href="img/monitor.png" target="_blank" rel="noopener"><img src="img/monitor.png" alt="" loading="lazy"><span>MONITOR: grafico che scorre, con autoscala intelligente.</span></a>
+<a href="img/multi_sweep.png" target="_blank" rel="noopener"><img src="img/multi_sweep.png" alt="" loading="lazy"><span>MULTI-CHANNEL: un riquadro e una traccia per ogni canale.</span></a>
+<a href="img/multi_hscan.png" target="_blank" rel="noopener"><img src="img/multi_hscan.png" alt="" loading="lazy"><span>Tensione, resistenza, temperatura e frequenza insieme, in vista normalizzata.</span></a>
+<a href="img/multi_setup.png" target="_blank" rel="noopener"><img src="img/multi_setup.png" alt="" loading="lazy"><span>Configurazione dei canali: CH n+10 sta accanto a CH n, per le misure a 4 fili.</span></a>
+</div>
+
+<h2>Come funziona</h2>
+<div class="mgrid2"><div>
+<h3>Il protocollo</h3>
+<p>Sulla seriale (9600 baud, 8N1, senza controllo di flusso) ogni comando ASCII termina con CR. L'Hydra risponde con un'eventuale riga di dati seguita da un <b>prompt</b>: <code>=&gt;</code> comando eseguito, <code>?&gt;</code> errore di sintassi, <code>!&gt;</code> errore di esecuzione. Se lo strumento ha l'eco attiva, il programma la toglie da solo.</p>
+<table><tr><th>Comando</th><th>A che cosa serve</th></tr>
+<tr><td class="l"><code>Ctrl-C</code>, <code>*IDN?</code></td><td class="l">alla connessione: annulla comandi a metà e legge l'identificazione</td></tr>
+<tr><td class="l"><code>SCAN 0</code>, <code>MON 0</code></td><td class="l">ferma scansione e Monitor prima di configurare e all'uscita</td></tr>
+<tr><td class="l"><code>FUNC ch,VDC,range</code> …</td><td class="l">configura il canale (VDC, VAC, OHMS, FREQ, TEMP)</td></tr>
+<tr><td class="l"><code>MON 1,ch</code> + <code>MON_VAL?</code></td><td class="l">legge il canale tramite la funzione Monitor (LIVE, MONITOR)</td></tr>
+<tr><td class="l"><code>*TRG</code> + <code>LAST? ch</code></td><td class="l">modalità a trigger: ultimo valore della scansione</td></tr></table>
+<p class="vnote">In multicanale il metodo predefinito "Sweep" sposta il Monitor da un canale all'altro e scarta la prima lettura dopo ogni cambio, che potrebbe appartenere ancora al canale precedente.</p>
+</div><div>
+<h3>L'architettura</h3>
+<pre>Tk (interfaccia)            thread di lavoro (porta seriale)
+────────────────            ────────────────────────────────
+pulsanti ─► coda lavori ──► connetti / configura / avvia
+                            letture a cadenza fissa
+_poll() ogni 100 ms ◄── coda eventi ◄── letture, stato, errori
+  ├─ lettura, statistiche, CSV
+  ├─ strumento analogico
+  └─ grafico ogni 300 ms</pre>
+<ul class="small"><li>Solo il thread di lavoro tocca la porta: i comandi non si accavallano mai.</li>
+<li>Le letture sono programmate come <code>next += periodo</code>: il periodo non deriva nel tempo.</li>
+<li>In multicanale legge un canale per giro, così Stop e chiusura della finestra rispondono subito anche durante una scansione lunga.</li></ul>
+<h3>L'ago dello strumento</h3>
+<p>La posizione x dell'ago segue un sistema del secondo ordine, integrato a passi di 8 ms e disegnato a circa 60 fotogrammi al secondo:</p>
+<div class="eq">x'' = ωn²·(obiettivo − x) − 2·ζ·ωn·x'   con ωn = 13 rad/s, ζ = 0,55</div>
+<p class="small">Con ζ = 0,55 l'ago supera di poco il valore e torna indietro, come uno strumento vero; ai fondo scala la velocità si inverte e si riduce al 25 %, e l'ago rimbalza.</p>
+</div></div>
+
+<h2>Installazione e avvio</h2>
+<div class="mgrid2"><div>
+<pre># Debian / Ubuntu
+sudo apt install python3-tk python3-serial python3-matplotlib
+
+git clone https://github.com/metallarox/fluke_hydra_monitor.git
+cd fluke_hydra_monitor
+python3 fluke_hydra_monitor.py</pre>
+<ol class="small"><li><b>Connessione</b>: scegli la porta seriale e premi Connect; nell'intestazione compare la risposta a <code>*IDN?</code>.</li>
+<li><b>Canale</b>: canale, funzione, portata e numero di fili.</li>
+<li><b>Acquisizione</b>: modalità e periodo (da 0,5 a 3600 s), eventualmente "Record to CSV", poi Start.</li></ol>
+</div><div>
+<h3>Sullo strumento</h3><p class="small">Interfaccia RS-232 a <b>9600 baud, 8 bit, nessuna parità, 1 bit di stop</b>, nessun handshake. Se l'Hydra non risponde, controlla il cavo (dritto o null-modem) sul manuale.</p>
+<h3>Permessi della porta</h3><pre>sudo usermod -aG dialout $USER</pre><p class="small">poi esci e rientra nella sessione.</p>
+<h3>Senza strumento</h3><pre>python3 tools/hydra_simulator.py   # es. "listening on /dev/pts/5"
+python3 fluke_hydra_monitor.py     # collegati a /dev/pts/5</pre>
+<p class="small">Il simulatore permette di provare tutta l'interfaccia, con opzioni per tensione, ampiezza, periodo e overload.</p>
+</div></div>
+
+<h2>I file CSV</h2>
+<div class="mgrid2"><div><p class="small">Una lettura per riga, sempre in unità base (V, Ω, Hz, °C/°F); gli overload hanno il valore vuoto.</p>
+<pre>timestamp,channel,function,value,unit
+2026-10-26T16:53:08.412,0,V DC,0.0160495,V</pre></div><div>
+<p class="small">In multicanale, una riga per scansione e una colonna per canale:</p>
+<pre>timestamp,CH00 V DC (V),CH03 Ohm (Ω),CH07 Thermocouple (°C/°F)
+2026-10-26T17:55:21.004,0.0143606,1301.2,25.295</pre></div></div>
+
+<h2>Ancora da verificare</h2>
+<ul class="small"><li>Il valore di fuori scala è assunto ≥ 9E+9: va controllato che cosa restituisce il proprio strumento con un ingresso Ω aperto.</li>
+<li>La modalità "Hydra scan" (scansione gestita dallo strumento, con <code>INTVL</code>, <code>TRIGGER 1</code>, <code>SCAN 1</code>) è sperimentale: la sintassi va confermata su un'unità reale. Il metodo "Sweep" usa solo comandi già verificati ed è quello predefinito.</li></ul>
+<p class="note">La documentazione completa è nel repository: guida d'uso in <a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/docs/USER_GUIDE.md" target="_blank" rel="noopener">docs/USER_GUIDE.md</a> e protocollo in <a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/docs/PROTOCOL.md" target="_blank" rel="noopener">docs/PROTOCOL.md</a>. Per le basi delle misure di tensione, corrente e resistenza c'è il <a href="../../multimetro/index.html">capitolo sul multimetro</a>.</p>
+</div></section>

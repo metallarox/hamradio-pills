@@ -314,6 +314,33 @@ for k,(c,i,m) in enumerate(ALL):
 {pg}</div></section>
 {FOOT}</body></html>''')
 # --- homepage
+# --- progetti
+PROJECTS=[
+ dict(id="hydra",dir="progetti/fluke-hydra-monitor",title="Fluke Hydra Monitor",img="prj-hydra.jpg",
+  meta="Python · Tkinter · RS-232 · Linux",repo="https://github.com/metallarox/fluke_hydra_monitor",
+  intro="Un'interfaccia moderna per l'acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV.",
+  tags=["Fluke Hydra","RS-232","Python","acquisizione dati","CSV"],body="tools/progetti/fluke-hydra-monitor.html"),
+]
+PRJ_INTRO="Strumenti software e lavori di laboratorio di IV3HGA: progetti completi, con il codice su GitHub."
+def prj_card(pr,up):
+    return f'''<article class="mod"><a class="shot" href="{up}{pr["dir"]}/index.html"><img src="{up}assets/{pr["img"]}" alt="{html.escape(pr["title"])}" loading="lazy"></a>
+<div><div class="num">Progetto</div><h3><a class="plain" href="{up}{pr["dir"]}/index.html">{pr["title"]}</a></h3><div class="meta">{pr["meta"]}</div><p>{pr["intro"]}</p>
+<div class="tags">{"".join(f"<span>{t}</span>" for t in pr["tags"])}</div>
+<div class="btns"><a class="btn primary" href="{up}{pr["dir"]}/index.html">Apri il progetto →</a><a class="btn ghost" href="{pr["repo"]}" target="_blank" rel="noopener">GitHub</a></div></div></article>'''
+W(os.path.join(ROOT,"progetti","index.html"),head("Progetti · Ham Radio Pills",PRJ_INTRO,"../")+topbar("../",[("Home","../index.html"),("Progetti",None)])+f'''
+<header class="chero"><div class="wrap"><span class="kicker">Sezione 3</span><h1>Progetti</h1><p class="lead">{PRJ_INTRO}</p><div class="cstats">{len(PROJECTS)} {"progetto" if len(PROJECTS)==1 else "progetti"}</div></div></header>
+<section class="chapter"><div class="wrap">{"".join(prj_card(pr,"../") for pr in PROJECTS)}<div style="height:50px"></div></div></section>
+{FOOT}</body></html>''')
+for k,pr in enumerate(PROJECTS):
+    up="../../"; body=open(os.path.join(ROOT,pr["body"])).read()
+    pv=PROJECTS[k-1] if k>0 else None; nx=PROJECTS[k+1] if k+1<len(PROJECTS) else None
+    pg=pager((f'{up}{pv["dir"]}/index.html',pv["title"]) if pv else None,(f'{up}{nx["dir"]}/index.html',nx["title"]) if nx else None) if (pv or nx) else ""
+    W(os.path.join(ROOT,pr["dir"],"index.html"),head(f'{pr["title"]} · Progetti · Ham Radio Pills',pr["intro"],up)+topbar(up,[("Home",f"{up}index.html"),("Progetti",f"{up}progetti/index.html"),(pr["title"],None)])+f'''
+<header class="chero"><div class="wrap"><span class="kicker">Progetti · {pr["meta"]}</span><h1>{pr["title"]}</h1><p class="lead">{pr["intro"]}</p>
+<div class="tags dark">{"".join(f"<span>{t}</span>" for t in pr["tags"])}</div></div></header>
+{body}<div class="wrap">{pg}<div style="height:30px"></div></div>
+{FOOT}</body></html>''')
+prjblock=f'''<div class="secblock" id="sez-progetti"><span class="kicker">Sezione 3</span><h2><a class="plain" href="progetti/index.html">Progetti</a></h2><p class="sub">{PRJ_INTRO}</p><div class="toc prj-toc">'''+"".join(f'<a href="{pr["dir"]}/index.html"><img src="assets/{pr["img"]}" alt=""><small>Progetto · {pr["meta"]}</small><h3>{pr["title"]}</h3><p>{pr["intro"]}</p><span class="go">Apri il progetto →</span></a>' for pr in PROJECTS)+'</div></div>'
 sect="".join(f'''<div class="secblock" id="{x["id"]}"><span class="kicker">{x["kicker"]}</span><h2>{x["title"]}</h2><p class="sub">{x["intro"]}</p><div class="toc">'''+"".join(f'<a href="{cdir(c)}/index.html"><small>{c["num"]} · {len(c["mods"])} {"modulo" if len(c["mods"])==1 else "moduli"}</small><h3>{c["title"]}</h3><p>{c["intro"]}</p><span class="go">Vai al capitolo →</span></a>' for c in (_byid[i] for i in x["ids"]))+'</div></div>' for x in SECTIONS)
 page=head("Ham Radio Pills · corso di elettronica e radiofrequenza · IV3HGA","Corso gratuito per radioamatori, diviso in elettronica e radiofrequenza: multimetro, oscilloscopio, VNA, carta di Smith, analizzatore di spettro, wattmetro RF, modulazioni, rumore, modo comune. A cura di IV3HGA.","")+f'''
 <header class="hero"><div class="wrap"><div>
@@ -332,7 +359,7 @@ page=head("Ham Radio Pills · corso di elettronica e radiofrequenza · IV3HGA","
 </div></div></section>
 <section id="capitoli"><div class="wrap"><h2>I capitoli</h2>
 <p class="sub">Il corso è diviso in due sezioni, elettronica e radiofrequenza, precedute dai decibel che servono a entrambe. Ogni capitolo ha la sua pagina, e ogni modulo la sua: si possono leggere anche da soli.</p>
-{sect}</div></section>
+{sect}{prjblock}</div></section>
 <section class="info"><div class="wrap"><h2>Come seguire il corso</h2>
 <p class="sub">Non serve un laboratorio: bastano strumenti economici e la voglia di provare sul banco quello che leggi.</p>
 <div class="grid3">
@@ -363,6 +390,11 @@ Lo scopo è spiegare qualche concetto che ci può tornare utile nelle nostre att
 > La matematica, per quanto indigesta, è il linguaggio che ci permette di collegare tutte le materie del mondo e di rappresentare qualsiasi cosa in un unico linguaggio che non conosce confini.
 Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti Python che lo generano (simulazioni, grafici e slide).
 {rows}
+## Sezione 3 · Progetti
+
+{PRJ_INTRO}
+
+{"".join(f"- **[{pr['title']}]({pr['repo']})**: {pr['intro']} Pagina: [{pr['dir']}/]({pr['dir']}/index.html)\n" for pr in PROJECTS)}
 ## Rigenerare un PDF
 
 Servono Python 3 con `numpy`, `matplotlib`, `scipy`, `Pillow` e `playwright` (Chromium).
