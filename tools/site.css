@@ -171,3 +171,9 @@ html[data-theme=dark] .gallery img,html[data-theme=dark] .prj-hero img{border-co
 @media (max-width:860px){.prj-intro{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}}
 .prj .btn.ghost{border-color:var(--line);color:var(--navy)}
 html[data-theme=dark] .prj .btn.ghost{color:#eaf2fb;border-color:#3a4c66}
+.gallery-web{display:grid;grid-template-columns:1fr 200px;gap:24px;align-items:start;margin-bottom:30px}
+.gallery-web .gallery{grid-template-columns:1fr 1fr}
+.phone{text-decoration:none;color:var(--mute);font-size:14px}.phone img{width:100%;border-radius:18px;border:1px solid var(--line);box-shadow:0 18px 50px rgba(10,26,46,.18);display:block}.phone span{display:block;margin-top:10px}
+.prj h3{margin-top:30px}
+@media (max-width:860px){.gallery-web{grid-template-columns:1fr}.gallery-web .gallery{grid-template-columns:1fr}.phone img{max-width:260px}}
+.prj-intro+.prj-cards{margin-top:36px}

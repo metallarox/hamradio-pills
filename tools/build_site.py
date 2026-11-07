@@ -317,9 +317,9 @@ for k,(c,i,m) in enumerate(ALL):
 # --- progetti
 PROJECTS=[
  dict(id="hydra",dir="progetti/fluke-hydra-monitor",title="Fluke Hydra Monitor",img="prj-hydra.jpg",
-  meta="Python · Tkinter · RS-232 · Linux",repo="https://github.com/metallarox/fluke_hydra_monitor",
-  intro="Un'interfaccia moderna per l'acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV.",
-  tags=["Fluke Hydra","RS-232","Python","acquisizione dati","CSV"],body="tools/progetti/fluke-hydra-monitor.html"),
+  meta="Python · ESP8266 · RS-232 · WiFi",repo="https://github.com/metallarox/fluke_hydra_monitor",
+  intro="Un'interfaccia moderna per l'acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono.",
+  tags=["Fluke Hydra","RS-232","Python","ESP8266","WiFi","CSV"],body="tools/progetti/fluke-hydra-monitor.html"),
 ]
 PRJ_INTRO="Strumenti software e lavori di laboratorio di IV3HGA: progetti completi, con il codice su GitHub."
 def prj_card(pr,up):

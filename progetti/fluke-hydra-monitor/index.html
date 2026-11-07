@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fluke Hydra Monitor · Progetti · Ham Radio Pills</title><meta name="description" content="Un&#x27;interfaccia moderna per l&#x27;acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV.">
-<link rel="icon" href="../../assets/logo.png"><link rel="stylesheet" href="../../assets/site.css?v=c49e28d6"><script src="../../assets/theme.js?v=28624b13"></script></head><body><nav class="topbar"><div class="wrap"><a class="brand" href="../../index.html"><img src="../../assets/logo.png" alt="">Ham Radio <span>Pills</span></a><div class="crumbs"><a href="../../index.html">Home</a> <span>›</span> <a href="../../progetti/index.html">Progetti</a> <span>›</span> <b>Fluke Hydra Monitor</b></div></div></nav>
-<header class="chero"><div class="wrap"><span class="kicker">Progetti · Python · Tkinter · RS-232 · Linux</span><h1>Fluke Hydra Monitor</h1><p class="lead">Un'interfaccia moderna per l'acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV.</p>
-<div class="tags dark"><span>Fluke Hydra</span><span>RS-232</span><span>Python</span><span>acquisizione dati</span><span>CSV</span></div></div></header>
+<title>Fluke Hydra Monitor · Progetti · Ham Radio Pills</title><meta name="description" content="Un&#x27;interfaccia moderna per l&#x27;acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono.">
+<link rel="icon" href="../../assets/logo.png"><link rel="stylesheet" href="../../assets/site.css?v=fd2d5feb"><script src="../../assets/theme.js?v=28624b13"></script></head><body><nav class="topbar"><div class="wrap"><a class="brand" href="../../index.html"><img src="../../assets/logo.png" alt="">Ham Radio <span>Pills</span></a><div class="crumbs"><a href="../../index.html">Home</a> <span>›</span> <a href="../../progetti/index.html">Progetti</a> <span>›</span> <b>Fluke Hydra Monitor</b></div></div></nav>
+<header class="chero"><div class="wrap"><span class="kicker">Progetti · Python · ESP8266 · RS-232 · WiFi</span><h1>Fluke Hydra Monitor</h1><p class="lead">Un'interfaccia moderna per l'acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono.</p>
+<div class="tags dark"><span>Fluke Hydra</span><span>RS-232</span><span>Python</span><span>ESP8266</span><span>WiFi</span><span>CSV</span></div></div></header>
 <section class="prj"><div class="wrap">
 <div class="prj-intro"><div>
 <h2>Un'interfaccia moderna per un acquisitore storico</h2>
 <p>Il <b>Fluke Hydra 2620A / 2625A</b> è un acquisitore dati da banco con 21 canali: tensioni continue e alternate, resistenze a 2 e 4 fili, frequenza, termocoppie e termoresistenze Pt100. È ancora uno strumento ottimo, ma il software originale è dell'epoca di DOS e Windows e oggi è difficile farlo funzionare.</p>
 <p><b>Fluke Hydra Monitor</b> è un unico script Python (Tkinter, matplotlib e pyserial) che parla con lo strumento direttamente sulla seriale RS-232, gira su Linux e non richiede altro. Mostra la lettura in grande, uno <b>strumento analogico a bobina mobile</b> disegnato come quelli da pannello, un <b>grafico</b> che scorre, l'acquisizione <b>su più canali</b> e il salvataggio in CSV.</p>
+<p>Con un <b>ESP8266</b> e un MAX3232 la stessa interfaccia diventa una pagina web, raggiungibile anche dal telefono: è <a href="#esp">Hydra Web</a>, descritto più sotto.</p>
 <div class="btns"><a class="btn primary" href="https://github.com/metallarox/fluke_hydra_monitor" target="_blank" rel="noopener">Vai al progetto su GitHub</a><a class="btn ghost" href="https://github.com/metallarox/fluke_hydra_monitor/archive/refs/heads/main.zip">⬇ Scarica lo ZIP</a></div>
-<p class="vnote">Versione 1.1.0 · 73 de IV3HGA</p>
+<p class="vnote">Versione 1.2.0 · 73 de IV3HGA</p>
 </div>
 <a class="prj-hero" href="img/live.png" target="_blank" rel="noopener"><img src="img/live.png" alt="Modalità LIVE con lo strumento analogico"></a></div>
 
@@ -33,6 +34,65 @@
 <a href="img/multi_hscan.png" target="_blank" rel="noopener"><img src="img/multi_hscan.png" alt="" loading="lazy"><span>Tensione, resistenza, temperatura e frequenza insieme, in vista normalizzata.</span></a>
 <a href="img/multi_setup.png" target="_blank" rel="noopener"><img src="img/multi_setup.png" alt="" loading="lazy"><span>Configurazione dei canali: CH n+10 sta accanto a CH n, per le misure a 4 fili.</span></a>
 </div>
+
+<h2 id="esp">Hydra Web: l'Hydra nel browser con un ESP8266</h2>
+<div class="prj-intro"><div>
+<p>Dalla versione 1.2.0 c'è anche un <b>firmware per ESP8266</b>. Un <b>Wemos D1 mini (Pro)</b> con un convertitore <b>MAX3232</b> collegato alla porta RS-232 dell'Hydra trasforma l'acquisitore in uno strumento di rete: aprendo <b>http://hydra.local</b> da qualsiasi browser, anche dal telefono, si trova la stessa interfaccia del programma desktop.</p>
+<p>L'acquisizione gira <b>sull'ESP8266</b>, non nel browser: continua anche a pagina chiusa, e riaprendola da qualsiasi dispositivo si ritrova la sessione in corso con le ultime 600 letture conservate sulla scheda.</p>
+<div class="btns"><a class="btn primary" href="https://github.com/metallarox/fluke_hydra_monitor/tree/main/firmware" target="_blank" rel="noopener">Il firmware su GitHub</a><a class="btn ghost" href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/firmware/README.md" target="_blank" rel="noopener">Guida al firmware</a></div>
+</div><a class="prj-hero" href="img/web/web_multi.png" target="_blank" rel="noopener"><img src="img/web/web_multi.png" alt="Hydra Web in modalità multicanale nel browser"></a></div>
+
+<div class="grid3 prj-cards">
+<div class="card"><h4>Stesse modalità del desktop</h4><p>LIVE con lo strumento analogico, MONITOR con il grafico, Trigger + LAST? e MULTI-CHANNEL (Sweep o Hydra scan), con lettura grande, statistiche, riquadri dei canali e finestra di configurazione.</p></div>
+<div class="card"><h4>Esportazione e console</h4><p>CSV di tutte le letture e, in multicanale, una riga per scansione. Una <b>console</b> manda comandi grezzi all'Hydra: comoda per verificare la sintassi della scansione.</p></div>
+<div class="card"><h4>Ponte seriale WiFi</h4><p>La scheda espone la seriale sulla porta TCP <b>2625</b>: nel programma desktop basta scegliere <code>socket://hydra.local:2625</code> per usarlo senza cavo. Mentre il PC è collegato, il controllo dal web è in pausa.</p></div>
+<div class="card"><h4>Rete senza fatica</h4><p>Configurazione WiFi dalla pagina, access point di riserva con captive portal, nome mDNS <b>hydra.local</b>, aggiornamenti OTA.</p></div>
+<div class="card"><h4>Nessuna libreria esterna</h4><p>Solo il core Arduino per ESP8266. La pagina è compressa in gzip dentro il firmware e non ha bisogno di internet: nessun CDN.</p></div>
+<div class="card"><h4>Fatta anche per il telefono</h4><p>La pagina si adatta allo schermo: sullo smartphone lettura, riquadri e grafico vengono impilati, i comandi finiscono in fondo.</p></div>
+</div>
+
+<h3>Le schermate</h3>
+<div class="gallery-web">
+<div class="gallery">
+<a href="img/web/web_live.png" target="_blank" rel="noopener"><img src="img/web/web_live.png" alt="" loading="lazy"><span>LIVE nel browser, con lo strumento analogico.</span></a>
+<a href="img/web/web_monitor.png" target="_blank" rel="noopener"><img src="img/web/web_monitor.png" alt="" loading="lazy"><span>MONITOR: il grafico con autoscala.</span></a>
+<a href="img/web/web_setup.png" target="_blank" rel="noopener"><img src="img/web/web_setup.png" alt="" loading="lazy"><span>Configurazione dei canali, salvata sulla scheda.</span></a>
+</div>
+<a class="phone" href="img/web/web_mobile.png" target="_blank" rel="noopener"><img src="img/web/web_mobile.png" alt="Hydra Web sullo smartphone" loading="lazy"><span>Sullo smartphone.</span></a>
+</div>
+
+<div class="mgrid2"><div>
+<h3>Il collegamento</h3>
+<pre>Wemos D1 mini Pro      MAX3232 (3,3 V)            Hydra RS-232 (DB9)
+─────────────────      ───────────────            ──────────────────
+3V3  ───────────────── VCC
+GND  ───────────────── GND ────────────────────── pin 5  GND
+TX  (GPIO1) ────────── T1IN    T1OUT ──────────── RX dell'Hydra
+RX  (GPIO3) ────────── R1OUT   R1IN  ──────────── TX dell'Hydra
+5V  ── USB, o step-down a 5 V dall'alimentazione 9–16 V dell'Hydra</pre>
+<ul class="small"><li>Il MAX3232 va alimentato a <b>3,3 V</b>, mai a 5 V: le sue uscite pilotano direttamente i pin dell'ESP8266.</li>
+<li>Se l'Hydra non risponde ("Hydra: no answer" nella pagina), scambia le due linee dati lato DB9 (null-modem).</li>
+<li>Con <code>HYDRA_UART_SWAP 1</code> in <code>config.h</code> l'Hydra passa su <b>D8 (TX, GPIO15)</b> e <b>D7 (RX, GPIO13)</b>: la USB resta libera per programmare la scheda e i messaggi di avvio dell'ESP8266 non arrivano allo strumento.</li></ul>
+</div><div>
+<h3>Programmazione e primo avvio</h3>
+<ol class="small"><li>Arduino IDE con il core <b>esp8266</b> 3.1.x, scheda <b>LOLIN(WEMOS) D1 mini Pro</b> (o D1 mini), apri <code>firmware/hydra_web/hydra_web.ino</code> e carica. In alternativa PlatformIO:</li></ol>
+<pre>cd firmware
+pio run -e d1_mini_pro -t upload</pre>
+<ol class="small" start="2"><li>Senza rete configurata la scheda apre l'access point <b>Hydra-XXXX</b> (password <code>hydra2625</code>, modificabile in <code>config.h</code>); la pagina si apre da sola, altrimenti vai su <b>http://192.168.4.1</b>.</li>
+<li><b>WiFi…</b> → nome della rete e password → <i>Save &amp; restart</i>.</li>
+<li>Dalla tua rete apri <b>http://hydra.local</b>. Gli aggiornamenti successivi si possono fare via WiFi (OTA).</li></ol>
+</div></div>
+
+<h3>L'API HTTP</h3>
+<p class="small">La pagina parla con la scheda tramite una piccola API JSON, utilizzabile anche da script propri:</p>
+<table><tr><th>Metodo e percorso</th><th>A che cosa serve</th></tr>
+<tr><td class="l"><code>GET /api/status</code></td><td class="l">stato di scheda, strumento, sessione e WiFi</td></tr>
+<tr><td class="l"><code>GET /api/readings?since=SEQ</code></td><td class="l">le letture successive a SEQ, al massimo 200 per chiamata</td></tr>
+<tr><td class="l"><code>POST /api/start</code>, <code>/api/stop</code></td><td class="l">avvia o ferma: modalità, metodo, periodo e configurazione dei canali</td></tr>
+<tr><td class="l"><code>POST /api/cmd</code></td><td class="l">un comando grezzo all'Hydra (solo a misura ferma)</td></tr>
+<tr><td class="l"><code>GET/POST /api/config</code></td><td class="l">la configurazione dei canali, salvata sulla scheda</td></tr>
+<tr><td class="l"><code>POST /api/wifi</code>, <code>/api/reboot</code></td><td class="l">rete e riavvio</td></tr></table>
+<p class="vnote">Per modificare la pagina senza riprogrammare la scheda c'è <code>firmware/mock_server.py</code>, che simula il dispositivo su http://localhost:8080; <code>build_web.py</code> rigenera la pagina compressa per il firmware. Le letture restano nella pagina finché è aperta (fino a 200 000): esportale prima di chiuderla.</p>
 
 <h2>Come funziona</h2>
 <div class="mgrid2"><div>
@@ -93,8 +153,8 @@ python3 fluke_hydra_monitor.py     # collegati a /dev/pts/5</pre>
 
 <h2>Ancora da verificare</h2>
 <ul class="small"><li>Il valore di fuori scala è assunto ≥ 9E+9: va controllato che cosa restituisce il proprio strumento con un ingresso Ω aperto.</li>
-<li>La modalità "Hydra scan" (scansione gestita dallo strumento, con <code>INTVL</code>, <code>TRIGGER 1</code>, <code>SCAN 1</code>) è sperimentale: la sintassi va confermata su un'unità reale. Il metodo "Sweep" usa solo comandi già verificati ed è quello predefinito.</li></ul>
-<p class="note">La documentazione completa è nel repository: guida d'uso in <a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/docs/USER_GUIDE.md" target="_blank" rel="noopener">docs/USER_GUIDE.md</a> e protocollo in <a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/docs/PROTOCOL.md" target="_blank" rel="noopener">docs/PROTOCOL.md</a>. Per le basi delle misure di tensione, corrente e resistenza c'è il <a href="../../multimetro/index.html">capitolo sul multimetro</a>.</p>
+<li>La modalità "Hydra scan" (scansione gestita dallo strumento, con <code>INTVL</code>, <code>TRIGGER 1</code>, <code>SCAN 1</code>) è sperimentale: la sintassi va confermata su un'unità reale. Il metodo "Sweep" usa solo comandi già verificati ed è quello predefinito. Nel firmware questi comandi sono in <code>config.h</code> (<code>HSCAN_*</code>) e si possono provare dalla console della pagina con <code>INTVL?</code>, <code>TRIGGER?</code>, <code>SCAN?</code>.</li></ul>
+<p class="note">La documentazione completa è nel repository: guida al firmware in <a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/firmware/README.md" target="_blank" rel="noopener">firmware/README.md</a>, guida d'uso in <a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/docs/USER_GUIDE.md" target="_blank" rel="noopener">docs/USER_GUIDE.md</a> e protocollo in <a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/docs/PROTOCOL.md" target="_blank" rel="noopener">docs/PROTOCOL.md</a>. Per le basi delle misure di tensione, corrente e resistenza c'è il <a href="../../multimetro/index.html">capitolo sul multimetro</a>.</p>
 </div></section>
 <div class="wrap"><div style="height:30px"></div></div>
 <footer><div class="wrap"><div><b>Ham Radio Pills</b> · a cura di Elia, IV3HGA · 73!</div><div><a href="https://github.com/metallarox/hamradio-pills">github.com/metallarox/hamradio-pills</a></div></div></footer></body></html>

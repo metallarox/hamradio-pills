@@ -159,7 +159,7 @@ Gli strumenti RF, i segnali e i sistemi radio, il rumore e i disturbi: dalla mis
 
 Strumenti software e lavori di laboratorio di IV3HGA: progetti completi, con il codice su GitHub.
 
-- **[Fluke Hydra Monitor](https://github.com/metallarox/fluke_hydra_monitor)**: Un'interfaccia moderna per l'acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Pagina: [progetti/fluke-hydra-monitor/](progetti/fluke-hydra-monitor/index.html)
+- **[Fluke Hydra Monitor](https://github.com/metallarox/fluke_hydra_monitor)**: Un'interfaccia moderna per l'acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono. Pagina: [progetti/fluke-hydra-monitor/](progetti/fluke-hydra-monitor/index.html)
 
 ## Rigenerare un PDF
 
