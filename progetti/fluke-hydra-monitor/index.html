@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fluke Hydra Monitor · Progetti · Ham Radio Pills</title><meta name="description" content="Un&#x27;interfaccia moderna per l&#x27;acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono, montata sul retro dello strumento con un supporto stampato in 3D.">
-<link rel="icon" href="../../assets/logo.png"><link rel="stylesheet" href="../../assets/site.css?v=6d5a8fe1"><script src="../../assets/theme.js?v=28624b13"></script></head><body><nav class="topbar"><div class="wrap"><a class="brand" href="../../index.html"><img src="../../assets/logo.png" alt="">Ham Radio <span>Pills</span></a><div class="crumbs"><a href="../../index.html">Home</a> <span>›</span> <a href="../../progetti/index.html">Progetti</a> <span>›</span> <b>Fluke Hydra Monitor</b></div></div></nav>
+<link rel="icon" href="../../assets/logo.png"><link rel="stylesheet" href="../../assets/site.css?v=73a489aa"><script src="../../assets/theme.js?v=28624b13"></script></head><body><nav class="topbar"><div class="wrap"><a class="brand" href="../../index.html"><img src="../../assets/logo.png" alt="">Ham Radio <span>Pills</span></a><div class="crumbs"><a href="../../index.html">Home</a> <span>›</span> <a href="../../progetti/index.html">Progetti</a> <span>›</span> <b>Fluke Hydra Monitor</b></div></div></nav>
 <header class="chero"><div class="wrap"><span class="kicker">Progetti · Python · ESP8266 · RS-232 · stampa 3D</span><h1>Fluke Hydra Monitor</h1><p class="lead">Un'interfaccia moderna per l'acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono, montata sul retro dello strumento con un supporto stampato in 3D.</p>
 <div class="tags dark"><span>Fluke Hydra</span><span>RS-232</span><span>Python</span><span>ESP8266</span><span>stampa 3D</span><span>FreeCAD</span></div></div></header>
 <section class="prj"><div class="wrap">
@@ -9,7 +9,7 @@
 <h2>Un'interfaccia moderna per un acquisitore storico</h2>
 <p>Il <b>Fluke Hydra 2620A / 2625A</b> è un acquisitore dati da banco con 21 canali: tensioni continue e alternate, resistenze a 2 e 4 fili, frequenza, termocoppie e termoresistenze Pt100. È ancora uno strumento ottimo, ma il software originale è dell'epoca di DOS e Windows e oggi è difficile farlo funzionare.</p>
 <p><b>Fluke Hydra Monitor</b> è un unico script Python (Tkinter, matplotlib e pyserial) che parla con lo strumento direttamente sulla seriale RS-232, gira su Linux e non richiede altro. Mostra la lettura in grande, uno <b>strumento analogico a bobina mobile</b> disegnato come quelli da pannello, un <b>grafico</b> che scorre, l'acquisizione <b>su più canali</b> e il salvataggio in CSV.</p>
-<p>Con un <b>ESP8266</b> e un MAX3232 la stessa interfaccia diventa una pagina web, raggiungibile anche dal telefono: è <a href="#esp">Hydra Web</a>. La scheda si monta sul retro dello strumento con un <a href="#hardware">supporto stampato in 3D</a> che usa la feritoia GPIB, con tanto di modello da ruotare nel browser.</p>
+<p>Con un <b>ESP8266</b> e un MAX3232 la stessa interfaccia diventa una pagina web, raggiungibile anche dal telefono: è <a href="#esp">Hydra Web</a>. La scheda si monta sul retro dello strumento con un <a href="#hardware">supporto stampato in 3D</a> che usa la feritoia GPIB, con tanto di modello da ruotare nel browser. Più sotto ci sono anche <a href="#foto">le foto dello strumento aperto</a>.</p>
 <div class="btns"><a class="btn primary" href="https://github.com/metallarox/fluke_hydra_monitor" target="_blank" rel="noopener">Vai al progetto su GitHub</a><a class="btn ghost" href="https://github.com/metallarox/fluke_hydra_monitor/archive/refs/heads/main.zip">⬇ Scarica lo ZIP</a></div>
 <p class="vnote">Versione 1.2.0 · 73 de IV3HGA</p>
 </div>
@@ -24,6 +24,21 @@
 <div class="card"><h4>Multicanale</h4><p>Qualsiasi insieme dei 21 canali, ognuno con funzione e portata proprie: riquadri con i valori in tempo reale, una traccia per canale e vista <b>normalizzata</b> quando le grandezze sono diverse.</p></div>
 <div class="card"><h4>Dati e robustezza</h4><p>Statistiche min/max/media, gestione degli overload, CSV scritto lettura per lettura. Un solo thread possiede la porta seriale, tre tentativi sugli errori, e lo strumento viene sempre lasciato pulito con <code>MON 0</code>.</p></div>
 </div>
+
+<h2 id="foto">L'Hydra, dentro e fuori</h2>
+<p>Il mio Hydra 2625A, aperto sul banco. Clicca su una foto per vederla a piena risoluzione.</p>
+<div class="photos">
+<a class="w2" href="img/foto/frontale.jpg" target="_blank" rel="noopener"><img src="img/foto/frontale_m.jpg" alt="Pannello frontale del Fluke Hydra" loading="lazy"><span>Il frontale: display fluorescente, tasti FUNC, ALRM, Mx+B, INTVL, SCAN e MON.</span></a>
+<a href="img/foto/frontale-boccole.jpg" target="_blank" rel="noopener"><img src="img/foto/frontale-boccole_m.jpg" alt="Boccole COM e V Ω" loading="lazy"><span>Le boccole frontali COM e V Ω (300 V max): sono il canale 0.</span></a>
+<a href="img/foto/retro-gpib.jpg" target="_blank" rel="noopener"><img src="img/foto/retro-gpib_m.jpg" alt="Pannello posteriore con RS-232 e apertura GPIB" loading="lazy"><span>Il retro: la RS-232C con la piedinatura serigrafata (RX 2, TX 3, DTR 4, GND 5) e, sotto, l'<b>apertura IEEE-488</b> chiusa da un tappo: è lì che va il supporto per il Wemos.</span></a>
+<a href="img/foto/retro-aperto.jpg" target="_blank" rel="noopener"><img src="img/foto/retro-aperto_m.jpg" alt="Retro con l'apertura GPIB e le morsettiere" loading="lazy"><span>Visto da dietro, aperto: l'apertura GPIB, il connettore RS-232, le morsettiere a vite degli ingressi e la presa di alimentazione.</span></a>
+<a href="img/foto/scheda-ad.jpg" target="_blank" rel="noopener"><img src="img/foto/scheda-ad_m.jpg" alt="Scheda A/D con i relè" loading="lazy"><span>La scheda A/D ("A/D PWB ASSY"): i relè gialli selezionano i canali, la schermatura copre le morsettiere degli ingressi.</span></a>
+<a class="w2" href="img/foto/interno-lato.jpg" target="_blank" rel="noopener"><img src="img/foto/interno-lato_m.jpg" alt="Scheda principale" loading="lazy"><span>La scheda principale ("MAIN ASSY"): a destra l'alimentatore con i trasformatori, al centro il microcontrollore, in basso a sinistra la scheda di memoria.</span></a>
+<a href="img/foto/digitale.jpg" target="_blank" rel="noopener"><img src="img/foto/digitale_m.jpg" alt="Sezione digitale" loading="lazy"><span>La sezione digitale: microcontrollore Hitachi HD63A03, EPROM del firmware (U8, versione 5.4, John Fluke 1990), cristallo, logica 74HC e reti resistive.</span></a>
+<a href="img/foto/memoria.jpg" target="_blank" rel="noopener"><img src="img/foto/memoria_m.jpg" alt="Scheda di memoria e Timekeeper" loading="lazy"><span>La scheda di memoria con due SRAM non volatili Dallas DS1245Y, innestata su J1. Sotto, la MK48T08 "Timekeeper", RAM con orologio e batteria integrati.</span></a>
+<a href="img/foto/digitale-dettaglio.jpg" target="_blank" rel="noopener"><img src="img/foto/digitale-dettaglio_m.jpg" alt="Dettaglio della logica" loading="lazy"><span>Dettaglio: Hitachi HD63A40, EPROM e Timekeeper; sotto, la logica 74HC, gli LM324 e le reti resistive Dale.</span></a>
+</div>
+<p class="vnote">Una nota pratica: la MK48T08 e le DS1245Y hanno la batteria al litio dentro il contenitore. Dopo più di trent'anni possono essere scariche: se l'Hydra perde configurazione e ora a ogni spegnimento, il sospetto va lì.</p>
 
 <h2>Le schermate</h2>
 <div class="gallery">

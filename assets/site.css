@@ -211,3 +211,11 @@ html[data-theme=dark] .v3d-stage{background:radial-gradient(ellipse at 50% 30%,#
 html[data-theme=dark] .v3d-bar button{background:#131d2e;color:#eaf2fb;border-color:#3a4c66}
 html[data-theme=dark] .v3d-bar button.on,html[data-theme=dark] .v3d-bar .v3d-play{background:var(--blue);border-color:var(--blue)}
 @media (max-width:860px){.v3d-stage{height:380px}.v3d-sl{margin-left:0;width:100%}.v3d-sl input{flex:1}}
+/* foto */
+.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:18px 0 10px}
+.photos a{text-decoration:none;color:var(--mute);font-size:14px;line-height:1.45}
+.photos img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:12px;border:1px solid var(--line);box-shadow:0 12px 34px rgba(10,26,46,.16);transition:box-shadow .15s}
+.photos a.w2{grid-column:span 2}.photos a.w2 img{aspect-ratio:3/2}
+.photos a:hover img{box-shadow:0 16px 44px rgba(10,26,46,.32)}
+.photos span{display:block;margin-top:10px}.photos span a{color:var(--blue)}
+@media (max-width:860px){.photos{grid-template-columns:1fr}.photos a.w2{grid-column:auto}.photos img{aspect-ratio:4/3}}
