@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fluke Hydra Monitor · Progetti · Ham Radio Pills</title><meta name="description" content="Un&#x27;interfaccia moderna per l&#x27;acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono, montata sul retro dello strumento con un supporto stampato in 3D.">
-<link rel="icon" href="../../assets/logo.png"><link rel="stylesheet" href="../../assets/site.css?v=73a489aa"><script src="../../assets/theme.js?v=28624b13"></script></head><body><nav class="topbar"><div class="wrap"><a class="brand" href="../../index.html"><img src="../../assets/logo.png" alt="">Ham Radio <span>Pills</span></a><div class="crumbs"><a href="../../index.html">Home</a> <span>›</span> <a href="../../progetti/index.html">Progetti</a> <span>›</span> <b>Fluke Hydra Monitor</b></div></div></nav>
+<link rel="icon" href="../../assets/logo.png"><link rel="stylesheet" href="../../assets/site.css?v=6e8975b3"><script src="../../assets/theme.js?v=28624b13"></script></head><body><nav class="topbar"><div class="wrap"><a class="brand" href="../../index.html"><img src="../../assets/logo.png" alt="">Ham Radio <span>Pills</span></a><div class="crumbs"><a href="../../index.html">Home</a> <span>›</span> <a href="../../progetti/index.html">Progetti</a> <span>›</span> <b>Fluke Hydra Monitor</b></div></div></nav>
 <header class="chero"><div class="wrap"><span class="kicker">Progetti · Python · ESP8266 · RS-232 · stampa 3D</span><h1>Fluke Hydra Monitor</h1><p class="lead">Un'interfaccia moderna per l'acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono, montata sul retro dello strumento con un supporto stampato in 3D.</p>
 <div class="tags dark"><span>Fluke Hydra</span><span>RS-232</span><span>Python</span><span>ESP8266</span><span>stampa 3D</span><span>FreeCAD</span></div></div></header>
 <section class="prj"><div class="wrap">
@@ -269,6 +269,9 @@ _poll() ogni 100 ms ◄── coda eventi ◄── letture, stato, errori
 <p>Con ζ = 0,2 l'ago danza a lungo, con ζ = 2 arriva troppo piano. ζ = 0,55 è un compromesso realistico: un piccolo superamento ben visibile, che dà l'impressione di uno strumento vero, e un assestamento rapido.</p>
 </div></div>
 
+<div class="nl-box"><h4>▶ Prova tu: l'ago, la molla e lo smorzatore</h4>
+<p class="small">L'ago a sinistra e la massa a destra obbediscono alla stessa equazione, calcolata qui nel browser con lo stesso algoritmo del programma. Le frecce sono le tre forze: la <span class="co">bobina</span> spinge verso l'obiettivo, la <span class="cg">molla</span> richiama verso lo zero, lo <span class="cb">smorzatore</span> si oppone alla velocità; la loro somma è l'accelerazione x''. Sotto, i conti dell'equazione con i valori di questo istante. Cambia ζ e ωn e guarda come cambia il movimento.</p>
+<div class="nl" data-w="lab"></div></div>
 <h3>3 · La soluzione, con i numeri</h3>
 <div class="mgrid2"><div>
 <p>Per un gradino unitario (l'obiettivo passa da 0 a 1) con ζ &lt; 1 la soluzione esatta è:</p>
@@ -296,6 +299,9 @@ _poll() ogni 100 ms ◄── coda eventi ◄── letture, stato, errori
 <p class="note">È lo stesso modo di ragionare che si usa per i filtri: un Butterworth del secondo ordine è proprio il caso ζ = 0,707.</p>
 </div></div>
 
+<div class="nl-box"><h4>▶ I poli si muovono, la risposta cambia</h4>
+<p class="small">Sposta ζ: i poli scorrono sulla circonferenza di raggio ω<sub>n</sub> = 13. A destra la risposta al gradino si ridisegna nel tempo, chiusa nel suo inviluppo esponenziale (in verde). Con ζ = 0 i poli sono sull'asse immaginario e l'oscillazione non si spegne mai; da ζ = 1 in su diventano reali e l'oscillazione sparisce.</p>
+<div class="nl" data-w="poles"></div></div>
 <h3>5 · Vista in frequenza: perché l'ago "fa la media"</h3>
 <div class="mgrid2"><div><figure class="plot"><img src="img/math/freq.svg" alt="Risposta in frequenza dell'ago"></figure></div><div>
 <p>Se la lettura cambiasse in modo sinusoidale, l'ago la seguirebbe con un'ampiezza data da |H(jω)|:</p>
@@ -306,6 +312,9 @@ _poll() ogni 100 ms ◄── coda eventi ◄── letture, stato, errori
 <li>Con una lettura ogni 0,5 s le variazioni non possono essere più veloci di 1 Hz: nel caso peggiore l'ago le esagera di 0,6 dB, cioè meno del 7 %.</li></ul>
 </div></div>
 
+<div class="nl-box"><h4>▶ Una lettura che oscilla</h4>
+<p class="small">Qui l'obiettivo è una sinusoide (tratteggiata) e l'ago la insegue. A bassa frequenza la segue fedelmente; verso 1,3 Hz la esagera un poco; sopra qualche hertz si muove sempre meno e in ritardo, fino quasi a fermarsi sul valore medio. A destra il punto si muove sulla curva della risposta in frequenza; sotto, l'ampiezza misurata sulla simulazione si confronta con la formula. La piccola differenza, circa un decimo di dB vicino al picco, è proprio l'effetto dell'integratore discreto descritto nel punto 6.</p>
+<div class="nl" data-w="freq"></div></div>
 <h3>6 · Come lo calcola il programma</h3>
 <div class="mgrid2"><div>
 <pre>wn, zeta, dt = 13.0, 0.55, 0.008
@@ -326,6 +335,9 @@ for _ in range(2):                   # 2 passi da 8 ms ogni fotogramma
 <figure class="plot"><img src="img/math/euler.svg" alt="Soluzione esatta e soluzione numerica"></figure>
 </div></div>
 
+<div class="nl-box"><h4>▶ Il calcolo, un passo alla volta</h4>
+<p class="small">Ogni pressione di <b>Un passo</b> esegue le tre righe del programma, con i numeri veri: il punto arancione è la posizione calcolata, la linea è la soluzione esatta. Attiva il confronto con l'<b>Euler esplicito</b> e togli lo smorzamento: il metodo "ingenuo" si allontana a ogni oscillazione, quello del programma no. Alza Δt oltre 154 ms e anche il semi-implicito perde la stabilità.</p>
+<div class="nl" data-w="euler"></div></div>
 <h3>7 · Fermi meccanici e rimbalzo</h3>
 <div class="mgrid2"><div><figure class="plot"><img src="img/math/stop.svg" alt="L'ago sbatte sul fermo e rimbalza"></figure></div><div>
 <ul><li>L'obiettivo è limitato tra −5,5 % e +105,5 % della scala: in overload l'ago punta poco oltre il fondo scala, come uno strumento vero.</li>
@@ -334,6 +346,9 @@ for _ in range(2):                   # 2 passi da 8 ms ogni fotogramma
 <li>Tratteggiata, la traiettoria che l'ago avrebbe senza fermo: arriverebbe a circa il 118 %.</li></ul>
 <p class="note">Tutto questo per un ago disegnato sullo schermo: è un vezzo, appunto. Ma la matematica è la stessa di filtri, oscillatori, PLL e controlli automatici, e vederla all'opera su qualcosa che si muove davanti agli occhi aiuta a non dimenticarla.</p>
 </div></div>
+<div class="nl-box"><h4>▶ Contro il fermo</h4>
+<p class="small">Manda l'ago all'80 %, al 94 %, al 97 % e in overload: con l'11,6 % di sovraelongazione, da circa il 95 % in su l'ago sbatte sul fermo (cerchio arancione) e torna indietro con un quarto della velocità. Cambia il coefficiente di restituzione e per vedere un fermo più "gommoso" (e piccolo) o più elastico.</p>
+<div class="nl" data-w="bounce"></div></div>
 </div></section>
 <section class="prj"><div class="wrap">
 <h2>Installazione e avvio</h2>
@@ -368,5 +383,5 @@ python3 fluke_hydra_monitor.py     # collegati a /dev/pts/5</pre>
 <li>La modalità "Hydra scan" (scansione gestita dallo strumento, con <code>INTVL</code>, <code>TRIGGER 1</code>, <code>SCAN 1</code>) è sperimentale: la sintassi va confermata su un'unità reale. Il metodo "Sweep" usa solo comandi già verificati ed è quello predefinito. Nel firmware questi comandi sono in <code>config.h</code> (<code>HSCAN_*</code>) e si possono provare dalla console della pagina con <code>INTVL?</code>, <code>TRIGGER?</code>, <code>SCAN?</code>.</li></ul>
 <p class="note">La documentazione completa è nel repository: guida al firmware in <a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/firmware/README.md" target="_blank" rel="noopener">firmware/README.md</a>, guida d'uso in <a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/docs/USER_GUIDE.md" target="_blank" rel="noopener">docs/USER_GUIDE.md</a> e protocollo in <a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/docs/PROTOCOL.md" target="_blank" rel="noopener">docs/PROTOCOL.md</a>. Per le basi delle misure di tensione, corrente e resistenza c'è il <a href="../../multimetro/index.html">capitolo sul multimetro</a>.</p>
 </div></section>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script><script type="module" src="../../assets/viewer3d.js?v=ccd6e8b7"></script><div class="wrap"><div style="height:30px"></div></div>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script><script type="module" src="../../assets/viewer3d.js?v=ccd6e8b7"></script><script src="../../assets/needle-lab.js?v=69387023" defer></script><div class="wrap"><div style="height:30px"></div></div>
 <footer><div class="wrap"><div><b>Ham Radio Pills</b> · a cura di Elia, IV3HGA · 73!</div><div><a href="https://github.com/metallarox/hamradio-pills">github.com/metallarox/hamradio-pills</a></div></div></footer></body></html>
