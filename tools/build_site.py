@@ -263,7 +263,7 @@ def head(title,desc,up):
 <link rel="icon" href="{up}assets/logo.png"><link rel="stylesheet" href="{up}assets/site.css?v={VER['assets/site.css']}"><script src="{up}assets/theme.js?v={VER['assets/theme.js']}"></script></head><body>'''
 def topbar(up,crumbs):
     cr=" <span>›</span> ".join(f'<a href="{h}">{t}</a>' if h else f'<b>{t}</b>' for t,h in crumbs)
-    return f'''<nav class="topbar"><div class="wrap"><a class="brand" href="{up}index.html"><img src="{up}assets/logo.png" alt="">Ham Radio <span>Pills</span></a><div class="crumbs">{cr}</div></div></nav>'''
+    return f'''<nav class="topbar"><div class="wrap"><a class="brand" href="{up}index.html"><img src="{up}assets/logo.png" alt="">Ham Radio <span>Pills</span></a><div class="crumbs">{cr}</div><div class="menu"><a href="{up}corso/index.html">Corso</a><a href="{up}progetti/index.html">Progetti</a></div></div></nav>'''
 def pager(prev,nxt):
     l=f'<a class="pg prev" href="{prev[0]}"><small>← precedente</small><b>{prev[1]}</b></a>' if prev else '<span></span>'
     r=f'<a class="pg next" href="{nxt[0]}"><small>successivo →</small><b>{nxt[1]}</b></a>' if nxt else '<span></span>'
@@ -286,7 +286,7 @@ for k,c in enumerate(CHAPTERS):
     cards="".join(mod_card(c,i+1,m,up) for i,m in enumerate(c["mods"]))
     pv=CHAPTERS[k-1] if k>0 else None; nx=CHAPTERS[k+1] if k+1<len(CHAPTERS) else None
     pg=pager((f'{up}{cdir(pv)}/index.html',f'{pv["num"]} · {pv["title"]}') if pv else None,(f'{up}{cdir(nx)}/index.html',f'{nx["num"]} · {nx["title"]}') if nx else None)
-    W(os.path.join(ROOT,cdir(c),"index.html"),head(f'{c["num"]} · {c["title"]} · Ham Radio Pills',c["intro"],up)+topbar(up,[("Home",f"{up}index.html"),(x["title"],f'{up}index.html#{x["id"]}'),(c["title"],None)])+f'''
+    W(os.path.join(ROOT,cdir(c),"index.html"),head(f'{c["num"]} · {c["title"]} · Ham Radio Pills',c["intro"],up)+topbar(up,[("Home",f"{up}index.html"),("Corso",f"{up}corso/index.html"),(x["title"],f'{up}corso/index.html#{x["id"]}'),(c["title"],None)])+f'''
 <header class="chero"><div class="wrap"><span class="kicker">{x["kicker"]} · {x["title"]}</span><div class="chap-head"><span class="chap-num">{c["num"]}</span><h1>{c["title"]}</h1></div>
 <p class="lead">{c["intro"]}</p><div class="cstats">{n} {"modulo" if n==1 else "moduli"} · {sum(m["slides"] for m in c["mods"])} slide</div></div></header>
 <section class="chapter"><div class="wrap"><div class="path p{n}">{steps}</div>{cards}{pg}</div></section>
@@ -298,7 +298,7 @@ for k,(c,i,m) in enumerate(ALL):
     lk=lambda t:(f'{up}{t[2]["dir"]}/index.html',t[2]["title"])
     pg=pager(lk(pv) if pv else None,lk(nx) if nx else None)
     others="".join(f'<a class="{"on" if j+1==i else ""}" href="{up}{mm["dir"]}/index.html"><small>Modulo {j+1}</small>{mm["short"]}</a>' for j,mm in enumerate(c["mods"]))
-    W(os.path.join(ROOT,m["dir"],"index.html"),head(f'{m["title"]} · Ham Radio Pills',f'{c["num"]} · {c["title"]}: {m["meta"]}',up)+topbar(up,[("Home",f"{up}index.html"),(c["title"],ch),(m["short"],None)])+f'''
+    W(os.path.join(ROOT,m["dir"],"index.html"),head(f'{m["title"]} · Ham Radio Pills',f'{c["num"]} · {c["title"]}: {m["meta"]}',up)+topbar(up,[("Home",f"{up}index.html"),("Corso",f"{up}corso/index.html"),(c["title"],ch),(m["short"],None)])+f'''
 <header class="chero"><div class="wrap"><span class="kicker">{c["num"]} · {c["title"]} · Modulo {i} di {len(c["mods"])}</span><h1>{m["title"]}</h1>
 <p class="lead">{m["slides"]} slide · {m["meta"]}</p>
 <div class="btns"><a class="btn primary" href="{m["pdf"]}" download>⬇ Scarica PDF</a><a class="btn ghost" href="{m["pdf"]}" target="_blank" rel="noopener">Apri a schermo intero</a></div></div></header>
@@ -328,7 +328,7 @@ def prj_card(pr,up):
 <div class="tags">{"".join(f"<span>{t}</span>" for t in pr["tags"])}</div>
 <div class="btns"><a class="btn primary" href="{up}{pr["dir"]}/index.html">Apri il progetto →</a><a class="btn ghost" href="{pr["repo"]}" target="_blank" rel="noopener">GitHub</a></div></div></article>'''
 W(os.path.join(ROOT,"progetti","index.html"),head("Progetti · Ham Radio Pills",PRJ_INTRO,"../")+topbar("../",[("Home","../index.html"),("Progetti",None)])+f'''
-<header class="chero"><div class="wrap"><span class="kicker">Sezione 3</span><h1>Progetti</h1><p class="lead">{PRJ_INTRO}</p><div class="cstats">{len(PROJECTS)} {"progetto" if len(PROJECTS)==1 else "progetti"}</div></div></header>
+<header class="chero"><div class="wrap"><span class="kicker">Ham Radio Pills</span><h1>Progetti</h1><p class="lead">{PRJ_INTRO}</p><div class="cstats">{len(PROJECTS)} {"progetto" if len(PROJECTS)==1 else "progetti"}</div></div></header>
 <section class="chapter"><div class="wrap">{"".join(prj_card(pr,"../") for pr in PROJECTS)}<div style="height:50px"></div></div></section>
 {FOOT}</body></html>''')
 for k,pr in enumerate(PROJECTS):
@@ -340,15 +340,34 @@ for k,pr in enumerate(PROJECTS):
 <div class="tags dark">{"".join(f"<span>{t}</span>" for t in pr["tags"])}</div></div></header>
 {body}<script type="importmap">{{"imports":{{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}}}</script><script type="module" src="{up}assets/viewer3d.js?v={_v('assets/viewer3d.js')}"></script><script src="{up}assets/needle-lab.js?v={_v('assets/needle-lab.js')}" defer></script><div class="wrap">{pg}<div style="height:30px"></div></div>
 {FOOT}</body></html>''')
-prjblock=f'''<div class="secblock" id="sez-progetti"><span class="kicker">Sezione 3</span><h2><a class="plain" href="progetti/index.html">Progetti</a></h2><p class="sub">{PRJ_INTRO}</p><div class="toc prj-toc">'''+"".join(f'<a href="{pr["dir"]}/index.html"><img src="assets/{pr["img"]}" alt=""><small>Progetto · {pr["meta"]}</small><h3>{pr["title"]}</h3><p>{pr["intro"]}</p><span class="go">Apri il progetto →</span></a>' for pr in PROJECTS)+'</div></div>'
-sect="".join(f'''<div class="secblock" id="{x["id"]}"><span class="kicker">{x["kicker"]}</span><h2>{x["title"]}</h2><p class="sub">{x["intro"]}</p><div class="toc">'''+"".join(f'<a href="{cdir(c)}/index.html"><small>{c["num"]} · {len(c["mods"])} {"modulo" if len(c["mods"])==1 else "moduli"}</small><h3>{c["title"]}</h3><p>{c["intro"]}</p><span class="go">Vai al capitolo →</span></a>' for c in (_byid[i] for i in x["ids"]))+'</div></div>' for x in SECTIONS)
-page=head("Ham Radio Pills · corso di elettronica e radiofrequenza · IV3HGA","Corso gratuito per radioamatori, diviso in elettronica e radiofrequenza: multimetro, oscilloscopio, VNA, carta di Smith, analizzatore di spettro, wattmetro RF, modulazioni, rumore, modo comune. A cura di IV3HGA.","")+f'''
+LATEST=[("Progetto",PROJECTS[0]["title"],PROJECTS[0]["intro"],f'{PROJECTS[0]["dir"]}/index.html')]+[(c["num"],c["title"],c["intro"],f'{cdir(c)}/index.html') for c in (_byid["lcr"],_byid["cm"])]
+sect="".join(f'''<div class="secblock" id="{x["id"]}"><span class="kicker">{x["kicker"]}</span><h2>{x["title"]}</h2><p class="sub">{x["intro"]}</p><div class="toc">'''+"".join(f'<a href="../{cdir(c)}/index.html"><small>{c["num"]} · {len(c["mods"])} {"modulo" if len(c["mods"])==1 else "moduli"}</small><h3>{c["title"]}</h3><p>{c["intro"]}</p><span class="go">Vai al capitolo →</span></a>' for c in (_byid[i] for i in x["ids"]))+'</div></div>' for x in SECTIONS)
+COURSE_INTRO="Un corso in pillole di elettronica e radiofrequenza per il laboratorio e la stazione: il multimetro e l'oscilloscopio, l'LCR meter, il VNA e la carta di Smith, l'analizzatore di spettro, il generatore e il wattmetro RF, e poi decibel, modulazioni, FT8, accesso multiplo, telefonia, rumore e correnti di modo comune."
+W(os.path.join(ROOT,"corso","index.html"),head("Il corso · Ham Radio Pills",COURSE_INTRO,"../")+topbar("../",[("Home","../index.html"),("Corso",None)])+f'''
+<header class="chero"><div class="wrap"><span class="kicker">Ham Radio Pills</span><h1>Il corso</h1><p class="lead">{COURSE_INTRO}</p>
+<div class="cstats">{len(CHAPTERS)} capitoli · {nmod} moduli · {nsl} slide · PDF gratuiti</div>
+<div class="btns" style="margin-top:20px"><a class="btn primary" href="../{cdir(CHAPTERS[0])}/index.html">Inizia dal primo capitolo →</a></div></div></header>
+<section id="capitoli"><div class="wrap">
+<p class="sub" style="margin-top:40px">Il corso è diviso in due sezioni, elettronica e radiofrequenza, precedute dai decibel che servono a entrambe. Ogni capitolo ha la sua pagina, e ogni modulo la sua: si possono leggere anche da soli.</p>
+<div class="toc jump three">{"".join(f'<a href="#{x["id"]}"><small>{x["kicker"]}</small><h3>{x["title"]}</h3><p>{len(x["ids"])} {"capitolo" if len(x["ids"])==1 else "capitoli"}</p></a>' for x in SECTIONS)}</div>
+{sect}</div></section>
+<section class="info"><div class="wrap"><h2>Come seguire il corso</h2>
+<p class="sub">Non serve un laboratorio: bastano strumenti economici e la voglia di provare sul banco quello che leggi.</p>
+<div class="grid3">
+<div class="card"><h4>📡 Cosa serve</h4><p>Un buon multimetro true RMS, un oscilloscopio con sonde 10×, un VNA anche economico (NanoVNA, LiteVNA o simili) con kit SOL, un analizzatore di spettro (anche un tinySA), un generatore RF, un wattmetro passante, un carico fittizio, attenuatori, un DC block e qualche cavo.</p></div>
+<div class="card"><h4>🧭 Come procedere</h4><p>Leggi un modulo, poi rifai la misura sul banco. Ogni presentazione ha formule pronte, esempi numerici e checklist finali.</p></div>
+<div class="card"><h4>🧪 Esempi e sorgenti</h4><p>Grafici ed esempi vengono da simulazioni verificate. Gli script Python che generano slide e grafici sono nel repository: modificali per i tuoi casi.</p></div>
+</div></div></section>
+{FOOT}</body></html>''')
+# --- homepage
+nprj=len(PROJECTS)
+page=head("Ham Radio Pills · elettronica e radiofrequenza · IV3HGA","Ham Radio Pills di IV3HGA: un corso gratuito di elettronica e radiofrequenza per radioamatori e una raccolta di progetti di laboratorio.","")+f'''
 <header class="hero"><div class="wrap"><div>
-  <span class="kicker">Corso · elettronica e radiofrequenza per radioamatori</span>
+  <span class="kicker">Elettronica e radiofrequenza · IV3HGA</span>
   <h1>Ham Radio <span>Pills</span></h1>
-  <p class="lead">Un corso in pillole di elettronica e radiofrequenza per il laboratorio e la stazione: il multimetro e l'oscilloscopio, il VNA e la carta di Smith, l'analizzatore di spettro, il generatore e il wattmetro RF, e poi decibel, modulazioni, FT8, accesso multiplo, telefonia, rumore e correnti di modo comune.</p>
-  <div class="btns"><a class="btn primary" href="#capitoli">Inizia il corso ↓</a><a class="btn ghost" href="https://github.com/metallarox/hamradio-pills">Sorgenti su GitHub</a></div>
-  <div class="stats"><div><b>{len(CHAPTERS)}</b>capitoli</div><div><b>{nmod}</b>moduli</div><div><b>{nsl}</b>slide</div><div><b>PDF</b>gratuiti</div></div>
+  <p class="lead">Pillole di elettronica e radiofrequenza per il laboratorio e la stazione: un corso con presentazioni gratuite e una raccolta di progetti, con il codice e i file per rifarli.</p>
+  <div class="btns"><a class="btn primary" href="corso/index.html">Il corso →</a><a class="btn ghost" href="progetti/index.html">I progetti →</a></div>
+  <div class="stats"><div><b>{len(CHAPTERS)}</b>capitoli</div><div><b>{nmod}</b>moduli</div><div><b>{nsl}</b>slide</div><div><b>{nprj}</b>{"progetto" if nprj==1 else "progetti"}</div></div>
 </div><img src="assets/logo.png" alt="Logo IV3HGA"></div></header>
 <section class="mission"><div class="wrap"><div class="mgrid">
 <figure class="author"><img src="assets/iv3hga-traliccio.jpg" alt="Elia, IV3HGA, al lavoro su un traliccio"><figcaption>Elia · IV3HGA, al lavoro in quota</figcaption></figure>
@@ -357,16 +376,16 @@ page=head("Ham Radio Pills · corso di elettronica e radiofrequenza · IV3HGA","
 <p>Questo sito vuole spiegare qualche concetto che ci può tornare utile nelle nostre attività di laboratorio e in stazione. La trattazione è <b>pratica e non troppo accademica</b>: si parte da quello che vediamo sul banco, con qualche pillola di teoria qua e là, quando serve a capire davvero cosa succede.</p>
 <blockquote>La matematica, per quanto indigesta, è il linguaggio che ci permette di collegare tutte le materie del mondo e di rappresentare qualsiasi cosa in un unico linguaggio che non conosce confini.</blockquote></div>
 </div></div></section>
-<section id="capitoli"><div class="wrap"><h2>I capitoli</h2>
-<p class="sub">Il corso è diviso in due sezioni, elettronica e radiofrequenza, precedute dai decibel che servono a entrambe. Ogni capitolo ha la sua pagina, e ogni modulo la sua: si possono leggere anche da soli.</p>
-{sect}{prjblock}</div></section>
-<section class="info"><div class="wrap"><h2>Come seguire il corso</h2>
-<p class="sub">Non serve un laboratorio: bastano strumenti economici e la voglia di provare sul banco quello che leggi.</p>
-<div class="grid3">
-<div class="card"><h4>📡 Cosa serve</h4><p>Un buon multimetro true RMS, un oscilloscopio con sonde 10×, un VNA anche economico (NanoVNA, LiteVNA o simili) con kit SOL, un analizzatore di spettro (anche un tinySA), un generatore RF, un wattmetro passante, un carico fittizio, attenuatori, un DC block e qualche cavo.</p></div>
-<div class="card"><h4>🧭 Come procedere</h4><p>Leggi un modulo, poi rifai la misura sul banco. Ogni presentazione ha formule pronte, esempi numerici e checklist finali.</p></div>
-<div class="card"><h4>🧪 Esempi e sorgenti</h4><p>Grafici ed esempi vengono da simulazioni verificate. Gli script Python che generano slide e grafici sono nel repository: modificali per i tuoi casi.</p></div>
-</div></div></section>
+<section id="sezioni"><div class="wrap"><h2>Da dove vuoi partire?</h2>
+<div class="doors">
+<a class="door" href="corso/index.html"><div class="door-img"><img src="assets/{CHAPTERS[min(3,len(CHAPTERS)-1)]["mods"][0]["img"]}" alt=""></div><div class="door-body"><span class="kicker">Sezione · {nmod} moduli</span><h3>Il corso</h3><p>{COURSE_INTRO}</p>
+<div class="minitoc">{"".join(f'<span><b>{x["title"]}</b> · {len(x["ids"])} {"capitolo" if len(x["ids"])==1 else "capitoli"}</span>' for x in SECTIONS)}</div><span class="go">Apri il corso →</span></div></a>
+<a class="door" href="progetti/index.html"><div class="door-img"><img src="assets/{PROJECTS[0]["img"]}" alt=""></div><div class="door-body"><span class="kicker">Sezione · {nprj} {"progetto" if nprj==1 else "progetti"}</span><h3>Progetti</h3><p>{PRJ_INTRO}</p>
+<div class="minitoc">{"".join(f'<span><b>{pr["title"]}</b> · {pr["meta"]}</span>' for pr in PROJECTS)}</div><span class="go">Apri i progetti →</span></div></a>
+</div>
+<h3 class="tochead">Le ultime aggiunte</h3>
+<div class="toc three">{"".join(f'<a href="{l}"><small>{k}</small><h3>{t}</h3><p>{d}</p></a>' for k,t,d,l in LATEST)}</div>
+</div></section>
 {FOOT}</body></html>'''
 open(os.path.join(ROOT,"index.html"),"w").write(page)
 # README
