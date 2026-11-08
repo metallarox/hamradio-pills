@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fluke Hydra Monitor · Progetti · Ham Radio Pills</title><meta name="description" content="Un&#x27;interfaccia moderna per l&#x27;acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono.">
-<link rel="icon" href="../../assets/logo.png"><link rel="stylesheet" href="../../assets/site.css?v=baeef5b0"><script src="../../assets/theme.js?v=28624b13"></script></head><body><nav class="topbar"><div class="wrap"><a class="brand" href="../../index.html"><img src="../../assets/logo.png" alt="">Ham Radio <span>Pills</span></a><div class="crumbs"><a href="../../index.html">Home</a> <span>›</span> <a href="../../progetti/index.html">Progetti</a> <span>›</span> <b>Fluke Hydra Monitor</b></div></div></nav>
-<header class="chero"><div class="wrap"><span class="kicker">Progetti · Python · ESP8266 · RS-232 · WiFi</span><h1>Fluke Hydra Monitor</h1><p class="lead">Un'interfaccia moderna per l'acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono.</p>
-<div class="tags dark"><span>Fluke Hydra</span><span>RS-232</span><span>Python</span><span>ESP8266</span><span>WiFi</span><span>CSV</span></div></div></header>
+<title>Fluke Hydra Monitor · Progetti · Ham Radio Pills</title><meta name="description" content="Un&#x27;interfaccia moderna per l&#x27;acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono, montata sul retro dello strumento con un supporto stampato in 3D.">
+<link rel="icon" href="../../assets/logo.png"><link rel="stylesheet" href="../../assets/site.css?v=6d5a8fe1"><script src="../../assets/theme.js?v=28624b13"></script></head><body><nav class="topbar"><div class="wrap"><a class="brand" href="../../index.html"><img src="../../assets/logo.png" alt="">Ham Radio <span>Pills</span></a><div class="crumbs"><a href="../../index.html">Home</a> <span>›</span> <a href="../../progetti/index.html">Progetti</a> <span>›</span> <b>Fluke Hydra Monitor</b></div></div></nav>
+<header class="chero"><div class="wrap"><span class="kicker">Progetti · Python · ESP8266 · RS-232 · stampa 3D</span><h1>Fluke Hydra Monitor</h1><p class="lead">Un'interfaccia moderna per l'acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono, montata sul retro dello strumento con un supporto stampato in 3D.</p>
+<div class="tags dark"><span>Fluke Hydra</span><span>RS-232</span><span>Python</span><span>ESP8266</span><span>stampa 3D</span><span>FreeCAD</span></div></div></header>
 <section class="prj"><div class="wrap">
 <div class="prj-intro"><div>
 <h2>Un'interfaccia moderna per un acquisitore storico</h2>
 <p>Il <b>Fluke Hydra 2620A / 2625A</b> è un acquisitore dati da banco con 21 canali: tensioni continue e alternate, resistenze a 2 e 4 fili, frequenza, termocoppie e termoresistenze Pt100. È ancora uno strumento ottimo, ma il software originale è dell'epoca di DOS e Windows e oggi è difficile farlo funzionare.</p>
 <p><b>Fluke Hydra Monitor</b> è un unico script Python (Tkinter, matplotlib e pyserial) che parla con lo strumento direttamente sulla seriale RS-232, gira su Linux e non richiede altro. Mostra la lettura in grande, uno <b>strumento analogico a bobina mobile</b> disegnato come quelli da pannello, un <b>grafico</b> che scorre, l'acquisizione <b>su più canali</b> e il salvataggio in CSV.</p>
-<p>Con un <b>ESP8266</b> e un MAX3232 la stessa interfaccia diventa una pagina web, raggiungibile anche dal telefono: è <a href="#esp">Hydra Web</a>, descritto più sotto.</p>
+<p>Con un <b>ESP8266</b> e un MAX3232 la stessa interfaccia diventa una pagina web, raggiungibile anche dal telefono: è <a href="#esp">Hydra Web</a>. La scheda si monta sul retro dello strumento con un <a href="#hardware">supporto stampato in 3D</a> che usa la feritoia GPIB, con tanto di modello da ruotare nel browser.</p>
 <div class="btns"><a class="btn primary" href="https://github.com/metallarox/fluke_hydra_monitor" target="_blank" rel="noopener">Vai al progetto su GitHub</a><a class="btn ghost" href="https://github.com/metallarox/fluke_hydra_monitor/archive/refs/heads/main.zip">⬇ Scarica lo ZIP</a></div>
 <p class="vnote">Versione 1.2.0 · 73 de IV3HGA</p>
 </div>
@@ -37,7 +37,7 @@
 
 <h2 id="esp">Hydra Web: l'Hydra nel browser con un ESP8266</h2>
 <div class="prj-intro"><div>
-<p>Dalla versione 1.2.0 c'è anche un <b>firmware per ESP8266</b>. Un <b>Wemos D1 mini (Pro)</b> con un convertitore <b>MAX3232</b> collegato alla porta RS-232 dell'Hydra trasforma l'acquisitore in uno strumento di rete: aprendo <b>http://hydra.local</b> da qualsiasi browser, anche dal telefono, si trova la stessa interfaccia del programma desktop.</p>
+<p>C'è anche un <b>firmware per ESP8266</b>. Un <b>Wemos D1 mini (Pro)</b> con un convertitore <b>MAX3232</b> collegato alla porta RS-232 dell'Hydra trasforma l'acquisitore in uno strumento di rete: aprendo <b>http://hydra.local</b> da qualsiasi browser, anche dal telefono, si trova la stessa interfaccia del programma desktop.</p>
 <p>L'acquisizione gira <b>sull'ESP8266</b>, non nel browser: continua anche a pagina chiusa, e riaprendola da qualsiasi dispositivo si ritrova la sessione in corso con le ultime 600 letture conservate sulla scheda.</p>
 <div class="btns"><a class="btn primary" href="https://github.com/metallarox/fluke_hydra_monitor/tree/main/firmware" target="_blank" rel="noopener">Il firmware su GitHub</a><a class="btn ghost" href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/firmware/README.md" target="_blank" rel="noopener">Guida al firmware</a></div>
 </div><a class="prj-hero" href="img/web/web_multi.png" target="_blank" rel="noopener"><img src="img/web/web_multi.png" alt="Hydra Web in modalità multicanale nel browser"></a></div>
@@ -67,17 +67,18 @@
 ─────────────────      ───────────────            ──────────────────
 3V3  ───────────────── VCC
 GND  ───────────────── GND ────────────────────── pin 5  GND
-TX  (GPIO1) ────────── T1IN    T1OUT ──────────── RX dell'Hydra
-RX  (GPIO3) ────────── R1OUT   R1IN  ──────────── TX dell'Hydra
+D8  (GPIO15) ───────── T1IN    T1OUT ──────────── RX dell'Hydra
+D7  (GPIO13) ───────── R1OUT   R1IN  ──────────── TX dell'Hydra
 5V  ── USB, o step-down a 5 V dall'alimentazione 9–16 V dell'Hydra</pre>
-<ul class="small"><li>Il MAX3232 va alimentato a <b>3,3 V</b>, mai a 5 V: le sue uscite pilotano direttamente i pin dell'ESP8266.</li>
-<li>Se l'Hydra non risponde ("Hydra: no answer" nella pagina), scambia le due linee dati lato DB9 (null-modem).</li>
-<li>Con <code>HYDRA_UART_SWAP 1</code> in <code>config.h</code> l'Hydra passa su <b>D8 (TX, GPIO15)</b> e <b>D7 (RX, GPIO13)</b>: la USB resta libera per programmare la scheda e i messaggi di avvio dell'ESP8266 non arrivano allo strumento.</li></ul>
+<ul class="small"><li><b>Usa D8 e D7, non TX e RX.</b> TX/RX (GPIO1/GPIO3) sono condivisi con il convertitore USB-seriale della scheda: con il MAX3232 collegato lì la programmazione fallisce e i messaggi di avvio dell'ESP8266 arrivano all'Hydra. Il firmware sposta la UART su D8/D7 in hardware (<code>Serial.swap()</code>, <code>HYDRA_UART_SWAP 1</code>, l'impostazione predefinita): la USB resta libera e il collegamento è veloce e affidabile come su TX/RX.</li>
+<li>D8 deve essere basso all'accensione: il D1 mini ha già una resistenza di pull-down, che va bene con un ingresso del MAX3232. Se la scheda non parte con il convertitore collegato, controlla che il modulo non abbia un pull-up forte su T1IN.</li>
+<li>Il MAX3232 va alimentato a <b>3,3 V</b>, mai a 5 V: le sue uscite pilotano direttamente i pin dell'ESP8266.</li>
+<li>Se l'Hydra non risponde, apri la <b>pagina di debug</b> (qui sotto).</li></ul>
 </div><div>
 <h3>Programmazione e primo avvio</h3>
-<ol class="small"><li>Arduino IDE con il core <b>esp8266</b> 3.1.x, scheda <b>LOLIN(WEMOS) D1 mini Pro</b> (o D1 mini), apri <code>firmware/hydra_web/hydra_web.ino</code> e carica. In alternativa PlatformIO:</li></ol>
-<pre>cd firmware
-pio run -e d1_mini_pro -t upload</pre>
+<ol class="small"><li>Il modo più rapido: il <b>firmware già compilato</b> per il D1 mini Pro, nella cartella <code>firmware/bin/</code> e in ogni <a href="https://github.com/metallarox/fluke_hydra_monitor/releases/latest" target="_blank" rel="noopener">release</a>. Il file <code>…_D7-D8.bin</code> è per il collegamento consigliato, <code>…_TX-RX.bin</code> per chi usa TX e RX.</li></ol>
+<pre>esptool.py --port /dev/ttyUSB0 write_flash 0x0 hydra_web_…_D7-D8.bin</pre>
+<p class="small">Per compilarlo da sé: Arduino IDE con il core <b>esp8266</b> 3.1.x, scheda <b>LOLIN(WEMOS) D1 mini Pro</b> (o D1 mini), <code>firmware/hydra_web/hydra_web.ino</code>; oppure PlatformIO con <code>pio run -e d1_mini_pro -t upload</code> nella cartella <code>firmware</code>.</p>
 <ol class="small" start="2"><li>Senza rete configurata la scheda apre l'access point <b>Hydra-XXXX</b> (password <code>hydra2625</code>, modificabile in <code>config.h</code>); la pagina si apre da sola, altrimenti vai su <b>http://192.168.4.1</b>.</li>
 <li><b>WiFi…</b> → nome della rete e password → <i>Save &amp; restart</i>.</li>
 <li>Dalla tua rete apri <b>http://hydra.local</b>. Gli aggiornamenti successivi si possono fare via WiFi (OTA).</li></ol>
@@ -93,6 +94,101 @@ pio run -e d1_mini_pro -t upload</pre>
 <tr><td class="l"><code>GET/POST /api/config</code></td><td class="l">la configurazione dei canali, salvata sulla scheda</td></tr>
 <tr><td class="l"><code>POST /api/wifi</code>, <code>/api/reboot</code></td><td class="l">rete e riavvio</td></tr></table>
 <p class="vnote">Per modificare la pagina senza riprogrammare la scheda c'è <code>firmware/mock_server.py</code>, che simula il dispositivo su http://localhost:8080; <code>build_web.py</code> rigenera la pagina compressa per il firmware. Le letture restano nella pagina finché è aperta (fino a 200 000): esportale prima di chiuderla.</p>
+<h3>La pagina di debug della seriale</h3>
+<div class="mgrid2"><div><a class="prj-hero" href="img/web/debug_bad.png" target="_blank" rel="noopener"><img src="img/web/debug_bad.png" alt="Pagina di debug della seriale" loading="lazy"></a></div><div>
+<p>Su <b>http://hydra.local/debug</b> (o <i>Debug…</i> nella pagina principale) c'è tutto quello che serve quando lo strumento non risponde:</p>
+<ul class="small"><li><b>Diagnosi a parole</b>: non arriva nulla, arrivano byte ma nessuna risposta valida (velocità o parità sbagliate), comunicazione corretta, comandi rifiutati con <code>?&gt;</code>, risposte perse.</li>
+<li><b>Stato del collegamento</b>: pin usati, formato, contatori dall'accensione (byte, comandi, <code>=&gt;</code>, <code>?&gt;</code>, <code>!&gt;</code>, timeout, byte spuri), ultimo byte e ultima risposta buona.</li>
+<li><b>Prove rapide</b>: <code>*IDN?</code>, <code>FUNC? 0</code>, <code>MON?</code>, <code>SCAN?</code>, <code>INTVL?</code>, <code>TRIGGER?</code>, Ctrl-C o qualsiasi comando.</li>
+<li><b>Prova di loopback</b>: scollega l'Hydra, ponticella i pin 2 e 3 del DB9 del convertitore e avvia la prova. Se il messaggio torna indietro, ESP8266 e MAX3232 funzionano e il problema è nel cavo o nello strumento.</li>
+<li><b>Traffico</b>: le ultime 48 righe sulla linea, in tempo reale, con i caratteri di controllo resi visibili.</li></ul>
+</div></div>
+
+
+<h2 id="hardware">L'hardware: il Wemos nella feritoia GPIB</h2>
+<div class="prj-intro"><div>
+<p>Il retro dell'Hydra 2620A / 2625A ha un'apertura per l'interfaccia opzionale <b>IEEE-488 (GPIB)</b> che quasi sempre resta inutilizzata. Questo supporto stampato in 3D la sfrutta per ospitare la scheda di <a href="#esp">Hydra Web</a>:</p>
+<ul><li>una <b>piastra da 2,5 mm</b>, fissata con le due viti dei fori GPIB;</li>
+<li>sul retro, una <b>linguetta con la forma della feritoia</b> che entra nell'apertura: allinea la piastra, le dà rigidità ed è cava, perché dentro sta <b>il modulo MAX3232, in piedi</b>;</li>
+<li>il <b>Wemos all'esterno</b>, parallelo alla feritoia, sotto un coperchio basso stretto dalle stesse due viti.</li></ul>
+<p>In tutto sporge <b>12 mm</b> dal pannello. Non si fora nulla e non si modifica nulla dello strumento: si toglie in due minuti.</p>
+<div class="btns"><a class="btn primary" href="https://github.com/metallarox/fluke_hydra_monitor/tree/main/hardware/gpib_plate" target="_blank" rel="noopener">I file su GitHub</a><a class="btn ghost" href="https://github.com/metallarox/fluke_hydra_monitor/releases/latest" target="_blank" rel="noopener">⬇ Scarica STL e STEP</a></div>
+</div><a class="prj-hero hw" href="img/hw/mounted.png" target="_blank" rel="noopener"><img src="img/hw/mounted.png" alt="Supporto montato sul pannello dell'Hydra"></a></div>
+
+<h3>Il modello in 3D</h3>
+<div class="v3d" data-base="3d/" data-parts='[{"id":"panel","file":"panel.stl","color":"#5f6670","label":"pannello posteriore","noclip":false},{"id":"plate","file":"plate.stl","color":"#2f72c4"},{"id":"max3232","file":"max3232.stl","color":"#2e8b3e","explode":34,"noclip":true},{"id":"wemos","file":"wemos.stl","color":"#1e5e55","explode":40},{"id":"cover","file":"cover.stl","color":"#e3a922","explode":58}]'>
+<div class="v3d-stage"><img class="v3d-fallback" src="img/hw/exploded.png" alt="Vista esplosa del supporto"><div class="v3d-loading">caricamento del modello 3D…</div></div>
+<div class="v3d-bar">
+<button class="v3d-mounted">Montato</button><button class="v3d-exploded">Esploso</button><button class="v3d-play">▶ Montaggio</button><button class="v3d-cut">Sezione</button><button class="v3d-rotate">Rotazione</button><button class="v3d-home">Vista iniziale</button>
+<label class="v3d-sl">esploso <input type="range" class="v3d-explode" min="0" max="100" value="0"></label></div>
+<div class="v3d-legend">
+<label><input type="checkbox" value="cover" checked><i style="background:#e3a922"></i>coperchio</label>
+<label><input type="checkbox" value="wemos" checked><i style="background:#1e5e55"></i>Wemos D1 mini</label>
+<label><input type="checkbox" value="max3232" checked><i style="background:#2e8b3e"></i>modulo MAX3232</label>
+<label><input type="checkbox" value="plate" checked><i style="background:#2f72c4"></i>piastra con linguetta</label>
+<label><input type="checkbox" value="panel" checked><i style="background:#5f6670"></i>pannello dell'Hydra</label></div>
+<p class="vnote">Trascina per ruotare, rotella o due dita per lo zoom, tasto destro per spostare. <b>Sezione</b> taglia il modello a metà per vedere il MAX3232 dentro la linguetta. Wemos e MAX3232 sono sagome semplificate; i modelli vengono dal file parametrico del progetto.</p>
+</div>
+
+<div class="gallery">
+<a href="img/hw/mounted.png" target="_blank" rel="noopener"><img src="img/hw/mounted.png" alt="" loading="lazy"><span>Montato: 12 mm fuori dal pannello.</span></a>
+<a href="img/hw/exploded.png" target="_blank" rel="noopener"><img src="img/hw/exploded.png" alt="" loading="lazy"><span>Esploso: coperchio, Wemos, piastra con il MAX3232 nella linguetta.</span></a>
+<a href="img/hw/back.png" target="_blank" rel="noopener"><img src="img/hw/back.png" alt="" loading="lazy"><span>Il retro: la linguetta che entra nella feritoia GPIB.</span></a>
+</div>
+
+<h3>Le parti</h3>
+<div class="grid3 prj-cards">
+<div class="card"><h4>Piastra</h4><p>2,5 mm di spessore, 59 × 32 mm, con i fori per le viti all'interasse GPIB di 47,04 mm. Sul davanti una cornice con quattro piedini su cui appoggia il Wemos; sul retro la linguetta, con una tasca di 33,2 × 9,2 × 17 mm per il MAX3232 e un foro in fondo per far passare i fili verso l'interno.</p></div>
+<div class="card"><h4>Coperchio</h4><p>Copre il Wemos e viene stretto dalle stesse due viti della piastra, così preme gli angoli della scheda e la tiene ferma senza altre viti. Sopra c'è inciso IV3HGA; una tacca verso il DB9 fa uscire i fili di alimentazione.</p></div>
+<div class="card"><h4>Minuteria</h4><p>2 viti M3 × 10 a testa svasata con 2 dadi M3 dietro il pannello, un Wemos D1 mini o D1 mini Pro, un modulo mini MAX3232, filo sottile.</p></div>
+</div>
+
+<div class="mgrid2"><div>
+<h3>Prima di stampare: misura</h3>
+<p class="small">Le quote dipendono dallo strumento: controllale con un calibro e cambiale in cima alla macro (sono segnate con <code>(*)</code>).</p>
+<table><tr><th>Parametro</th><th>Predefinito</th><th>Che cosa misurare</th></tr>
+<tr><td class="l"><code>slot_len</code>, <code>slot_w</code></td><td class="l">36,0 × 12,0</td><td class="l">la feritoia GPIB nel punto più stretto (è a D: prendi il lato corto)</td></tr>
+<tr><td class="l"><code>gpib_pitch</code></td><td class="l">47,04</td><td class="l">distanza tra i due fori GPIB (valore dello standard IEEE-488)</td></tr>
+<tr><td class="l"><code>panel_t</code></td><td class="l">1,5</td><td class="l">spessore del pannello</td></tr>
+<tr><td class="l"><code>plate_w</code></td><td class="l">32</td><td class="l">spazio libero attorno alla feritoia (da un lato c'è il vano delle opzioni)</td></tr>
+<tr><td class="l"><code>tongue_depth</code></td><td class="l">16</td><td class="l">profondità libera dietro il pannello (sotto c'è la scheda madre)</td></tr>
+<tr><td class="l"><code>module_l</code>, <code>module_w</code></td><td class="l">21,5 × 13,5</td><td class="l">il tuo modulo MAX3232</td></tr>
+<tr><td class="l"><code>fit_clear</code></td><td class="l">0,20</td><td class="l">gioco della linguetta per lato: 0,15 per un incastro più stretto, 0,3 se non entra</td></tr></table>
+</div><div>
+<h3>Modificarlo in FreeCAD</h3>
+<ol class="small"><li><i>Macro → Macro…</i>, scegli <code>hydra_wemos_plate.FCMacro</code> ed <b>esegui</b>: compaiono <i>Plate</i> e <i>Cover</i>.</li>
+<li>Cambia i numeri nel blocco <code>P = dict(...)</code> (<i>Macro → Macro… → Modifica</i>) e rieseguila.</li>
+<li><i>File → Esporta</i> ogni parte in STL (o STEP).</li></ol>
+<p class="small">Senza FreeCAD lo stesso file è anche uno script CadQuery:</p>
+<pre>pip install cadquery
+python3 hydra_wemos_plate.FCMacro   # riscrive STEP e STL</pre>
+<h3>Stampa</h3>
+<ul class="small"><li><b>PETG o ASA</b>, non PLA: vicino a uno strumento caldo il PLA si ammorbidisce.</li>
+<li>Strati da 0,2 mm, 3 perimetri, riempimento 30 %.</li>
+<li><b>Piastra</b>: in piedi sulla punta della linguetta, con <b>supporti solo dal piatto</b> per l'anello attorno alla linguetta (i supporti ad albero vanno bene).</li>
+<li><b>Coperchio</b>: con la faccia superiore sul piatto, senza supporti: la scritta incisa viene nitida.</li></ul>
+</div></div>
+
+<h3>Il montaggio</h3>
+<div class="mgrid2"><div><a class="prj-hero hw" href="img/hw/assembly.png" target="_blank" rel="noopener"><img src="img/hw/assembly.png" alt="Le quattro fasi del montaggio, in sezione" loading="lazy"></a>
+<a class="prj-hero hw gif" href="img/hw/assembly.gif" target="_blank" rel="noopener"><img src="img/hw/assembly.gif" alt="Animazione del montaggio, in sezione" loading="lazy"></a></div><div>
+<ol><li><b>Salda i fili</b>: dal Wemos <b>3V3, GND, D8 → T1IN, D7 ← R1OUT</b> del MAX3232; dal lato RS-232 <b>TX, RX e GND</b> verso un DB9 femmina per la porta RS-232 dell'Hydra, oppure dall'interno dello strumento attraverso il foro in fondo alla linguetta.</li>
+<li><b>Infila il MAX3232</b> nella tasca dal davanti, in piedi, con i fili verso l'alto.</li>
+<li><b>Spingi la linguetta</b> nella feritoia GPIB.</li>
+<li><b>Appoggia il Wemos</b> sui quattro piedini dentro la cornice, con l'ESP-12 verso l'alto e l'antenna verso il DB9; i fili passano dalle aperture della cornice.</li>
+<li><b>Metti il coperchio</b> e infila le due viti attraverso coperchio, piastra e pannello, con i dadi dietro il pannello. Il coperchio blocca gli angoli del Wemos.</li>
+<li><b>Alimentazione</b>: i fili 5V e GND escono dalla tacca verso il DB9. Per usare invece la presa micro-USB imposta <code>usb_opening=True</code> e alza <code>wemos_lift</code> a circa 5 mm, così la spina passa sopra la piastra.</li></ol>
+<p class="note">Se l'Hydra non risponde apri <b>http://hydra.local/debug</b>: se TX e RX sono invertiti, scambia i fili di D7 e D8.</p>
+</div></div>
+
+<h3>I file</h3>
+<table><tr><th>File</th><th>Che cos'è</th></tr>
+<tr><td class="l"><a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/hardware/gpib_plate/hydra_wemos_plate.FCMacro" target="_blank" rel="noopener"><code>hydra_wemos_plate.FCMacro</code></a></td><td class="l">il modello parametrico: macro di FreeCAD e script CadQuery</td></tr>
+<tr><td class="l"><a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/hardware/gpib_plate/hydra_wemos_plate.step" target="_blank" rel="noopener"><code>hydra_wemos_plate.step</code></a></td><td class="l">piastra e coperchio, da aprire in FreeCAD o in qualsiasi CAD</td></tr>
+<tr><td class="l"><a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/hardware/gpib_plate/hydra_wemos_plate.stl" target="_blank" rel="noopener"><code>hydra_wemos_plate.stl</code></a></td><td class="l">la piastra, già orientata per la stampa (in piedi sulla linguetta)</td></tr>
+<tr><td class="l"><a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/hardware/gpib_plate/hydra_wemos_plate_cover.stl" target="_blank" rel="noopener"><code>hydra_wemos_plate_cover.stl</code></a></td><td class="l">il coperchio, già orientato per la stampa (faccia superiore sul piatto)</td></tr>
+<tr><td class="l"><a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/hardware/gpib_plate/3D.md" target="_blank" rel="noopener"><code>3D.md</code></a>, <code>preview/</code></td><td class="l">modelli leggeri per il visualizzatore 3D di GitHub</td></tr></table>
+<p class="vnote">Tutti i file, insieme al programma e al firmware già compilato, sono anche nell'<a href="https://github.com/metallarox/fluke_hydra_monitor/releases/latest" target="_blank" rel="noopener">ultima release</a>.</p>
 
 <h2>Come funziona</h2>
 <div class="mgrid2"><div>
@@ -257,5 +353,5 @@ python3 fluke_hydra_monitor.py     # collegati a /dev/pts/5</pre>
 <li>La modalità "Hydra scan" (scansione gestita dallo strumento, con <code>INTVL</code>, <code>TRIGGER 1</code>, <code>SCAN 1</code>) è sperimentale: la sintassi va confermata su un'unità reale. Il metodo "Sweep" usa solo comandi già verificati ed è quello predefinito. Nel firmware questi comandi sono in <code>config.h</code> (<code>HSCAN_*</code>) e si possono provare dalla console della pagina con <code>INTVL?</code>, <code>TRIGGER?</code>, <code>SCAN?</code>.</li></ul>
 <p class="note">La documentazione completa è nel repository: guida al firmware in <a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/firmware/README.md" target="_blank" rel="noopener">firmware/README.md</a>, guida d'uso in <a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/docs/USER_GUIDE.md" target="_blank" rel="noopener">docs/USER_GUIDE.md</a> e protocollo in <a href="https://github.com/metallarox/fluke_hydra_monitor/blob/main/docs/PROTOCOL.md" target="_blank" rel="noopener">docs/PROTOCOL.md</a>. Per le basi delle misure di tensione, corrente e resistenza c'è il <a href="../../multimetro/index.html">capitolo sul multimetro</a>.</p>
 </div></section>
-<div class="wrap"><div style="height:30px"></div></div>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script><script type="module" src="../../assets/viewer3d.js?v=ccd6e8b7"></script><div class="wrap"><div style="height:30px"></div></div>
 <footer><div class="wrap"><div><b>Ham Radio Pills</b> · a cura di Elia, IV3HGA · 73!</div><div><a href="https://github.com/metallarox/hamradio-pills">github.com/metallarox/hamradio-pills</a></div></div></footer></body></html>

@@ -317,9 +317,9 @@ for k,(c,i,m) in enumerate(ALL):
 # --- progetti
 PROJECTS=[
  dict(id="hydra",dir="progetti/fluke-hydra-monitor",title="Fluke Hydra Monitor",img="prj-hydra.jpg",
-  meta="Python · ESP8266 · RS-232 · WiFi",repo="https://github.com/metallarox/fluke_hydra_monitor",
-  intro="Un'interfaccia moderna per l'acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono.",
-  tags=["Fluke Hydra","RS-232","Python","ESP8266","WiFi","CSV"],body="tools/progetti/fluke-hydra-monitor.html"),
+  meta="Python · ESP8266 · RS-232 · stampa 3D",repo="https://github.com/metallarox/fluke_hydra_monitor",
+  intro="Un'interfaccia moderna per l'acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono, montata sul retro dello strumento con un supporto stampato in 3D.",
+  tags=["Fluke Hydra","RS-232","Python","ESP8266","stampa 3D","FreeCAD"],body="tools/progetti/fluke-hydra-monitor.html"),
 ]
 PRJ_INTRO="Strumenti software e lavori di laboratorio di IV3HGA: progetti completi, con il codice su GitHub."
 def prj_card(pr,up):
@@ -338,7 +338,7 @@ for k,pr in enumerate(PROJECTS):
     W(os.path.join(ROOT,pr["dir"],"index.html"),head(f'{pr["title"]} · Progetti · Ham Radio Pills',pr["intro"],up)+topbar(up,[("Home",f"{up}index.html"),("Progetti",f"{up}progetti/index.html"),(pr["title"],None)])+f'''
 <header class="chero"><div class="wrap"><span class="kicker">Progetti · {pr["meta"]}</span><h1>{pr["title"]}</h1><p class="lead">{pr["intro"]}</p>
 <div class="tags dark">{"".join(f"<span>{t}</span>" for t in pr["tags"])}</div></div></header>
-{body}<div class="wrap">{pg}<div style="height:30px"></div></div>
+{body}<script type="importmap">{{"imports":{{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}}}</script><script type="module" src="{up}assets/viewer3d.js?v={_v('assets/viewer3d.js')}"></script><div class="wrap">{pg}<div style="height:30px"></div></div>
 {FOOT}</body></html>''')
 prjblock=f'''<div class="secblock" id="sez-progetti"><span class="kicker">Sezione 3</span><h2><a class="plain" href="progetti/index.html">Progetti</a></h2><p class="sub">{PRJ_INTRO}</p><div class="toc prj-toc">'''+"".join(f'<a href="{pr["dir"]}/index.html"><img src="assets/{pr["img"]}" alt=""><small>Progetto · {pr["meta"]}</small><h3>{pr["title"]}</h3><p>{pr["intro"]}</p><span class="go">Apri il progetto →</span></a>' for pr in PROJECTS)+'</div></div>'
 sect="".join(f'''<div class="secblock" id="{x["id"]}"><span class="kicker">{x["kicker"]}</span><h2>{x["title"]}</h2><p class="sub">{x["intro"]}</p><div class="toc">'''+"".join(f'<a href="{cdir(c)}/index.html"><small>{c["num"]} · {len(c["mods"])} {"modulo" if len(c["mods"])==1 else "moduli"}</small><h3>{c["title"]}</h3><p>{c["intro"]}</p><span class="go">Vai al capitolo →</span></a>' for c in (_byid[i] for i in x["ids"]))+'</div></div>' for x in SECTIONS)
