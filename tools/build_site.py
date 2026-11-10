@@ -256,10 +256,12 @@ ALL=[(c,i+1,m) for c in CHAPTERS for i,m in enumerate(c["mods"])]
 FOOT='<footer><div class="wrap"><div><b>Ham Radio Pills</b> · a cura di Elia, IV3HGA · 73!</div><div><a href="https://github.com/metallarox/hamradio-pills">github.com/metallarox/hamradio-pills</a></div></div></footer>'
 def _v(f): return hashlib.md5(open(os.path.join(ROOT,f),"rb").read()).hexdigest()[:8]
 VER={k:_v(k) for k in ["assets/site.css","assets/theme.js","assets/viewer.js"]}
-def head(title,desc,up):
+BASE="https://metallarox.github.io/hamradio-pills/"
+PAGES=[]
+def head(title,desc,up,path=None):
     return f'''<!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{html.escape(title)}</title><meta name="description" content="{html.escape(desc)}">
+<title>{html.escape(title)}</title><meta name="description" content="{html.escape(desc)}"><meta property="og:title" content="{html.escape(title)}"><meta property="og:description" content="{html.escape(desc)}">
 <link rel="icon" href="{up}assets/logo.png"><link rel="stylesheet" href="{up}assets/site.css?v={VER['assets/site.css']}"><script src="{up}assets/theme.js?v={VER['assets/theme.js']}"></script></head><body>'''
 def topbar(up,crumbs):
     cr=" <span>›</span> ".join(f'<a href="{h}">{t}</a>' if h else f'<b>{t}</b>' for t,h in crumbs)
@@ -278,6 +280,9 @@ def mod_card(c,i,m,up):
         <div class="btns"><a class="btn primary" href="{page}">Apri il modulo →</a><a class="btn ghost" href="{pdf_}" download>⬇ PDF</a></div></div>
     </article>'''
 def W(path,txt):
+    rel=os.path.relpath(path,ROOT).replace(os.sep,"/"); url=BASE+(rel[:-len("index.html")] if rel.endswith("index.html") else rel)
+    PAGES.append(url)
+    txt=txt.replace('</head>',f'<link rel="canonical" href="{url}"><meta property="og:url" content="{url}"><meta property="og:type" content="website"><meta property="og:site_name" content="Ham Radio Pills · IV3HGA"><meta property="og:image" content="{BASE}assets/logo.png"></head>',1)
     os.makedirs(os.path.dirname(path),exist_ok=True); open(path,"w").write(txt)
 # --- pagine dei capitoli
 for k,c in enumerate(CHAPTERS):
@@ -387,7 +392,11 @@ page=head("Ham Radio Pills · elettronica e radiofrequenza · IV3HGA","Ham Radio
 <div class="toc three">{"".join(f'<a href="{l}"><small>{k}</small><h3>{t}</h3><p>{d}</p></a>' for k,t,d,l in LATEST)}</div>
 </div></section>
 {FOOT}</body></html>'''
-open(os.path.join(ROOT,"index.html"),"w").write(page)
+W(os.path.join(ROOT,"index.html"),page)
+import datetime as _dt
+_d=_dt.date.today().isoformat()
+open(os.path.join(ROOT,"sitemap.xml"),"w").write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f"  <url><loc>{u}</loc><lastmod>{_d}</lastmod></url>\n" for u in sorted(set(PAGES)))+'</urlset>\n')
+open(os.path.join(ROOT,"robots.txt"),"w").write(f"User-agent: *\nAllow: /\nSitemap: {BASE}sitemap.xml\n")
 # README
 rows=""
 for c in CHAPTERS:
