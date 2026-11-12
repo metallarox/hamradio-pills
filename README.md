@@ -8,7 +8,7 @@ Un corso in pillole di elettronica e radiofrequenza per radioamatori, a cura di 
 
 Lo scopo è spiegare qualche concetto che ci può tornare utile nelle nostre attività di laboratorio, con una trattazione pratica e non troppo accademica e qualche pillola di teoria qua e là.
 
-> La matematica, per quanto indigesta, è il linguaggio che ci permette di collegare tutte le materie del mondo e di rappresentare qualsiasi cosa in un unico linguaggio che non conosce confini.
+> La matematica, per quanto possa apparire ostica, è il linguaggio universale che unisce ogni disciplina, permettendoci di descrivere, comprendere e interpretare il mondo attraverso un'unica forma di espressione, capace di superare ogni confine.
 Ogni modulo è un PDF pronto da leggere o proiettare, accompagnato dai sorgenti Python che lo generano (simulazioni, grafici e slide).
 
 ## Per tutti · Le basi comuni
