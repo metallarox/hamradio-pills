@@ -325,6 +325,10 @@ PROJECTS=[
   meta="Python · ESP8266 · RS-232 · stampa 3D",repo="https://github.com/metallarox/fluke_hydra_monitor",
   intro="Un'interfaccia moderna per l'acquisitore Fluke Hydra 2620A / 2625A: lettura in grande, strumento analogico a bobina mobile, grafico, acquisizione su più canali e CSV. Con un ESP8266 diventa anche una pagina web, raggiungibile dal telefono, montata sul retro dello strumento con un supporto stampato in 3D.",
   tags=["Fluke Hydra","RS-232","Python","ESP8266","stampa 3D","FreeCAD"],body="tools/progetti/fluke-hydra-monitor.html"),
+ dict(id="eload",dir="progetti/eload-60v",title="eload-60v · carico elettronico a 4 canali",img="prj-eload.jpg",
+  meta="KiCad · ESP8266 · 60 V 20 A 300 W",repo="https://github.com/metallarox/eload-60v",
+  intro="Un carico elettronico da banco open hardware: quattro canali a corrente costante da 5 A, fino a 60 V e 300 W, misura a 20 bit su ogni canale, protezioni in hardware indipendenti dal firmware e controllo WiFi con un ESP8266. Con il modello 3D della scheda e due approfondimenti animati sull'anello di corrente e sul calore.",
+  tags=["carico elettronico","KiCad","MOSFET lineari","anello di controllo","ESP8266","SOA"],body="tools/progetti/eload-60v.html"),
 ]
 PRJ_INTRO="Strumenti software e lavori di laboratorio di IV3HGA: progetti completi, con il codice su GitHub."
 def prj_card(pr,up):
@@ -343,9 +347,9 @@ for k,pr in enumerate(PROJECTS):
     W(os.path.join(ROOT,pr["dir"],"index.html"),head(f'{pr["title"]} · Progetti · Ham Radio Pills',pr["intro"],up)+topbar(up,[("Home",f"{up}index.html"),("Progetti",f"{up}progetti/index.html"),(pr["title"],None)])+f'''
 <header class="chero"><div class="wrap"><span class="kicker">Progetti · {pr["meta"]}</span><h1>{pr["title"]}</h1><p class="lead">{pr["intro"]}</p>
 <div class="tags dark">{"".join(f"<span>{t}</span>" for t in pr["tags"])}</div></div></header>
-{body}<script type="importmap">{{"imports":{{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}}}</script><script type="module" src="{up}assets/viewer3d.js?v={_v('assets/viewer3d.js')}"></script><script src="{up}assets/needle-lab.js?v={_v('assets/needle-lab.js')}" defer></script><div class="wrap">{pg}<div style="height:30px"></div></div>
+{body}<script type="importmap">{{"imports":{{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}}}</script><script type="module" src="{up}assets/viewer3d.js?v={_v('assets/viewer3d.js')}"></script><script src="{up}assets/needle-lab.js?v={_v('assets/needle-lab.js')}" defer></script><script src="{up}assets/eload-lab.js?v={_v('assets/eload-lab.js')}" defer></script><div class="wrap">{pg}<div style="height:30px"></div></div>
 {FOOT}</body></html>''')
-LATEST=[("Progetto",PROJECTS[0]["title"],PROJECTS[0]["intro"],f'{PROJECTS[0]["dir"]}/index.html')]+[(c["num"],c["title"],c["intro"],f'{cdir(c)}/index.html') for c in (_byid["lcr"],_byid["cm"])]
+LATEST=[("Progetto",pr["title"],pr["intro"],f'{pr["dir"]}/index.html') for pr in PROJECTS[::-1]]+[(c["num"],c["title"],c["intro"],f'{cdir(c)}/index.html') for c in (_byid["lcr"],)]
 sect="".join(f'''<div class="secblock" id="{x["id"]}"><span class="kicker">{x["kicker"]}</span><h2>{x["title"]}</h2><p class="sub">{x["intro"]}</p><div class="toc">'''+"".join(f'<a href="../{cdir(c)}/index.html"><small>{c["num"]} · {len(c["mods"])} {"modulo" if len(c["mods"])==1 else "moduli"}</small><h3>{c["title"]}</h3><p>{c["intro"]}</p><span class="go">Vai al capitolo →</span></a>' for c in (_byid[i] for i in x["ids"]))+'</div></div>' for x in SECTIONS)
 COURSE_INTRO="Un corso in pillole di elettronica e radiofrequenza per il laboratorio e la stazione: il multimetro e l'oscilloscopio, l'LCR meter, il VNA e la carta di Smith, l'analizzatore di spettro, il generatore e il wattmetro RF, e poi decibel, modulazioni, FT8, accesso multiplo, telefonia, rumore e correnti di modo comune."
 W(os.path.join(ROOT,"corso","index.html"),head("Il corso · Ham Radio Pills",COURSE_INTRO,"../")+topbar("../",[("Home","../index.html"),("Corso",None)])+f'''

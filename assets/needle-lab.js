@@ -287,6 +287,6 @@ function euler(root) {
 }
 
 const W = { lab, bounce: lab, poles, freq, euler };
-const init = () => document.querySelectorAll('.nl[data-w]').forEach(r => { try { W[r.dataset.w](r); } catch (e) { console.warn(e); } });
+const init = () => document.querySelectorAll('.nl[data-w]').forEach(r => { if (!W[r.dataset.w]) return; try { W[r.dataset.w](r); } catch (e) { console.warn(e); } });
 document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
 })();

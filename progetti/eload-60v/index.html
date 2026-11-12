@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>eload-60v · carico elettronico a 4 canali · Progetti · Ham Radio Pills</title><meta name="description" content="Un carico elettronico da banco open hardware: quattro canali a corrente costante da 5 A, fino a 60 V e 300 W, misura a 20 bit su ogni canale, protezioni in hardware indipendenti dal firmware e controllo WiFi con un ESP8266. Con il modello 3D della scheda e due approfondimenti animati sull&#x27;anello di corrente e sul calore."><meta property="og:title" content="eload-60v · carico elettronico a 4 canali · Progetti · Ham Radio Pills"><meta property="og:description" content="Un carico elettronico da banco open hardware: quattro canali a corrente costante da 5 A, fino a 60 V e 300 W, misura a 20 bit su ogni canale, protezioni in hardware indipendenti dal firmware e controllo WiFi con un ESP8266. Con il modello 3D della scheda e due approfondimenti animati sull&#x27;anello di corrente e sul calore.">
+<link rel="icon" href="../../assets/logo.png"><link rel="stylesheet" href="../../assets/site.css?v=24303f39"><script src="../../assets/theme.js?v=28624b13"></script><link rel="canonical" href="https://metallarox.github.io/hamradio-pills/progetti/eload-60v/"><meta property="og:url" content="https://metallarox.github.io/hamradio-pills/progetti/eload-60v/"><meta property="og:type" content="website"><meta property="og:site_name" content="Ham Radio Pills · IV3HGA"><meta property="og:image" content="https://metallarox.github.io/hamradio-pills/assets/logo.png"></head><body><nav class="topbar"><div class="wrap"><a class="brand" href="../../index.html"><img src="../../assets/logo.png" alt="">Ham Radio <span>Pills</span></a><div class="crumbs"><a href="../../index.html">Home</a> <span>›</span> <a href="../../progetti/index.html">Progetti</a> <span>›</span> <b>eload-60v · carico elettronico a 4 canali</b></div><div class="menu"><a href="../../corso/index.html">Corso</a><a href="../../progetti/index.html">Progetti</a></div></div></nav>
+<header class="chero"><div class="wrap"><span class="kicker">Progetti · KiCad · ESP8266 · 60 V 20 A 300 W</span><h1>eload-60v · carico elettronico a 4 canali</h1><p class="lead">Un carico elettronico da banco open hardware: quattro canali a corrente costante da 5 A, fino a 60 V e 300 W, misura a 20 bit su ogni canale, protezioni in hardware indipendenti dal firmware e controllo WiFi con un ESP8266. Con il modello 3D della scheda e due approfondimenti animati sull'anello di corrente e sul calore.</p>
+<div class="tags dark"><span>carico elettronico</span><span>KiCad</span><span>MOSFET lineari</span><span>anello di controllo</span><span>ESP8266</span><span>SOA</span></div></div></header>
+<section class="prj"><div class="wrap">
+<div class="prj-intro"><div>
+<h2>Un carico elettronico da banco, aperto fino all'ultima vite</h2>
+<p>Un <b>carico elettronico</b> è l'opposto di un alimentatore: invece di dare corrente la assorbe, nella quantità che decidi tu, e la trasforma in calore. Serve per provare alimentatori, batterie, pannelli solari, regolatori e convertitori: si chiede una corrente precisa e si guarda come si comporta la sorgente.</p>
+<p><b>eload-60v</b> ha <b>quattro canali indipendenti</b> da 5 A, fino a <b>60 V</b> e <b>300 W</b> in continua. Ogni canale ha una misura a 20 bit, le protezioni sono fatte in hardware e non dipendono dal firmware, e il controllo passa per il <b>WiFi</b> con un Wemos D1 mini Pro (ESP8266) innestato su zoccolo, oltre a un pannello frontale con display OLED ed encoder.</p>
+<p>Qui sotto: <a href="#come">come funziona</a>, <a href="#modello3d">la scheda in 3D</a>, e due approfondimenti con le animazioni: <a href="#anello">l'anello di corrente</a> e <a href="#calore">calore e area di funzionamento sicuro</a>.</p>
+<div class="btns"><a class="btn primary" href="https://github.com/metallarox/eload-60v" target="_blank" rel="noopener">Vai al progetto su GitHub</a><a class="btn ghost" href="https://github.com/metallarox/eload-60v/raw/main/hardware/fabrication/eload_4ch_gerbers_rev0.3.zip">⬇ Gerber rev 0.3</a><a class="btn ghost" href="https://github.com/metallarox/eload-60v/blob/main/docs/Electronic_Load_Circuit_Walkthrough.pdf" target="_blank" rel="noopener">Le slide (20, in inglese)</a><a class="btn ghost" href="ibom.html" target="_blank" rel="noopener">BOM interattiva</a></div>
+<p class="vnote"><b>Stato: rev 0.3, progetto completo ma non ancora costruito né provato al banco.</b> ERC e DRC sono puliti e l'anello e il bilancio termico sono stati analizzati numericamente: è un progetto rivisto, non un prodotto collaudato. 73 de IV3HGA</p>
+</div>
+<a class="prj-hero" href="img/render_top.png" target="_blank" rel="noopener"><img src="img/render_top.png" alt="Rendering della scheda eload-60v vista dall'alto"></a></div>
+
+<h2>Le caratteristiche</h2>
+<table><tr><th>Parametro</th><th>Valore</th></tr>
+<tr><td>Tensione d'ingresso</td><td>0 – 60 V (la protezione OVP in hardware scatta a 64,7 V)</td></tr>
+<tr><td>Corrente</td><td>4 canali × 0 – 5 A = 20 A</td></tr>
+<tr><td>Potenza</td><td>4 × 75 W = 300 W continui (sopra 15 V comanda il limite di potenza)</td></tr>
+<tr><td>Modi</td><td>Corrente costante per canale; potenza costante (CP) e resistenza costante (CR) nel firmware; carico pulsato 0,1 Hz – 1 kHz</td></tr>
+<tr><td>Impostazione</td><td>DAC8565 a 16 bit: <b>76 µA</b> per passo, per canale</td></tr>
+<tr><td>Misura</td><td>Un INA228 per canale: 20 bit, shunt a 4 terminali (Kelvin), misura di tensione remota</td></tr>
+<tr><td>Controllo</td><td>WiFi con Wemos LOLIN D1 mini Pro su zoccolo; pannello con OLED I²C, encoder e tasto OUTPUT</td></tr>
+<tr><td>Protezioni</td><td>OVP, OTP, sovracorrente e sovrapotenza per canale, crowbar contro l'inversione di polarità, fusibile da 25 A</td></tr>
+<tr><td>Anello</td><td>Margine di fase ≈ 80°, banda ad anello chiuso 6 – 15 kHz (dal modello)</td></tr>
+<tr><td>Circuito stampato</td><td>170 × 125 mm, 2 strati, rame da 2 oz, KiCad 10</td></tr></table>
+
+<h2 id="come">Come funziona</h2>
+<div class="mgrid2"><div>
+<p>Il percorso della potenza è corto: <b>DUT+</b> → fusibile da 25 A → bus VLOAD → i quattro MOSFET → gli shunt → <b>DUT−</b>. Ogni MOSFET lavora in <b>zona lineare</b>: non fa da interruttore, ma da resistenza variabile comandata dalla tensione di gate. Tutta la potenza che la sorgente consegna diventa calore nei quattro transistor.</p>
+<p>Attorno a questo percorso ci sono tre blocchi: il <b>controllo</b> che decide quanta corrente far passare, la <b>misura</b> che la legge, e la <b>sicurezza</b> che può spegnere tutto senza chiedere il permesso al firmware.</p>
+</div><a class="prj-hero hw" href="img/block_diagram.png" target="_blank" rel="noopener"><img src="img/block_diagram.png" alt="Schema a blocchi del carico elettronico" loading="lazy"></a></div>
+
+<div class="grid3 prj-cards">
+<div class="card"><h4>Il canale</h4><p>Un operazionale OPA2196 montato come <b>integratore</b> pilota un MOSFET IXYS <b>IXTH75N10L2</b>, della famiglia <i>Linear L2</i> pensata proprio per il funzionamento lineare (ha un'area di funzionamento sicuro estesa). Nel source c'è uno shunt da <b>20 mΩ</b> a 4 terminali. L'impostazione è l'uscita del DAC divisa per 25: <b>I = V<sub>DAC</sub> × 2 A/V</b>.</p></div>
+<div class="card"><h4>La risoluzione</h4><p>Il DAC8565 ha 16 bit su 2,5 V: un passo vale 38 µV, cioè <b>76 µA</b> di corrente, e 2,5 V corrispondono ai 5 A di fondo scala. L'INA228 legge lo shunt con 20 bit su ±163,84 mV: 312,5 nV per passo, cioè circa <b>16 µA</b>. Misura più fine dell'impostazione: si può correggere il guadagno di ogni canale (auto-trim).</p></div>
+<div class="card"><h4>Il fail-safe</h4><p>La linea <b>ARM</b> è attiva alta con una resistenza verso massa. La possono tirare giù il microcontrollore, i comparatori LM393 di <b>OVP e OTP</b> o l'ALERT di qualunque INA228. ARM bassa porta CLAMP alta, che cortocircuita a massa tutte e quattro le impostazioni. Microcontrollore assente, reset, avvio incerto: il carico resta <b>spento</b>.</p></div>
+<div class="card"><h4>Il calore</h4><p>I quattro TO-247 stanno <b>sotto</b> la scheda, avvitati su uno <b>spreader di rame</b> da 80 × 70 × 6 mm. Lo spreader è al potenziale del drain (VLOAD), quindi è isolato dal dissipatore per CPU da un pad termico. Due NTC sullo spreader danno la temperatura al firmware e al comparatore OTP.</p></div>
+<div class="card"><h4>L'ingresso</h4><p>Un diodo Schottky D²PAK (VS-30CTQ100S) fa da <b>crowbar</b>: se colleghi la sorgente al contrario conduce e fa saltare il fusibile. Un TVS SMCJ64CA taglia i transitori. Le connessioni del DUT sono su perni M5, con la misura di tensione remota separata.</p></div>
+<div class="card"><h4>Alimentazioni e pannello</h4><p>Un alimentatore isolato da 12 V alimenta gli operazionali e la ventola, un 78L05 i 5 V analogici, un buck AP63205 solo il Wemos. Il pannello frontale arriva con un cavo piatto a 10 poli: OLED 128 × 64, encoder (che fa da nonio: premuto passa da grosso a fine) e tasto OUTPUT, l'unico modo per armare il carico dal pannello.</p></div>
+</div>
+
+<div class="gallery">
+<a href="img/front_panel.png" target="_blank" rel="noopener"><img src="img/front_panel.png" alt="" loading="lazy"><span>Il pannello frontale: OLED, encoder con pulsante, tasto OUTPUT con LED.</span></a>
+<a href="img/render_bottom.png" target="_blank" rel="noopener"><img src="img/render_bottom.png" alt="" loading="lazy"><span>Il lato inferiore: qui si montano i quattro MOSFET, sopra lo spreader di rame.</span></a>
+</div>
+
+<h3 id="modello3d">Il modello in 3D</h3>
+<p>La scheda viene direttamente dal progetto KiCad. Sotto ci sono i quattro MOSFET, lo spreader di rame, il pad isolante, il dissipatore e la ventola: premi <b>▶ Montaggio</b> per vederli salire al loro posto, oppure <b>Sezione</b> per tagliare il gruppo a metà e vedere la pila termica di lato.</p>
+<div class="v3d" data-base="3d/" data-up="y" data-scale="1000" data-cam="215,55,235" data-target="-15,-38,0" data-cut="0,0,-1" data-parts='[{"id":"board","file":"board.glb","noclip":false},{"id":"mosfet","file":"mosfet.glb","color":"#33363d","rough":0.6,"explode":-12},{"id":"tab","file":"mosfet_tab.glb","color":"#b8bcc4","rough":0.45,"metal":0.25,"explode":-12},{"id":"spreader","file":"spreader.glb","color":"#b87333","rough":0.4,"metal":0.3,"explode":-22},{"id":"pad","file":"pad.glb","color":"#8c929b","rough":0.9,"explode":-30},{"id":"cooler","file":"cooler.glb","color":"#c9ced6","rough":0.5,"metal":0.2,"explode":-40},{"id":"fan","file":"fan.glb","color":"#3a3f48","rough":0.7,"explode":-56}]'>
+<div class="v3d-stage"><img class="v3d-fallback" src="img/render_top.png" alt="Rendering della scheda"><div class="v3d-loading">caricamento del modello 3D…</div></div>
+<div class="v3d-bar">
+<button class="v3d-mounted">Montato</button><button class="v3d-exploded">Esploso</button><button class="v3d-play">▶ Montaggio</button><button class="v3d-cut">Sezione</button><button class="v3d-rotate">Rotazione</button><button class="v3d-home">Vista iniziale</button>
+<label class="v3d-sl">esploso <input type="range" class="v3d-explode" min="0" max="100" value="0"></label></div>
+<div class="v3d-legend">
+<label><input type="checkbox" value="board" checked><i style="background:#1f6b3a"></i>scheda (da KiCad)</label>
+<label><input type="checkbox" value="mosfet,tab" checked><i style="background:#1d1f24"></i>4 × IXTH75N10L2</label>
+<label><input type="checkbox" value="spreader" checked><i style="background:#b87333"></i>spreader di rame</label>
+<label><input type="checkbox" value="pad" checked><i style="background:#8c929b"></i>pad isolante</label>
+<label><input type="checkbox" value="cooler" checked><i style="background:#c9ced6"></i>dissipatore</label>
+<label><input type="checkbox" value="fan" checked><i style="background:#2b2f36"></i>ventola</label></div>
+<p class="vnote">Trascina per ruotare, rotella o due dita per lo zoom, tasto destro per spostare. La scheda è esportata da KiCad 10; i MOSFET TO-247 orizzontali e la parte meccanica sono disegnati a parte perché non sono nella libreria 3D. Spreader e pad hanno le misure del progetto; <b>dissipatore e ventola sono indicativi</b>: va bene qualunque dissipatore per CPU di classe SP3/TR4.</p>
+</div>
+</div></section>
+
+<section class="vezzo" id="anello"><div class="wrap">
+<span class="kicker">Approfondimento</span>
+<h2>L'anello di corrente: perché un condensatore da 10 nF diventa da 1 nF</h2>
+<p class="lead2">Un carico elettronico è un anello di regolazione: misura la corrente, la confronta con quella richiesta e corregge il gate. Se l'anello è lento, la corrente arriva in ritardo; se è troppo veloce, oscilla. Nella rev 0.1 il carico era stabilissimo ma pigro. Nella rev 0.2 è dieci volte più rapido e ancora più stabile. Vediamo perché.</p>
+
+<h3>1 · Il circuito di un canale</h3>
+<div class="mgrid2"><div>
+<p>L'OPA2196 confronta l'impostazione con la tensione sullo shunt, R<sub>s</sub>·I. La differenza passa per <b>R14 = 1 kΩ</b> e carica il condensatore <b>C6</b> tra uscita e ingresso invertente: è un <b>integratore</b>. Finché c'è un errore, l'uscita continua a salire o a scendere; si ferma solo quando R<sub>s</sub>·I è uguale all'impostazione. Per questo l'errore a regime è zero.</p>
+<p>L'uscita pilota il gate attraverso una resistenza da 103 Ω. Il MOSFET, con lo shunt nel source, è un <b>inseguitore di source</b>: la tensione sullo shunt segue quella del gate meno V<sub>GS</sub>. Il suo guadagno è</p>
+<div class="nl-eq">A<sub>f</sub> = g<sub>m</sub>·R<sub>s</sub> / (1 + g<sub>m</sub>·R<sub>s</sub>)   con   g<sub>m</sub> = 2·√(K·I),  K ≈ 13 A/V²</div>
+<p>Con 20 mΩ e g<sub>m</sub> di qualche siemens, A<sub>f</sub> è piccolo: 0,04 a 100 mA, circa 0,14 a 1,25 A. E <b>cresce con la corrente</b>.</p>
+</div><div>
+<p>Mettendo insieme integratore e inseguitore, la banda ad anello chiuso, finché valgono le approssimazioni, è</p>
+<div class="nl-eq">f<sub>3dB</sub> ≈ A<sub>f</sub> / (2π·R14·C6)</div>
+<p>Con <b>C6 = 10 nF</b> (rev 0.1): 1/(2π·10 µs) = 16 kHz, per A<sub>f</sub> = 0,04 … 0,24 (da 0,1 a 5 A) fa <b>0,7 – 4 kHz</b>. Con <b>C6 = 1 nF</b> (rev 0.2) tutto si moltiplica per dieci: <b>7 – 40 kHz</b>. Il modello completo, che include la capacità di gate e il secondo polo dell'operazionale, dà 0,6 – 1,5 kHz e 6 – 15 kHz: ad alta corrente la formula semplice è ottimista.</p>
+<p>La <b>stabilità</b> invece si gioca molto più in alto, intorno a <b>600 kHz</b>, dove il guadagno dell'operazionale incontra la capacità di gate (circa 8 nF). Lì, secondo il modello, il margine di fase passa da circa 70° a <b>80 – 84°</b>: velocizzare l'anello non ha tolto stabilità, anzi. Il filtro sull'impostazione, C5, scende da 100 nF a 10 nF per non diventare lui il collo di bottiglia.</p>
+</div></div>
+
+<h3>2 · Il ritardo di accensione</h3>
+<p>Il passo piccolo non è tutto. Quando il carico parte da zero, il gate è a 0 V e deve salire fino alla soglia (circa 3,5 V) prima che passi corrente. Durante la salita l'errore resta fisso a R<sub>s</sub>·I, quindi l'integratore sale a pendenza costante. Il tempo per arrivare in soglia è</p>
+<div class="nl-eq">t<sub>d</sub> ≈ V<sub>G</sub>·R14·C6 / (R<sub>s</sub>·I) = 3,8 V · 1 kΩ · C6 / 20 mV  →  1,9 ms con 10 nF,  190 µs con 1 nF   (I = 1 A)</div>
+<p>Il firmware usa un trucco in più: con l'uscita accesa tiene ogni canale a <b>10 mA</b> invece che a zero (keep-alive). Il gate resta già in soglia e l'accensione scende a circa <b>40 µs</b>. Lo stesso livello da 10 mA è il «basso» del carico pulsato.</p>
+
+<div class="nl-box"><h4>▶ Prova tu: rev 0.1 contro rev 0.2</h4>
+<p class="small">A sinistra la corrente nel canale dopo il comando, calcolata con il modello del progetto (simulazione a grande segnale con slew rate dell'operazionale e capacità di gate); la traccia tenue è l'altra revisione. A destra il diagramma di Bode del guadagno d'anello e della risposta ad anello chiuso alla corrente scelta. Cambia revisione e prova, e guarda di quanto si sposta la traccia.</p>
+<div class="nl" data-w="eloop" data-src="loop.json"></div></div>
+
+<div class="gallery">
+<a href="img/step.png" target="_blank" rel="noopener"><img src="img/step.png" alt="" loading="lazy"><span>Le risposte al gradino, dalle slide del progetto.</span></a>
+<a href="img/bode.png" target="_blank" rel="noopener"><img src="img/bode.png" alt="" loading="lazy"><span>Il guadagno d'anello: margine di fase e frequenza di attraversamento.</span></a>
+</div>
+<p class="vnote">Resistenza d'uscita e secondo polo dell'operazionale sono <b>ipotesi</b> del modello, elencate nelle slide. La prima prova al banco in programma è proprio il gradino 1,0 ↔ 1,2 A, prima su un alimentatore robusto e poi con un metro di cavo.</p>
+</div></section>
+
+<section class="vezzo" id="calore"><div class="wrap">
+<span class="kicker">Approfondimento</span>
+<h2>Calore e area di funzionamento sicuro</h2>
+<p class="lead2">300 W di calore sono tanti: è un piccolo radiatore. Il calore nasce nella giunzione del MOSFET e deve arrivare all'aria attraversando una catena di resistenze termiche, una dopo l'altra, come resistenze in serie in cui al posto della corrente scorre la potenza e al posto della tensione sale la temperatura.</p>
+<div class="mgrid2"><div>
+<h3>La catena</h3>
+<p>Ogni MOSFET dissipa P<sub>FET</sub>, tutti insieme P<sub>tot</sub>. Dall'aria verso la giunzione:</p>
+<div class="nl-eq">T<sub>base</sub> = T<sub>a</sub> + R<sub>sa</sub>·P<sub>tot</sub><br>T<sub>spreader</sub> = T<sub>base</sub> + 0,03 K/W · P<sub>tot</sub><br>T<sub>case</sub> = T<sub>spreader</sub> + 0,21 K/W · P<sub>FET</sub><br>T<sub>j</sub> = T<sub>case</sub> + 0,31 K/W · P<sub>FET</sub></div>
+<p>A 35 °C con un dissipatore da 0,12 K/W e 4 × 75 W: base 71 °C, spreader 80 °C, case 96 °C, <b>giunzione 119 °C</b>, sotto i 150 °C ammessi. Per reggere 300 W continui, dissipatore più pad devono stare sotto circa <b>0,22 K/W</b>.</p>
+</div><div>
+<h3>L'area di funzionamento sicuro</h3>
+<p>Un MOSFET in zona lineare non muore solo di temperatura media: a tensione alta può nascere un <b>punto caldo</b> che si autoalimenta. Per questo il costruttore dà l'area di funzionamento sicuro in continua (<b>FBSOA</b>): per l'IXTH75N10L2 sono garantiti 240 W a 80 V con il case a 75 °C, da ridurre linearmente fino a zero a 150 °C.</p>
+<p>Il punto peggiore è 60 V × 1,25 A = 75 W per transistor. Con il case a 96 °C l'FBSOA ridotta vale 240 × (150 − 96)/75 ≈ <b>173 W</b>: un margine di <b>2,3 volte</b>. Il firmware limita ogni canale a 5 A e 75 W, l'OTP spegne tutto con lo spreader verso 100 °C (giunzione intorno a 139 °C).</p>
+</div></div>
+
+<div class="nl-box"><h4>▶ Prova tu: quanto scalda?</h4>
+<p class="small">Scegli tensione, corrente totale, quanti canali la dividono, la temperatura dell'ambiente e la resistenza termica del dissipatore. A sinistra il punto di lavoro di un MOSFET dentro i limiti del firmware (zona verde) e la FBSOA garantita alla temperatura del case che ne risulta (linea rossa tratteggiata). A destra le temperature lungo la catena, con la soglia dell'OTP e il massimo della giunzione.</p>
+<div class="nl" data-w="etherm"></div></div>
+<a class="prj-hero hw" href="img/soa.png" target="_blank" rel="noopener"><img src="img/soa.png" alt="SOA del MOSFET con i punti di lavoro" loading="lazy"></a>
+<p class="vnote">Le resistenze termiche di dissipatore e pad sono ipotesi: andranno misurate sul pezzo vero, insieme al punto in cui scatta l'OTP.</p>
+</div></section>
+
+<section class="prj"><div class="wrap">
+<h2>Il firmware</h2>
+<div class="mgrid2"><div>
+<p>Versione 0.2.0 per il D1 mini Pro: compila e la matematica del controllo ha i suoi test, ma <b>non ha ancora girato sull'hardware</b>.</p>
+<ul><li><b>Controllo:</b> CC, CP e CR con l'impostazione divisa tra i canali, protezioni hardware e firmware con la causa dello sgancio, taglio a fine scarica per le batterie, auto-trim.</li>
+<li><b>Carico pulsato:</b> il canale salta tra l'impostazione e 10 mA da 0,1 Hz a 1 kHz, con duty regolabile (fasi di almeno 100 µs), dal menu del pannello o dalla pagina web.</li>
+<li><b>Pannello:</b> OLED con il logo all'avvio, encoder come nonio e per il menu, tasto OUTPUT.</li>
+<li><b>Registrazione:</b> CSV nei 14 MB di flash, con Wh e Ah.</li>
+<li><b>Web:</b> grafico in tempo reale, comandi, aggiornamento OTA. Al primo avvio apre un access point per la configurazione, poi risponde su <code>http://eload.local</code>.</li></ul>
+<p>C'è anche un'API HTTP, per comandarlo da uno script:</p>
+<div class="nl-code"><pre>curl -d "mode=CC" -d "set=2.5" -d "out=1" http://eload.local/api/set
+curl -d "pulse=1" -d "freq=100" -d "duty=20" http://eload.local/api/set
+curl http://eload.local/api/status</pre></div>
+</div><div>
+<a class="prj-hero hw" href="img/web_ui.png" target="_blank" rel="noopener"><img src="img/web_ui.png" alt="La pagina web del carico" loading="lazy"></a>
+<a class="prj-hero hw" href="img/oled_pulse_menu.png" target="_blank" rel="noopener"><img src="img/oled_pulse_menu.png" alt="Menu del carico pulsato sull'OLED" loading="lazy"></a>
+</div></div>
+
+<h2>Costruirlo</h2>
+<table><tr><th>Passo</th><th>Che cosa serve</th></tr>
+<tr><td>Circuito stampato</td><td>Gerber rev 0.3: 2 strati, 1,6 mm, <b>rame da 2 oz</b>. Attenzione: molti fornitori chiedono almeno 0,2 mm di isolamento con 2 oz, mentre i piedini MSOP-10 dell'INA228 distano 0,15 mm. Chiedi al fornitore, o ordina 1 oz sugli strati esterni.</td></tr>
+<tr><td>Componenti</td><td>Circa <b>126 €</b> di elettronica per una scheda (ottobre 2026). Metà sono i quattro IXTH75N10L2, che possono avere tempi di consegna lunghi.</td></tr>
+<tr><td>Meccanica</td><td>Spreader di rame, pad isolante (≥ 100 V), dissipatore per CPU con ventola PWM a 4 fili, distanziali M3 in nylon, bulloni M5 per i morsetti.</td></tr>
+<tr><td>Pannello</td><td>OLED I²C SSD1309 2,42″ o SH1106 1,3″, encoder EC11 con pulsante, tasto con LED, cavo piatto a 10 poli lungo al massimo 20 cm.</td></tr>
+<tr><td>Montaggio</td><td>La <a href="ibom.html" target="_blank" rel="noopener">BOM interattiva</a> evidenzia dove va ogni componente e ha le caselle per segnare quelli trovati e montati.</td></tr>
+<tr><td>Firmware</td><td>C'è un'immagine già compilata in <code>firmware/bin/</code>; dopo la prima programmazione si aggiorna via WiFi.</td></tr></table>
+
+<h2>Sicurezza, prima di accenderlo</h2>
+<div class="grid3 prj-cards">
+<div class="card"><h4>USB non isolata</h4><p>Tutto il controllo, compresa la porta USB del Wemos, è riferito al <b>DUT−</b>. Programma il modulo solo con il DUT scollegato, poi aggiorna via WiFi. L'alimentatore da 12 V deve essere isolato.</p></div>
+<div class="card"><h4>Rame in tensione</h4><p>Lo spreader e le alette dei MOSFET sono <b>alla tensione del DUT</b>. Il dissipatore è isolato solo dal pad.</p></div>
+<div class="card"><h4>Il calore è vero</h4><p>Niente piena potenza senza dissipatore e ventola, e verifica l'OTP prima di fidarti.</p></div>
+</div>
+
+<h2>Da verificare al banco</h2>
+<ul><li>La risposta al gradino 1,0 ↔ 1,2 A su un alimentatore robusto, poi con 1 m di cavo verso il DUT.</li>
+<li>Che il crowbar D1 sopravviva all'I²t del fusibile collegando la sorgente al contrario.</li>
+<li>La resistenza termica vera di dissipatore e pad, e il punto in cui scatta l'OTP.</li>
+<li>La portata del WiFi con l'antenna che sporge dal bordo della scheda dentro il contenitore.</li>
+<li>L'integrità del bus I²C con l'OLED su 20 cm di cavo piatto (pull-up da 2,2 kΩ).</li></ul>
+<p>Chi lo costruisce per primo è benvenuto: rapporti di prova, segnalazioni e pull request su GitHub.</p>
+
+<h2>Licenze</h2>
+<p>Hardware e documentazione: <b>CERN-OHL-S-2.0</b>. Software (firmware, analisi, generatori): <b>MIT</b>. Grazie alla licenza aperta, il progetto è stato raccolto anche da <a href="https://www.hardlabs.io/boards/metallarox--eload-60v" target="_blank" rel="noopener">hardlabs.io</a>.</p>
+<div class="btns"><a class="btn primary" href="https://github.com/metallarox/eload-60v" target="_blank" rel="noopener">Vai al progetto su GitHub</a><a class="btn ghost" href="https://github.com/metallarox/eload-60v/archive/refs/heads/main.zip">⬇ Scarica lo ZIP</a></div>
+</div></section>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script><script type="module" src="../../assets/viewer3d.js?v=c09d2a92"></script><script src="../../assets/needle-lab.js?v=d8bd5ae2" defer></script><script src="../../assets/eload-lab.js?v=3153212b" defer></script><div class="wrap"><div class="pager"><a class="pg prev" href="../../progetti/fluke-hydra-monitor/index.html"><small>← precedente</small><b>Fluke Hydra Monitor</b></a><span></span></div><div style="height:30px"></div></div>
+<footer><div class="wrap"><div><b>Ham Radio Pills</b> · a cura di Elia, IV3HGA · 73!</div><div><a href="https://github.com/metallarox/hamradio-pills">github.com/metallarox/hamradio-pills</a></div></div></footer></body></html>

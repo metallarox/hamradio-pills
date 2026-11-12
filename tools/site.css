@@ -260,3 +260,9 @@ html[data-theme=dark] .co{color:#ff7a5c}html[data-theme=dark] .cg{color:#4fc27a}
 html[data-theme=dark] .door{background:#131d2e;border-color:var(--line)}html[data-theme=dark] .door-body h3{color:#eaf2fb}
 @media (max-width:860px){.doors{grid-template-columns:1fr}.topbar .menu a{padding:6px 8px}}
 .toc.three{grid-template-columns:repeat(3,1fr)}@media (max-width:860px){.toc.three{grid-template-columns:1fr}}
+/* eload-60v widgets */
+.nl-seg{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.nl-seg>span{font-weight:600;color:var(--mute);font-size:14px;margin-right:4px}
+.nl[data-w=eloop] .nl-row,.nl[data-w=etherm] .nl-row{grid-template-columns:1fr 1fr}
+.nl-read b.bad{color:#d62f2f}.nl-read b.ok{color:#2a9d5c}
+html[data-theme=dark] .nl-read b.bad{color:#ff5c5c}html[data-theme=dark] .nl-read b.ok{color:#4fc27a}
+@media (max-width:860px){.nl[data-w=eloop] .nl-row,.nl[data-w=etherm] .nl-row{grid-template-columns:1fr}}
